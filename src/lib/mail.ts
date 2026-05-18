@@ -54,7 +54,9 @@ const FIELD_LABELS: Record<
 
 export async function sendContactEmail(p: ContactPayload): Promise<void> {
   const transporter = buildTransport();
-  const to = process.env.CONTACT_RECIPIENT ?? "buratnvk@gmail.com";
+  // Fail-safe default is the business inbox, not a personal address — a
+  // forgotten CONTACT_RECIPIENT env var must never silently drop leads.
+  const to = process.env.CONTACT_RECIPIENT ?? "info@nexovia.com.tr";
   const from = process.env.MAIL_FROM ?? to;
   const li = p.locale === "tr" ? 0 : 1;
 

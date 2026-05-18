@@ -1,7 +1,41 @@
-# Deploying nexovia-web (AWS EC2)
+# Deploying nexovia-web
 
-Standalone Next.js 16 (App Router, Node server). All 26 pages are statically
-prerendered; the only runtime surface is the contact Server Action (Nodemailer).
+Next.js 16 (App Router). All 26 pages are statically prerendered; the only
+runtime surface is the contact Server Action (Nodemailer SMTP).
+
+The 404 page needs no setup: the per-locale optional catch-alls call
+`notFound()` for any unknown URL, rendering the localized, chrome-wrapped
+`(tr)/not-found.tsx` / `(en)/not-found.tsx` with a real 404 status.
+
+## Vercel (primary)
+
+1. Import the GitHub repo at vercel.com — framework auto-detects as Next.js,
+   build `next build`, no overrides needed.
+2. **Project → Settings → Environment Variables** (Production + Preview) —
+   set every var from `.env.local.example`:
+
+   | Var | Value |
+   | --- | --- |
+   | `NEXT_PUBLIC_SITE_URL` | `https://nexovia.com.tr` |
+   | `CONTACT_RECIPIENT` | `info@nexovia.com.tr` |
+   | `MAIL_FROM` | `noreply@nexovia.com.tr` |
+   | `SMTP_HOST` `SMTP_PORT` `SMTP_SECURE` `SMTP_USER` `SMTP_PASS` | SMTP transport creds |
+
+   `.env.local.example` is git-ignored, so it is **not** read on Vercel —
+   these must be entered in the dashboard. `CONTACT_RECIPIENT` also has a
+   safe code default of `info@nexovia.com.tr`, so leads still arrive even
+   if the var is missed.
+3. Notes: the Server Action runs on Vercel's Node runtime (not Edge), so
+   Nodemailer + outbound SMTP (465/587) work unchanged and well within the
+   function timeout. The in-memory rate limiter is per-instance/best-effort
+   and resets on cold start — acceptable; move to a shared store only if
+   abuse becomes real.
+4. Point the `nexovia.com.tr` DNS at Vercel and ensure the SMTP/from domain
+   has SPF + DKIM so lead mail isn't spam-filtered.
+
+## AWS EC2 (alternative)
+
+Standalone Node server.
 
 ## 1. Build
 

@@ -3,18 +3,11 @@
 // Nodemailer. No DB; persistence to a lead store is an optional future hook.
 import { headers } from "next/headers";
 import { sendContactEmail, type ContactPayload } from "@/lib/mail";
-import { validateContact, type ContactField } from "@/lib/contact-schema";
+import { validateContact } from "@/lib/contact-schema";
+import type { ContactState } from "./contact-state";
 
-export type { ContactField };
-
-export interface ContactState {
-  status: "idle" | "success" | "error";
-  message?: string;
-  fieldErrors?: Partial<Record<ContactField, string>>;
-  values?: Record<string, string>;
-}
-
-export const initialContactState: ContactState = { status: "idle" };
+// Re-exported via ./contact-state — a "use server" module must export only
+// async functions, so types/initial-state live in that plain sibling.
 
 const tr = {
   required: "Bu alan zorunludur.",

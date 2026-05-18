@@ -8,11 +8,8 @@ import type { Locale } from "@/lib/site";
 import { getDictionary } from "@/i18n/getDictionary";
 import { pathFor } from "@/lib/routes";
 import { ArrowRight } from "@/components/shared/primitives";
-import {
-  submitContact,
-  initialContactState,
-  type ContactField,
-} from "@/actions/contact";
+import { submitContact } from "@/actions/contact";
+import { initialContactState, type ContactField } from "@/actions/contact-state";
 
 const inputStyle: CSSProperties = {
   width: "100%",

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Water efficiency measurement illustration">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#000826"/><stop offset=".55" stop-color="#001244"/><stop offset="1" stop-color="#001652"/>
+    </linearGradient>
+    <radialGradient id="rip" cx="50%" cy="50%">
+      <stop offset="0" stop-color="#00B8F1" stop-opacity=".6"/><stop offset="1" stop-color="#00B8F1" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="bar" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#00B8F1" stop-opacity=".2"/><stop offset="1" stop-color="#22D3EE"/>
+    </linearGradient>
+    <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.5" fill="#ffffff" fill-opacity=".05"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#dots)"/>
+  <g transform="translate(600,315)">
+    <circle r="70" fill="url(#rip)"/>
+    <circle r="96" fill="none" stroke="#00B8F1" stroke-opacity=".55" stroke-width="2"/>
+    <circle r="150" fill="none" stroke="#00B8F1" stroke-opacity=".3" stroke-width="2"/>
+    <circle r="210" fill="none" stroke="#00B8F1" stroke-opacity=".15" stroke-width="2"/>
+    <circle r="272" fill="none" stroke="#ffffff" stroke-opacity=".06" stroke-width="2"/>
+    <circle r="6" fill="#22D3EE"/>
+  </g>
+  <g transform="translate(132,470)">
+    <rect x="0"   y="-54"  width="40" height="54"  rx="3" fill="url(#bar)"/>
+    <rect x="66"  y="-86"  width="40" height="86"  rx="3" fill="url(#bar)"/>
+    <rect x="132" y="-70"  width="40" height="70"  rx="3" fill="url(#bar)"/>
+    <rect x="198" y="-116" width="40" height="116" rx="3" fill="url(#bar)"/>
+    <rect x="264" y="-94"  width="40" height="94"  rx="3" fill="url(#bar)"/>
+    <rect x="330" y="-138" width="40" height="138" rx="3" fill="url(#bar)"/>
+  </g>
+  <g transform="translate(820,470)">
+    <rect x="0"   y="-138" width="40" height="138" rx="3" fill="url(#bar)"/>
+    <rect x="66"  y="-104" width="40" height="104" rx="3" fill="url(#bar)"/>
+    <rect x="132" y="-150" width="40" height="150" rx="3" fill="url(#bar)"/>
+    <rect x="198" y="-92"  width="40" height="92"  rx="3" fill="url(#bar)"/>
+  </g>
+</svg>

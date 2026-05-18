@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Industrial water reporting illustration">
+  <defs>
+    <linearGradient id="wb" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#001244"/><stop offset=".6" stop-color="#0A4D7A"/><stop offset="1" stop-color="#00B8F1"/>
+    </linearGradient>
+    <pattern id="dw" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.5" fill="#ffffff" fill-opacity=".06"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#wb)"/>
+  <rect width="1200" height="630" fill="url(#dw)"/>
+  <!-- report sheet with trend -->
+  <g transform="translate(440,135)">
+    <rect width="320" height="360" rx="18" fill="#0B1226" stroke="rgba(255,255,255,.16)" stroke-width="2"/>
+    <rect x="30" y="34" width="160" height="14" rx="7" fill="rgba(255,255,255,.32)"/>
+    <rect x="30" y="62" width="260" height="9" rx="4.5" fill="rgba(255,255,255,.13)"/>
+    <g transform="translate(30,108)">
+      <rect width="260" height="170" rx="10" fill="rgba(255,255,255,.04)"/>
+      <polyline points="16,140 60,108 104,122 148,78 192,92 236,46" fill="none" stroke="#22D3EE" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <polyline points="16,140 60,108 104,122 148,78 192,92 236,46 252,170 16,170" fill="#22D3EE" fill-opacity=".15"/>
+    </g>
+    <rect x="30" y="300" width="140" height="40" rx="8" fill="#00B8F1" fill-opacity=".22" stroke="#22D3EE"/>
+  </g>
+  <!-- water drop -->
+  <g transform="translate(840,300)">
+    <path d="M0,-70 C48,-12 60,18 60,36 A60 60 0 1 1 -60 36 C-60,18 -48,-12 0,-70 Z" fill="#00B8F1" fill-opacity=".18" stroke="#22D3EE" stroke-width="4"/>
+    <path d="M-22 36 a22 22 0 0 0 22 22" fill="none" stroke="#22D3EE" stroke-width="4" stroke-linecap="round"/>
+  </g>
+</svg>

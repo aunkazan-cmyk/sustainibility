@@ -1,49 +1,358 @@
+/* Nexovia — base styles. Ported verbatim from the design prototype's
+   styles.css. Changes for the Next.js build:
+   - removed the Google Fonts @import (fonts come from next/font, mapped below)
+   - folded the locked "flow" accent + "editorial" fontset into :root
+     (the A/B tweaks runtime is gone, so they are the only state)
+   - removed the [data-page-hidden] SPA routing helper
+   - added .nx-hover-* classes so the prototype's JS hover handlers become
+     pure CSS (keeps content pages server-rendered / zero-JS) */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Brand area colors — from project_docs/03_design_system.md */
+  --nx-navy: #001652;
+  --nx-navy-deep: #000d33;
+  --nx-navy-soft: #0B1F5C;
+  --nx-ink: #0F172A;
+
+  --nx-flow: #00B8F1;
+  --nx-flow-dark: #0E7490;
+  --nx-flow-deep: #0A4D7A;
+  --nx-flow-soft: #E0F7FF;
+
+  --nx-sustain: #3F7E65;
+  --nx-sustain-bright: #6BAE89;
+  --nx-sustain-soft: #ECFDF5;
+  --nx-sustain-dark: #14532D;
+
+  --nx-adr: #D97706;
+  --nx-adr-deep: #92400E;
+  --nx-adr-soft: #FFF7ED;
+
+  /* Neutrals */
+  --nx-white: #FFFFFF;
+  --nx-50: #F8FAFC;
+  --nx-100: #F1F5F9;
+  --nx-150: #E8ECF1;
+  --nx-200: #E2E8F0;
+  --nx-300: #CBD5E1;
+  --nx-400: #94A3B8;
+  --nx-500: #64748B;
+  --nx-600: #475569;
+  --nx-700: #334155;
+  --nx-800: #1E293B;
+  --nx-900: #0F172A;
+
+  /* Active accent — locked to Flow (the A/B tweaks panel is dropped) */
+  --nx-accent: var(--nx-flow);
+  --nx-accent-deep: var(--nx-flow-deep);
+  --nx-accent-soft: var(--nx-flow-soft);
+
+  /* Type families — locked to the "editorial" pairing.
+     The var(--font-*) come from next/font (see RootDocument). */
+  --nx-font-display: var(--font-newsreader), Georgia, serif;
+  --nx-font-body: var(--font-manrope), "Inter", system-ui, sans-serif;
+  --nx-font-mono: ui-monospace, "SF Mono", "JetBrains Mono", "Menlo", monospace;
+
+  /* Layout */
+  --nx-container: 1240px;
+  --nx-radius-sm: 8px;
+  --nx-radius: 14px;
+  --nx-radius-lg: 24px;
+  --nx-radius-pill: 999px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html {
-  height: 100%;
-}
-
-html,
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
 body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--nx-font-body);
+  color: var(--nx-900);
+  background: var(--nx-white);
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  line-height: 1.55;
+}
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; }
+img, svg { display: block; max-width: 100%; }
+
+/* Layout helpers */
+.nx-container {
+  width: 100%;
+  max-width: var(--nx-container);
+  margin: 0 auto;
+  padding: 0 28px;
+}
+@media (max-width: 720px) { .nx-container { padding: 0 20px; } }
+
+/* Display type */
+.nx-display {
+  font-family: var(--nx-font-display);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  text-wrap: balance;
+}
+.nx-eyebrow {
+  font-family: var(--nx-font-body);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--nx-500);
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+/* Buttons */
+.nx-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 22px;
+  border-radius: var(--nx-radius-pill);
+  font-weight: 600;
+  font-size: 15px;
+  border: 1px solid transparent;
+  transition: transform .15s ease, background .15s ease, border-color .15s ease;
+  white-space: nowrap;
+}
+.nx-btn:hover { transform: translateY(-1px); }
+.nx-btn--primary { background: var(--nx-navy); color: #fff; }
+.nx-btn--primary:hover { background: #002270; }
+/* Navy text on the cyan accent (Flow #00B8F1 vs white fails WCAG even at the
+   3:1 UI threshold). Navy-on-cyan is high-contrast and is exactly the
+   treatment the prototype's own Direction B used (color:#001244). */
+.nx-btn--accent { background: var(--nx-accent); color: var(--nx-navy); }
+.nx-btn--accent:hover { filter: brightness(1.08); }
+.nx-btn--ghost { background: transparent; color: var(--nx-900); border-color: var(--nx-300); }
+.nx-btn--ghost:hover { background: var(--nx-100); }
+.nx-btn--ghost-light { background: transparent; color: #fff; border-color: rgba(255,255,255,.25); }
+.nx-btn--ghost-light:hover { background: rgba(255,255,255,.08); }
+
+/* Pills / badges */
+.nx-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--nx-radius-pill);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  background: var(--nx-accent-soft);
+  color: var(--nx-accent-deep);
+  border: 1px solid color-mix(in oklab, var(--nx-accent) 20%, transparent);
+  white-space: nowrap;
+}
+.nx-pill--dark {
+  background: rgba(255,255,255,.06);
+  color: #fff;
+  border-color: rgba(255,255,255,.15);
+}
+.nx-pill--placeholder {
+  background: #fef3c7;
+  color: #92400E;
+  border-color: #fcd34d;
+  font-size: 10px;
+  padding: 3px 8px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+/* Cards */
+.nx-card {
+  background: #fff;
+  border: 1px solid var(--nx-200);
+  border-radius: var(--nx-radius);
+  padding: 24px;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+/* Section spacing */
+.nx-section {
+  padding: 96px 0;
+}
+.nx-section--tight { padding: 72px 0; }
+.nx-section--dark { background: var(--nx-navy-deep); color: #fff; }
+.nx-section--ink { background: var(--nx-ink); color: #fff; }
+.nx-section--soft { background: var(--nx-50); }
+
+/* Logo wordmark */
+.nx-wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 1px;
+  font-family: var(--font-manrope), sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  font-size: 22px;
+  line-height: 1;
+}
+.nx-wordmark__dot {
+  width: 7px; height: 7px;
+  background: var(--nx-accent);
+  border-radius: 50%;
+  margin-right: 6px;
+  align-self: center;
+  display: inline-block;
+}
+.nx-wordmark__sub {
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0;
+  margin-left: 6px;
+  color: var(--nx-accent);
+  text-transform: lowercase;
+  font-style: italic;
+}
+.nx-wordmark--light { color: #fff; }
+
+/* Hide scrollbars on overflow containers we control */
+.nx-no-scrollbar::-webkit-scrollbar { display: none; }
+.nx-no-scrollbar { scrollbar-width: none; }
+
+/* Code-like elements */
+.nx-mono { font-family: var(--nx-font-mono); font-size: 12px; letter-spacing: 0; }
+
+/* Utility colors */
+.nx-fg-accent { color: var(--nx-accent); }
+.nx-fg-muted { color: var(--nx-500); }
+
+/* Grid helpers */
+.nx-grid { display: grid; gap: 24px; }
+.nx-grid-2 { grid-template-columns: 1fr 1fr; }
+.nx-grid-3 { grid-template-columns: repeat(3, 1fr); }
+.nx-grid-4 { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 900px) {
+  .nx-grid-2, .nx-grid-3, .nx-grid-4 { grid-template-columns: 1fr; }
+}
+
+/* Focus rings */
+:focus-visible { outline: 2px solid var(--nx-accent); outline-offset: 3px; }
+
+/* ---------------------------------------------------------------------
+   Hover helpers — replace the prototype's inline JS onMouseEnter/Leave
+   style mutations so cards/rows stay server-rendered (zero client JS).
+   --------------------------------------------------------------------- */
+.nx-hover-soft { transition: background .2s ease; }
+.nx-hover-soft:hover { background: #fafaf7; }
+
+.nx-hover-tile { transition: background .2s ease; background: #fff; }
+.nx-hover-tile:hover { background: #fafaf7; }
+
+.nx-hover-lift {
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+.nx-hover-lift:hover {
+  transform: translateY(-2px);
+  border-color: var(--nx-accent);
+  box-shadow: 0 18px 36px -18px rgba(0,0,0,0.1);
+}
+
+.nx-hover-card {
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.nx-hover-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 24px 50px -16px rgba(0,0,0,0.12);
+}
+
+/* ---------------------------------------------------------------------
+   Responsive — the prototype is desktop-grid heavy via inline styles;
+   these collapse multi-column grids on small screens and wire the
+   mobile header. Hooks are added on the ported markup.
+   --------------------------------------------------------------------- */
+.nx-desktop-nav { display: flex; }
+.nx-mobile-only { display: none; }
+
+@media (max-width: 960px) {
+  .nx-desktop-nav { display: none; }
+  .nx-mobile-only { display: inline-flex; }
+  [data-nx-collapse] { grid-template-columns: 1fr !important; }
+  [data-nx-collapse-2] { grid-template-columns: repeat(2, 1fr) !important; }
+  [data-nx-stack] { display: block !important; }
+  /* Drop sticky on mobile: once the layout stacks to one column, a pinned
+     block scrolls awkwardly. Overrides the inline position: sticky. */
+  [data-nx-unstick] { position: static !important; }
+  /* Section rhythm on tablet. Pages hardcode desktop-scale vertical
+     padding (80-120px) as inline styles; these hooks shrink only the
+     desktop-sized sides to a normal tablet standard, never the
+     intentionally-small ones (e.g. a hero's 40px top stays 40px).
+     -section = both sides, -t = top only, -b = bottom only.
+     Phones get a tighter value below. */
+  [data-nx-section], [data-nx-section-t] { padding-top: 64px !important; }
+  [data-nx-section], [data-nx-section-b] { padding-bottom: 64px !important; }
+  /* Collapsed-grid gap. When a 2-col grid stacks to one column its inline
+     gap (64/80px) becomes pure vertical dead space between blocks. Shrink
+     to a normal stacked rhythm. Only grids whose own gap exceeded 32px are
+     marked, so small inline gaps are never inflated. */
+  [data-nx-cgap] { gap: 32px !important; }
+}
+@media (max-width: 600px) {
+  [data-nx-collapse-2] { grid-template-columns: 1fr !important; }
+  /* Phone tier: standard mobile section spacing (~48px). */
+  [data-nx-section], [data-nx-section-t] { padding-top: 48px !important; }
+  [data-nx-section], [data-nx-section-b] { padding-bottom: 48px !important; }
+  [data-nx-cgap] { gap: 24px !important; }
+}
+
+/* Navbar dropdown (Platform / Services). Panel visibility is data-driven by
+   the client component; styling is pure CSS. The 10px top padding is the
+   hover-bridge so the pointer doesn't leave the wrapper between trigger and
+   panel. */
+.nx-dropdown { position: relative; display: inline-block; }
+.nx-dropdown__panel {
+  position: absolute;
+  top: 100%;
+  left: -14px;
+  padding-top: 10px; /* hover-bridge so the pointer stays in the wrapper */
+  min-width: 252px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(4px);
+  transition: opacity .15s ease, transform .15s ease, visibility .15s;
+  z-index: 60;
+}
+.nx-dropdown__panel[data-open="true"] {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.nx-dropdown__panel {
+  --_card: 1px solid var(--nx-200);
+}
+.nx-dropdown__item {
+  display: block;
+  padding: 13px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  background: #fff;
+  border-left: var(--_card);
+  border-right: var(--_card);
+  border-top: var(--_card);
+}
+.nx-dropdown__item:last-child {
+  border-bottom: var(--_card);
+  border-radius: 0 0 var(--nx-radius) var(--nx-radius);
+}
+.nx-dropdown__item:first-of-type {
+  border-radius: var(--nx-radius) var(--nx-radius) 0 0;
+}
+.nx-dropdown__item:only-of-type { border-radius: var(--nx-radius); }
+.nx-dropdown__item:hover { background: var(--nx-50); }
+.nx-dropdown__panel { filter: drop-shadow(0 18px 40px rgba(2, 13, 51, 0.16)); }
+
+/* Mobile sticky "İletişime Geç" CTA (project_docs requirement). */
+.nx-sticky-cta { display: none; }
+@media (max-width: 960px) {
+  .nx-sticky-cta {
+    display: flex;
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    z-index: 55;
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: saturate(180%) blur(10px);
+    -webkit-backdrop-filter: saturate(180%) blur(10px);
+    border-top: 1px solid var(--nx-150);
   }
+  /* keep page content clear of the fixed bar */
+  body { padding-bottom: 64px; }
 }

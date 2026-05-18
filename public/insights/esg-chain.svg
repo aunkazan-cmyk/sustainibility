@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="ESG measurement chain illustration">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#06251b"/><stop offset=".55" stop-color="#0c3a2b"/><stop offset="1" stop-color="#14532D"/>
+    </linearGradient>
+    <linearGradient id="gbar" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#3F7E65"/><stop offset="1" stop-color="#97EC4C"/>
+    </linearGradient>
+    <pattern id="d2" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.5" fill="#ffffff" fill-opacity=".05"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg2)"/>
+  <rect width="1200" height="630" fill="url(#d2)"/>
+  <g transform="translate(150,315)">
+    <line x1="0" y1="0" x2="900" y2="0" stroke="#6BAE89" stroke-opacity=".4" stroke-width="3"/>
+    <g>
+      <circle cx="0"   cy="0" r="22" fill="#3F7E65" stroke="#97EC4C" stroke-width="2.5"/>
+      <circle cx="225" cy="0" r="22" fill="#3F7E65" stroke="#97EC4C" stroke-width="2.5"/>
+      <circle cx="450" cy="0" r="22" fill="#3F7E65" stroke="#97EC4C" stroke-width="2.5"/>
+      <circle cx="675" cy="0" r="22" fill="#3F7E65" stroke="#97EC4C" stroke-width="2.5"/>
+      <circle cx="900" cy="0" r="28" fill="#97EC4C"/>
+    </g>
+  </g>
+  <g transform="translate(150,470)" fill="url(#gbar)">
+    <rect x="-16"  y="-30"  width="32" height="30"  rx="3" opacity=".5"/>
+    <rect x="209"  y="-66"  width="32" height="66"  rx="3" opacity=".65"/>
+    <rect x="434"  y="-104" width="32" height="104" rx="3" opacity=".8"/>
+    <rect x="659"  y="-150" width="32" height="150" rx="3" opacity=".9"/>
+    <rect x="884"  y="-196" width="32" height="196" rx="3"/>
+  </g>
+  <g transform="translate(150,210)" fill="none" stroke="#97EC4C" stroke-opacity=".5" stroke-width="2">
+    <circle cx="0" cy="0" r="40"/><circle cx="900" cy="0" r="40"/>
+  </g>
+</svg>

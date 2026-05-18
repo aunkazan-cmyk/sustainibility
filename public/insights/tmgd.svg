@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="ADR / TMGD compliance illustration">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2a1604"/><stop offset=".55" stop-color="#5a3208"/><stop offset="1" stop-color="#92400E"/>
+    </linearGradient>
+    <pattern id="d3" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.5" fill="#ffffff" fill-opacity=".05"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg3)"/>
+  <rect width="1200" height="630" fill="url(#d3)"/>
+  <!-- hazard placard (UN diamond) -->
+  <g transform="translate(600,210) rotate(45)">
+    <rect width="200" height="200" rx="18" fill="none" stroke="#FCD34D" stroke-width="6"/>
+    <g transform="translate(100,100) rotate(-45)" text-anchor="middle">
+      <path d="M-38 -14 L0 -58 L38 -14 Z" fill="#FCD34D" fill-opacity=".2" stroke="#FCD34D" stroke-width="4" stroke-linejoin="round"/>
+      <line x1="-58" y1="40" x2="58" y2="40" stroke="#FCD34D" stroke-width="4"/>
+    </g>
+  </g>
+  <!-- shield + check -->
+  <g transform="translate(600,470)" fill="none" stroke="#F59E0B" stroke-width="5" stroke-linejoin="round">
+    <path d="M0,-66 L60,-44 V10 C60,54 32,80 0,94 C-32,80 -60,54 -60,10 V-44 Z" fill="#F59E0B" fill-opacity=".12"/>
+    <path d="M-24,6 L-6,24 L26,-16" stroke="#FCD34D" stroke-width="8" stroke-linecap="round"/>
+  </g>
+  <g stroke="#FCD34D" stroke-opacity=".5" stroke-width="3" fill="none">
+    <path d="M210 470 h150 M840 470 h150"/>
+  </g>
+</svg>

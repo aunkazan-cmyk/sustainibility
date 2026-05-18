@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Measure-first sustainability illustration">
+  <defs>
+    <linearGradient id="mb" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#06251b"/><stop offset=".55" stop-color="#14532D"/><stop offset="1" stop-color="#3F7E65"/>
+    </linearGradient>
+    <pattern id="dm" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.5" fill="#ffffff" fill-opacity=".06"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#mb)"/>
+  <rect width="1200" height="630" fill="url(#dm)"/>
+  <!-- ruler -->
+  <g transform="translate(330,150)">
+    <rect width="340" height="86" rx="12" fill="#0B1226" stroke="rgba(255,255,255,.16)" stroke-width="2"/>
+    <g stroke="#97EC4C" stroke-width="3" stroke-linecap="round">
+      <line x1="28" y1="86" x2="28" y2="48"/><line x1="60" y1="86" x2="60" y2="62"/>
+      <line x1="92" y1="86" x2="92" y2="62"/><line x1="124" y1="86" x2="124" y2="48"/>
+      <line x1="156" y1="86" x2="156" y2="62"/><line x1="188" y1="86" x2="188" y2="62"/>
+      <line x1="220" y1="86" x2="220" y2="48"/><line x1="252" y1="86" x2="252" y2="62"/>
+      <line x1="284" y1="86" x2="284" y2="62"/><line x1="316" y1="86" x2="316" y2="48"/>
+    </g>
+  </g>
+  <!-- target -->
+  <g transform="translate(770,400)">
+    <circle r="118" fill="none" stroke="#3F7E65" stroke-width="3" stroke-opacity=".5"/>
+    <circle r="78" fill="none" stroke="#6BAE89" stroke-width="3" stroke-opacity=".7"/>
+    <circle r="38" fill="#97EC4C" fill-opacity=".22" stroke="#97EC4C" stroke-width="3"/>
+    <circle r="7" fill="#97EC4C"/>
+  </g>
+  <!-- sequence path -->
+  <g transform="translate(330,420)">
+    <line x1="0" y1="0" x2="320" y2="0" stroke="#6BAE89" stroke-opacity=".4" stroke-width="3"/>
+    <circle cx="0" cy="0" r="11" fill="#97EC4C"/>
+    <circle cx="160" cy="0" r="11" fill="#6BAE89"/>
+    <circle cx="320" cy="0" r="11" fill="#3F7E65"/>
+  </g>
+</svg>

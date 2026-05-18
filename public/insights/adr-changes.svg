@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="ADR regulation changes illustration">
+  <defs>
+    <linearGradient id="ab" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2a1604"/><stop offset=".55" stop-color="#92400E"/><stop offset="1" stop-color="#D97706"/>
+    </linearGradient>
+    <pattern id="da" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.5" fill="#ffffff" fill-opacity=".06"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#ab)"/>
+  <rect width="1200" height="630" fill="url(#da)"/>
+  <!-- revision cycle -->
+  <g transform="translate(440,315)" fill="none" stroke="#FCD34D" stroke-width="6" stroke-linecap="round">
+    <path d="M96 0 A96 96 0 1 1 0 -96"/>
+    <path d="M0 -96 L-28 -124 M0 -96 L30 -122"/>
+  </g>
+  <!-- truck -->
+  <g transform="translate(700,360)" fill="none" stroke="#FCD34D" stroke-width="5" stroke-linejoin="round">
+    <rect x="0" y="-58" width="160" height="98" rx="8" fill="#FCD34D" fill-opacity=".10"/>
+    <path d="M160 -30 h58 l40 40 v28 h-98 z" fill="#FCD34D" fill-opacity=".10"/>
+    <circle cx="46" cy="52" r="20"/><circle cx="200" cy="52" r="20"/>
+    <g transform="translate(56,-40) rotate(45)"><rect width="44" height="44" rx="5" stroke="#FCD34D" stroke-width="4"/></g>
+  </g>
+</svg>

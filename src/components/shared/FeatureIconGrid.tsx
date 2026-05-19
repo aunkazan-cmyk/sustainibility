@@ -8,9 +8,18 @@ export type FeatureItem = {
 
 const Box = "div" as unknown as React.ElementType;
 
-export function FeatureIconGrid({ items }: { items: FeatureItem[] }) {
+export function FeatureIconGrid({
+  items,
+  theme = "flow",
+}: {
+  items: FeatureItem[];
+  theme?: "flow" | "sustain";
+}) {
   return (
-    <Box className="nx-feature-grid" data-nx-collapse-2>
+    <Box
+      className={`nx-feature-grid${theme === "sustain" ? " nx-feature-grid--sustain" : ""}`}
+      data-nx-collapse-2
+    >
       {items.map((item) => (
         <Box key={item.title} className="nx-feature-grid__item">
           <Box className="nx-feature-grid__icon">{item.icon}</Box>

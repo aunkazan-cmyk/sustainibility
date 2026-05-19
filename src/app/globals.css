@@ -424,6 +424,43 @@ html[data-nx-header="on-dark"] .nx-breadcrumb--on-dark nav span:last-child {
   gap: 48px;
   align-items: center;
 }
+.nx-image-hero__split-media {
+  position: relative;
+  min-height: 360px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.nx-image-hero__split-media--fade::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 16px;
+  background: linear-gradient(90deg, #fff 0%, rgba(255, 255, 255, 0.85) 18%, transparent 42%);
+}
+.nx-image-hero__split-media--fade .nx-image-hero__split-img {
+  object-position: center right;
+}
+.nx-pill--sustain {
+  background: var(--nx-sustain-soft);
+  color: var(--nx-sustain-dark);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.nx-btn--sustain {
+  background: var(--nx-sustain);
+  color: #fff;
+  border-color: var(--nx-sustain);
+}
+.nx-btn--sustain:hover {
+  filter: brightness(1.05);
+}
+.nx-btn--ghost-sustain {
+  border-color: color-mix(in oklab, var(--nx-sustain) 40%, var(--nx-200));
+  color: var(--nx-sustain-dark);
+}
 .nx-hero-title {
   font-family: var(--nx-font-display);
   font-size: clamp(36px, 5vw, 56px);
@@ -477,6 +514,16 @@ html[data-nx-header="on-dark"] .nx-breadcrumb--on-dark nav span:last-child {
   font-size: 14px;
   line-height: 1.55;
   color: var(--nx-600);
+}
+.nx-feature-grid--sustain {
+  grid-template-columns: repeat(5, 1fr);
+}
+.nx-feature-grid--sustain .nx-feature-grid__icon {
+  border-color: color-mix(in oklab, var(--nx-sustain) 35%, var(--nx-200));
+  color: var(--nx-sustain);
+}
+.nx-feature-grid--sustain .nx-feature-grid__title {
+  color: var(--nx-sustain-dark);
 }
 
 .nx-service-cards {
@@ -717,6 +764,13 @@ html[data-nx-header="on-dark"] .nx-breadcrumb--on-dark nav span:last-child {
   border-radius: 14px;
   padding: 28px;
 }
+.nx-checklist-panel--sustain {
+  background: var(--nx-sustain-soft);
+  border-color: color-mix(in oklab, var(--nx-sustain) 25%, var(--nx-200));
+}
+.nx-checklist-panel--sustain .nx-checklist-panel__title {
+  color: var(--nx-sustain-dark);
+}
 .nx-checklist-panel__list {
   list-style: none;
   margin: 16px 0 0;
@@ -875,11 +929,86 @@ html[data-nx-header="on-dark"] .nx-breadcrumb--on-dark nav span:last-child {
   line-height: 1.45;
 }
 
+.nx-benefit-icon-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.nx-benefit-icon-grid__item {
+  background: #fff;
+  border: 1px solid var(--nx-200);
+  border-radius: 12px;
+  padding: 20px;
+}
+.nx-benefit-icon-grid__icon {
+  width: 48px;
+  height: 48px;
+  border: 1px solid color-mix(in oklab, var(--nx-sustain) 35%, var(--nx-200));
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--nx-sustain);
+  margin-bottom: 12px;
+}
+.nx-benefit-icon-grid__title {
+  margin: 0 0 6px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--nx-sustain-dark);
+}
+.nx-benefit-icon-grid__body {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--nx-600);
+}
+
+.nx-process-steps--sustain .nx-process-steps__title {
+  color: var(--nx-sustain-dark);
+}
+.nx-process-steps--connected .nx-process-steps__item:not(:last-child)::after {
+  content: "→";
+  position: absolute;
+  right: -12px;
+  top: 28px;
+  color: var(--nx-sustain);
+  font-size: 18px;
+  font-weight: 600;
+}
+@media (max-width: 1100px) {
+  .nx-process-steps--connected .nx-process-steps__item::after {
+    display: none;
+  }
+}
+.nx-process-steps__icon {
+  display: flex;
+  color: var(--nx-sustain);
+  margin-bottom: 8px;
+}
+.nx-faq-item--sustain summary {
+  color: var(--nx-sustain-dark);
+}
+.nx-faq-item--sustain summary::after {
+  color: var(--nx-sustain);
+}
+
 .nx-sustain-bottom {
   display: grid;
   grid-template-columns: 0.9fr 1.4fr 1.1fr;
   gap: 40px;
   align-items: start;
+}
+.nx-sustain-sector-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.nx-sustain-insights--cards .nx-insight-card {
+  flex-direction: column;
+}
+.nx-sustain-insights--cards .nx-insight-card__media {
+  width: 100%;
 }
 .nx-sustain-sector-list {
   list-style: none;
@@ -914,7 +1043,8 @@ html[data-nx-header="on-dark"] .nx-breadcrumb--on-dark nav span:last-child {
 
 @media (max-width: 1100px) {
   .nx-service-cards { grid-template-columns: repeat(2, 1fr); }
-  .nx-feature-grid { grid-template-columns: repeat(2, 1fr); }
+  .nx-feature-grid,
+  .nx-feature-grid--sustain { grid-template-columns: repeat(2, 1fr); }
   .nx-process-steps { grid-template-columns: 1fr 1fr; }
   .nx-flow-feature-cards { grid-template-columns: 1fr 1fr; }
   .nx-sustain-bottom { grid-template-columns: 1fr; }

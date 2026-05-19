@@ -5,7 +5,7 @@ import type { Locale } from "@/lib/site";
 import { pathFor } from "@/lib/routes";
 import { IMAGES } from "@/lib/images";
 import { ArrowRight } from "./primitives";
-import { IconChat } from "./mockup-icons";
+import { IconChat, IconLeaf } from "./mockup-icons";
 
 export function CTABand({
   t,
@@ -35,7 +35,7 @@ export function CTABand({
     >
       <div className="nx-cta-band__bg" aria-hidden>
         <Image
-          src={IMAGES.waterCta}
+          src={variant === "sustain" ? IMAGES.sustainCta : IMAGES.waterCta}
           alt=""
           fill
           sizes="100vw"
@@ -52,7 +52,7 @@ export function CTABand({
               marginTop: 4,
             }}
           >
-            <IconChat />
+            {variant === "sustain" ? <IconLeaf /> : <IconChat />}
           </span>
           <div>
             <h3

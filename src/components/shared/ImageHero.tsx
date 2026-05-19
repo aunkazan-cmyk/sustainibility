@@ -13,6 +13,7 @@ export function ImageHero({
   accentColor,
   children,
   imageRight,
+  fadeToWhite = false,
 }: {
   image: string;
   imageAlt?: string;
@@ -22,6 +23,8 @@ export function ImageHero({
   accentColor?: string;
   children: ReactNode;
   imageRight?: string;
+  /** Split hero: fade image into white on the left (sustain page). */
+  fadeToWhite?: boolean;
 }) {
   if (variant === "split") {
     return (
@@ -38,17 +41,24 @@ export function ImageHero({
           )}
           <div className="nx-image-hero__split-grid" data-nx-collapse data-nx-cgap>
             <div className="nx-image-hero__split-copy">{children}</div>
-            <div className="nx-image-hero__split-media">
+            <div
+              className={
+                fadeToWhite
+                  ? "nx-image-hero__split-media nx-image-hero__split-media--fade"
+                  : "nx-image-hero__split-media"
+              }
+            >
               <Image
                 src={imageRight ?? image}
                 alt={imageAlt}
                 width={800}
                 height={600}
                 priority
+                className="nx-image-hero__split-img"
                 style={{
                   width: "100%",
-                  height: "auto",
-                  maxHeight: 480,
+                  height: "100%",
+                  minHeight: 360,
                   objectFit: "cover",
                   borderRadius: 16,
                 }}

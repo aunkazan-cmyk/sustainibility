@@ -2,7 +2,9 @@
 export const IMAGES = {
   homeHero: "/images/heroes/home-hero.jpg",
   waterHero: "/images/heroes/water-hero.jpg",
-  sustainHero: "/images/heroes/sustain-hero.jpg",
+  sustainHero: "/images/heroes/sustain-forest.svg",
+  sustainHeroPhoto: "/images/heroes/sustain-hero.jpg",
+  sustainCta: "/images/textures/sustain-cta.jpg",
   waterCta: "/images/textures/water-cta.jpg",
   waterCard: "/images/cards/water-theme.jpg",
   sustainCard: "/images/cards/sustain-theme.jpg",

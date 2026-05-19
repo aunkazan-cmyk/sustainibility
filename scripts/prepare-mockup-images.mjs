@@ -1,6 +1,6 @@
 // Copy + resize mockup/source_img into public/images. Run: npm run images
 import sharp from "sharp";
-import { readdirSync, mkdirSync, writeFileSync, copyFileSync } from "node:fs";
+import { readdirSync, mkdirSync, writeFileSync, copyFileSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -94,6 +94,30 @@ for (const [prefix, out, maxW] of MAP) {
   const key = out.replace(/\//g, "_").replace(/\.jpg$/, "");
   manifest[key] = `/images/${out}`;
 }
+
+// SVG hero + sustain CTA texture (copy as-is)
+const SVG_COPY = [
+  ["orman.svg", "heroes/sustain-forest.svg"],
+];
+for (const [name, relOut] of SVG_COPY) {
+  const src = join(SRC, name);
+  if (!existsSync(src)) {
+    console.warn("  skip (missing):", name);
+    continue;
+  }
+  const dest = join(OUT, relOut);
+  mkdirSync(dirname(dest), { recursive: true });
+  copyFileSync(src, dest);
+  manifest[relOut.replace(/\//g, "_").replace(/\.svg$/, "")] = `/images/${relOut}`;
+  console.log("  ✓", relOut, "(svg copy)");
+}
+
+// Sustain CTA from card theme jpg
+const sustainCtaSrc = resolveSource("Sustainability theme card background");
+const sustainCtaShort = join(STAGING, "sustain-cta.src.jpg");
+copyFileSync(join(SRC, sustainCtaSrc), sustainCtaShort);
+await processOne(sustainCtaShort, "textures/sustain-cta.jpg", 1920);
+manifest.textures_sustain_cta = "/images/textures/sustain-cta.jpg";
 
 writeFileSync(join(OUT, "manifest.json"), JSON.stringify(manifest, null, 2));
 console.log("\nDone.");

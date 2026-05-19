@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "./primitives";
 import { SectorIcon } from "./SectorIcon";
 
-function sectorKind(name: string): string {
+export function sectorKind(name: string): string {
   const x = name.toLowerCase();
   if (x.includes("lojistik") || x.includes("logistic")) return "adr";
   if (

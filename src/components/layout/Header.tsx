@@ -47,19 +47,7 @@ export function Header({ locale }: { locale: Locale }) {
   const homeHref = pathFor("home", locale);
 
   return (
-    <header
-      className="nx-site-header"
-      style={{
-        position: "sticky",
-        top: 0,
-        zIndex: 50,
-        background: "rgba(255,255,255,0.92)",
-        backdropFilter: "saturate(180%) blur(12px)",
-        WebkitBackdropFilter: "saturate(180%) blur(12px)",
-        borderBottom: "1px solid var(--nx-150)",
-        color: "var(--nx-900)",
-      }}
-    >
+    <header className="nx-site-header">
       <div
         className="nx-container"
         style={{

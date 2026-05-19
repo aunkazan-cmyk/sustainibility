@@ -5,6 +5,7 @@ import type { Locale } from "@/lib/site";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { StickyContactCta } from "./StickyContactCta";
+import { HeaderThemeProvider } from "./header-theme";
 
 export function SiteShell({
   locale,
@@ -14,11 +15,11 @@ export function SiteShell({
   children: ReactNode;
 }) {
   return (
-    <>
+    <HeaderThemeProvider>
       <Header locale={locale} />
       <main>{children}</main>
       <Footer locale={locale} />
       <StickyContactCta locale={locale} />
-    </>
+    </HeaderThemeProvider>
   );
 }

@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Strings } from "@/i18n/getDictionary";
 import { IMAGES } from "@/lib/images";
-import { SetHeaderVariant } from "@/components/shared/SetHeaderVariant";
+import { PageHeaderOnDark } from "@/components/shared/PageHeaderOnDark";
 import { ImageHero } from "@/components/shared/ImageHero";
 import { ChecklistPanel } from "@/components/shared/ChecklistPanel";
 import { ScopeList } from "@/components/shared/ScopeList";
@@ -41,7 +41,7 @@ export function WaterServiceHero({
 
   return (
     <>
-      <SetHeaderVariant variant="on-dark" />
+      <PageHeaderOnDark />
       <ImageHero
         image={IMAGES.waterHero}
         variant="fullBleed"

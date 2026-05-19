@@ -7,6 +7,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { resolveRoute, pathFor } from "@/lib/routes";
 import type { Locale } from "@/lib/site";
+import { useHeaderTheme } from "./header-theme";
 
 function parse(pathname: string): { locale: Locale; slug: string[] } {
   if (pathname === "/en" || pathname.startsWith("/en/")) {
@@ -17,8 +18,10 @@ function parse(pathname: string): { locale: Locale; slug: string[] } {
   return { locale: "tr", slug: rest ? rest.split("/") : [] };
 }
 
-export function LangSwitcher({ dark = false }: { dark?: boolean }) {
+export function LangSwitcher({ dark: darkProp }: { dark?: boolean }) {
   const pathname = usePathname() || "/";
+  const { transparent } = useHeaderTheme();
+  const dark = darkProp ?? transparent;
   const { locale, slug } = parse(pathname);
   const route = resolveRoute(locale, slug);
 
@@ -27,10 +30,11 @@ export function LangSwitcher({ dark = false }: { dark?: boolean }) {
 
   return (
     <div
+      className="nx-lang-switcher"
       style={{
         display: "inline-flex",
         borderRadius: 999,
-        background: dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.04)",
+        background: dark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.04)",
         padding: 2,
         fontSize: 12,
         fontWeight: 600,

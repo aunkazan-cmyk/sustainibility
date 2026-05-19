@@ -1,14 +1,11 @@
 "use client";
-import { useEffect } from "react";
 
 export type HeaderVariant = "light" | "on-dark";
 
+import { usePageHeaderVariant } from "./usePageHeaderVariant";
+
+/** @deprecated Prefer usePageHeaderVariant — kept for existing call sites. */
 export function SetHeaderVariant({ variant }: { variant: HeaderVariant }) {
-  useEffect(() => {
-    document.documentElement.dataset.nxHeader = variant;
-    return () => {
-      delete document.documentElement.dataset.nxHeader;
-    };
-  }, [variant]);
+  usePageHeaderVariant(variant);
   return null;
 }

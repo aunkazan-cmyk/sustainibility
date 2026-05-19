@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { LangSwitcher } from "./LangSwitcher";
+import { useHeaderTheme } from "./header-theme";
 
 export interface NavItem {
   label: string;
@@ -23,6 +24,7 @@ export function MobileNav({
 }) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const { transparent } = useHeaderTheme();
 
   // `open` is false during SSR/first render, so the createPortal branch
   // never references document on the server (no hydration mismatch, no
@@ -44,6 +46,7 @@ export function MobileNav({
     <div className="nx-mobile-only" style={{ alignItems: "center" }}>
       <button
         type="button"
+        className="nx-mobile-menu-btn"
         aria-label={open ? "Menüyü kapat" : "Menüyü aç"}
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
@@ -56,7 +59,7 @@ export function MobileNav({
           background: "transparent",
           border: "1px solid var(--nx-200)",
           borderRadius: 10,
-          color: "var(--nx-900)",
+          color: transparent ? "#fff" : "var(--nx-900)",
         }}
       >
         <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">

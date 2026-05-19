@@ -4,11 +4,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { CSSProperties } from "react";
+import { useHeaderTheme } from "./header-theme";
 
 export function NavLink({
   href,
   label,
-  dark = false,
+  dark: darkProp,
   hasMenu = false,
   style,
 }: {
@@ -19,6 +20,8 @@ export function NavLink({
   style?: CSSProperties;
 }) {
   const pathname = usePathname();
+  const { transparent } = useHeaderTheme();
+  const dark = darkProp ?? transparent;
   const active = pathname === href;
   const base: CSSProperties = {
     fontSize: 14,
@@ -28,14 +31,19 @@ export function NavLink({
         ? "#fff"
         : "var(--nx-900)"
       : dark
-        ? "rgba(255,255,255,0.78)"
+        ? "rgba(255,255,255,0.88)"
         : "var(--nx-700)",
     padding: "8px 2px",
     position: "relative",
     ...style,
   };
   return (
-    <Link href={href} style={base} aria-current={active ? "page" : undefined}>
+    <Link
+      href={href}
+      className="nx-nav-link"
+      style={base}
+      aria-current={active ? "page" : undefined}
+    >
       {label}
       {hasMenu && (
         <svg

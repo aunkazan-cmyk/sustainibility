@@ -360,23 +360,53 @@ img, svg { display: block; max-width: 100%; }
 /* ---------------------------------------------------------------------
    Mockup-aligned layout (heroes, cards, header on dark)
    --------------------------------------------------------------------- */
-html[data-nx-header="on-dark"] .nx-site-header {
+.nx-site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid var(--nx-150);
+  color: var(--nx-900);
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+/* Hero overlay: transparent bar, light nav (home + water at top of page). */
+html[data-nx-header="on-dark"]:not([data-nx-header-solid="true"]) .nx-site-header {
   background: transparent;
   border-bottom-color: transparent;
   color: #fff;
 }
-html[data-nx-header="on-dark"] .nx-site-header .nx-desktop-nav a,
-html[data-nx-header="on-dark"] .nx-site-header .nx-btn--ghost {
-  color: rgba(255,255,255,0.88) !important;
-  border-color: rgba(255,255,255,0.35) !important;
+html[data-nx-header="on-dark"]:not([data-nx-header-solid="true"]) .nx-site-header .nx-nav-link,
+html[data-nx-header="on-dark"]:not([data-nx-header-solid="true"]) .nx-site-header .nx-dropdown__trigger {
+  color: rgba(255, 255, 255, 0.92);
 }
-html[data-nx-header="on-dark"] .nx-site-header .nx-btn--accent {
-  background: #fff !important;
-  color: var(--nx-navy) !important;
+html[data-nx-header="on-dark"]:not([data-nx-header-solid="true"]) .nx-site-header .nx-btn--ghost {
+  color: rgba(255, 255, 255, 0.88);
+  border-color: rgba(255, 255, 255, 0.35);
 }
-html[data-nx-header="on-dark"] .nx-header-logo--light { display: none !important; }
-html[data-nx-header="on-dark"] .nx-header-logo--dark { display: flex !important; }
-.nx-header-logo--dark { display: none; }
+html[data-nx-header="on-dark"]:not([data-nx-header-solid="true"]) .nx-site-header .nx-btn--accent {
+  background: #fff;
+  color: var(--nx-navy);
+}
+html[data-nx-header="on-dark"]:not([data-nx-header-solid="true"]) .nx-site-header .nx-mobile-menu-btn {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.35);
+}
+html[data-nx-header="on-dark"]:not([data-nx-header-solid="true"]) .nx-header-logo--light {
+  display: none !important;
+}
+html[data-nx-header="on-dark"]:not([data-nx-header-solid="true"]) .nx-header-logo--dark {
+  display: flex !important;
+}
+
+.nx-header-logo--dark {
+  display: none;
+}
 html[data-nx-header="on-dark"] .nx-breadcrumb--on-dark nav {
   color: rgba(255,255,255,0.65);
 }

@@ -6,6 +6,7 @@
 import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useHeaderTheme } from "./header-theme";
 
 export interface DropItem {
   label: string;
@@ -25,6 +26,7 @@ export function NavDropdown({
   const wrapRef = useRef<HTMLDivElement>(null);
   const menuId = useId();
   const pathname = usePathname() || "/";
+  const { transparent } = useHeaderTheme();
   const active =
     pathname === href || items.some((i) => pathname === i.href);
 
@@ -58,6 +60,7 @@ export function NavDropdown({
     >
       <Link
         href={href}
+        className="nx-dropdown__trigger nx-nav-link"
         aria-haspopup="menu"
         aria-expanded={open}
         aria-controls={menuId}
@@ -69,7 +72,13 @@ export function NavDropdown({
           gap: 4,
           fontSize: 14,
           fontWeight: active ? 600 : 500,
-          color: active ? "var(--nx-900)" : "var(--nx-700)",
+          color: transparent
+            ? active
+              ? "#fff"
+              : "rgba(255,255,255,0.88)"
+            : active
+              ? "var(--nx-900)"
+              : "var(--nx-700)",
           padding: "8px 2px",
         }}
       >

@@ -4,7 +4,7 @@ import { getDictionary } from "@/i18n/getDictionary";
 import { pathFor, routeKeyForInsight, INSIGHT_ORDER } from "@/lib/routes";
 import { insightArticle } from "@/i18n/insights-content";
 import { IMAGES } from "@/lib/images";
-import { SetHeaderVariant } from "@/components/shared/SetHeaderVariant";
+import { PageHeaderOnDark } from "@/components/shared/PageHeaderOnDark";
 import { ImageHero } from "@/components/shared/ImageHero";
 import { SectionHeader } from "@/components/shared/SectionHeader";
 import { CTABand } from "@/components/shared/CTABand";
@@ -71,7 +71,7 @@ export function HomePage({ locale }: { locale: Locale }) {
 
   return (
     <>
-      <SetHeaderVariant variant="on-dark" />
+      <PageHeaderOnDark />
       <ImageHero image={IMAGES.homeHero} variant="home" minHeight={560}>
         <p
           className="nx-eyebrow"

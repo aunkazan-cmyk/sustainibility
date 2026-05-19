@@ -1,10 +1,8 @@
-// Footer — ported from components.jsx. Dark surface → the same real logo as
-// the navbar, white monochrome variant so it reads on the dark background.
-// (light). Real page links go through the registry; items with no page yet
-// render as muted text (no dead links). All 5 legal pages linked.
+// Footer — dark surface, registry links, social placeholders, mockup-aligned columns.
 import Link from "next/link";
 import Image from "next/image";
 import type { Locale } from "@/lib/site";
+import { ORG_EMAIL } from "@/lib/site";
 import { getDictionary } from "@/i18n/getDictionary";
 import { pathFor, type PageKey, type LegalDocId } from "@/lib/routes";
 import { legalTitle } from "@/lib/legal-content";
@@ -39,13 +37,17 @@ export function Footer({ locale }: { locale: Locale }) {
     },
     {
       title: lang === "TR" ? "Kurumsal" : "Company",
-      links: [{ label: t.nav.about, key: "about" }],
+      links: [
+        { label: t.nav.about, key: "about" },
+        { label: t.nav.contact, key: "contact" },
+      ],
     },
     {
       title: lang === "TR" ? "Kaynaklar" : "Resources",
       links: [
         { label: t.nav.insights, key: "insights" },
         { label: t.nav.trainings, key: "trainings" },
+        { label: t.nav.sectors, key: "sectors" },
       ],
     },
     {
@@ -56,6 +58,11 @@ export function Footer({ locale }: { locale: Locale }) {
       })),
     },
   ];
+
+  const taglineItems =
+    lang === "TR"
+      ? ["Mevzuat odaklı", "Ölçülebilir süreçler", "Saha + dijital"]
+      : ["Regulation-aware", "Measurable processes", "Field + digital"];
 
   return (
     <footer
@@ -71,7 +78,7 @@ export function Footer({ locale }: { locale: Locale }) {
             display: "grid",
             gridTemplateColumns: "1.6fr repeat(5, 1fr)",
             gap: 40,
-            marginBottom: 64,
+            marginBottom: 48,
           }}
           data-nx-collapse-2
         >
@@ -96,16 +103,24 @@ export function Footer({ locale }: { locale: Locale }) {
                 ? "Su verimliliği, sürdürülebilirlik ve ADR/TMGD danışmanlığı. Ölçülebilir süreçler, mevzuat odaklı yaklaşım."
                 : "Water efficiency, sustainability and ADR/TMGD consulting. Measurable processes, regulation-aware approach."}
             </p>
-            <div
-              style={{
-                marginTop: 24,
-                fontSize: 13,
-                color: "rgba(255,255,255,0.5)",
-              }}
-            >
-              <div>talep@nexovia.com.tr</div>
-              <div style={{ marginTop: 4 }}>nexovia.com.tr</div>
-            </div>
+            <nav className="nx-footer-social" aria-label={lang === "TR" ? "Sosyal medya" : "Social media"}>
+              <a href="#" aria-label="LinkedIn">
+                in
+              </a>
+              <a href="#" aria-label="YouTube">
+                YT
+              </a>
+              <a href={`mailto:${ORG_EMAIL}`} aria-label="E-posta">
+                @
+              </a>
+            </nav>
+            <p style={{ marginTop: 20, fontSize: 13, color: "rgba(255,255,255,0.5)" }}>
+              <a href={`mailto:${ORG_EMAIL}`} style={{ color: "inherit" }}>
+                {ORG_EMAIL}
+              </a>
+              <br />
+              <span style={{ marginTop: 4, display: "inline-block" }}>nexovia.com.tr</span>
+            </p>
           </div>
           {cols.map((c) => (
             <div key={c.title}>
@@ -141,11 +156,7 @@ export function Footer({ locale }: { locale: Locale }) {
                         {l.label}
                       </Link>
                     ) : (
-                      <span
-                        style={{ fontSize: 14, color: "rgba(255,255,255,0.5)" }}
-                      >
-                        {l.label}
-                      </span>
+                      <span style={{ fontSize: 14, color: "rgba(255,255,255,0.5)" }}>{l.label}</span>
                     )}
                   </li>
                 ))}
@@ -153,24 +164,28 @@ export function Footer({ locale }: { locale: Locale }) {
             </div>
           ))}
         </div>
+        <div className="nx-footer-tagline">
+          <span>Nexovia</span>
+          <span>{taglineItems.join(" · ")}</span>
+        </div>
         <div
           style={{
-            paddingTop: 28,
+            marginTop: 20,
+            paddingTop: 20,
             borderTop: "1px solid rgba(255,255,255,0.08)",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
             fontSize: 13,
             color: "rgba(255,255,255,0.5)",
+            flexWrap: "wrap",
+            gap: 12,
           }}
         >
           <div>
-            © 2026 Nexovia —{" "}
-            {lang === "TR" ? "Tüm hakları saklıdır" : "All rights reserved"}.
+            © 2026 Nexovia — {lang === "TR" ? "Tüm hakları saklıdır" : "All rights reserved"}.
           </div>
-          <div style={{ display: "flex", gap: 24 }}>
-            <span>nexovia.com.tr</span>
-          </div>
+          <span>nexovia.com.tr</span>
         </div>
       </div>
     </footer>

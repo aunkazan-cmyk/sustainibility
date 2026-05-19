@@ -48,11 +48,12 @@ export function Header({ locale }: { locale: Locale }) {
 
   return (
     <header
+      className="nx-site-header"
       style={{
         position: "sticky",
         top: 0,
         zIndex: 50,
-        background: "rgba(255,255,255,0.85)",
+        background: "rgba(255,255,255,0.92)",
         backdropFilter: "saturate(180%) blur(12px)",
         WebkitBackdropFilter: "saturate(180%) blur(12px)",
         borderBottom: "1px solid var(--nx-150)",
@@ -74,14 +75,25 @@ export function Header({ locale }: { locale: Locale }) {
           style={{ display: "flex", alignItems: "center" }}
           aria-label="Nexovia"
         >
-          <Image
-            src="/logos/optimized/nexovia-logo-light.png"
-            alt="Nexovia"
-            width={437}
-            height={120}
-            priority
-            style={{ height: 34, width: "auto" }}
-          />
+          <span className="nx-header-logo--light" style={{ display: "flex" }}>
+            <Image
+              src="/logos/optimized/nexovia-logo-light.png"
+              alt="Nexovia"
+              width={437}
+              height={120}
+              priority
+              style={{ height: 34, width: "auto" }}
+            />
+          </span>
+          <span className="nx-header-logo--dark" style={{ display: "none", alignItems: "center" }}>
+            <Image
+              src="/logos/optimized/nexovia-logo-footer.png"
+              alt="Nexovia"
+              width={437}
+              height={120}
+              style={{ height: 34, width: "auto" }}
+            />
+          </span>
         </Link>
 
         <nav

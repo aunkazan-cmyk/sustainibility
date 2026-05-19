@@ -1,4 +1,6 @@
-import Link from "next/link";
+import { writeFileSync } from "node:fs";
+
+const content = `import Link from "next/link";
 import type { Locale } from "@/lib/site";
 import { getDictionary } from "@/i18n/getDictionary";
 import { pathFor, routeKeyForInsight, INSIGHT_ORDER } from "@/lib/routes";
@@ -82,16 +84,15 @@ export function SustainabilityServicePage({ locale }: { locale: Locale }) {
             <div className="nx-sustain-insights">
               {insightIds.map((id) => {
                 const article = insightArticle(id, lang);
-                const href = pathFor(routeKeyForInsight(id), locale);
+                const key = routeKeyForInsight(id);
                 return (
                   <InsightCard
                     key={id}
-                    href={href}
-                    imageSrc={article.image}
-                    imageAlt=""
-                    meta={`${article.date} · ${article.tag}`}
+                    href={pathFor(key, locale)}
                     title={article.title}
-                    excerpt={article.lead}
+                    excerpt={article.excerpt}
+                    category={article.category}
+                    date={article.date}
                   />
                 );
               })}
@@ -111,3 +112,7 @@ export function SustainabilityServicePage({ locale }: { locale: Locale }) {
     </>
   );
 }
+`;
+
+writeFileSync("src/components/pages/SustainabilityServicePage.tsx", content);
+console.log("written");

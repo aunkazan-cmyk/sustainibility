@@ -175,7 +175,7 @@ export function InsightArticlePage({
         </div>
       </section>
 
-      <CTABand t={t} lang={lang} locale={locale} variant="navy" />
+      <CTABand t={t} lang={lang} locale={locale} />
     </>
   );
 }

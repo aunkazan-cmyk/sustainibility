@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "logos": "node scripts/optimize-logos.mjs",
+    "images": "node scripts/prepare-mockup-images.mjs",
     "test:contact": "node --experimental-strip-types tests/contact-schema.test.ts",
     "test:captcha": "node --experimental-strip-types tests/contact-captcha.test.ts"
   },

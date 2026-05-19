@@ -353,7 +353,7 @@ export function AdrPage({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      <CTABand t={t} lang={lang} locale={locale} variant="ink" />
+      <CTABand t={t} lang={lang} locale={locale} />
     </>
   );
 }

@@ -1,0 +1,12 @@
+{
+  "heroes_home-hero": "/images/heroes/home-hero.jpg",
+  "heroes_water-hero": "/images/heroes/water-hero.jpg",
+  "textures_water-cta": "/images/textures/water-cta.jpg",
+  "cards_water-theme": "/images/cards/water-theme.jpg",
+  "cards_sustain-theme": "/images/cards/sustain-theme.jpg",
+  "heroes_sustain-hero": "/images/heroes/sustain-hero.jpg",
+  "screens_flow-dashboard-1": "/images/screens/flow-dashboard-1.jpg",
+  "screens_flow-dashboard-2": "/images/screens/flow-dashboard-2.jpg",
+  "screens_flow-dashboard-3": "/images/screens/flow-dashboard-3.jpg",
+  "cards_adr-theme": "/images/cards/adr-theme.jpg"
+}

@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Mockup sources — filenames exceed Git/GitHub path limits; use npm run images → public/images/
+mockup/source_img/
+mockup/_staging/

@@ -3,7 +3,7 @@ import type { Locale } from "@/lib/site";
 import { getDictionary } from "@/i18n/getDictionary";
 import { pathFor, routeKeyForInsight, INSIGHT_ORDER } from "@/lib/routes";
 import { insightArticle } from "@/i18n/insights-content";
-import { FLOW_FAQ } from "@/i18n/faq";
+import { SUSTAIN_FAQ } from "@/i18n/faq";
 import { SectionHeader } from "@/components/shared/SectionHeader";
 import { CTABand } from "@/components/shared/CTABand";
 import { ProcessSteps } from "@/components/shared/ProcessSteps";
@@ -13,6 +13,8 @@ import { SectorIcon } from "@/components/shared/SectorIcon";
 import { sectorKind } from "@/components/shared/SectorStrip";
 import { IconExpertise, IconLeaf, IconShield, IconTech } from "@/components/shared/mockup-icons";
 import { SustainabilityServiceHero } from "@/components/pages/sustainability/SustainabilityServiceHero";
+import { ServiceDetailSections } from "@/components/shared/ServiceDetailSections";
+import { sustainServiceContent } from "@/i18n/service-content";
 
 export function SustainabilityServicePage({ locale }: { locale: Locale }) {
   const { t, lang } = getDictionary(locale);
@@ -80,6 +82,7 @@ export function SustainabilityServicePage({ locale }: { locale: Locale }) {
           },
         ];
 
+  const sc = sustainServiceContent(lang);
   const insightIds = INSIGHT_ORDER.slice(0, 3);
 
   return (
@@ -109,37 +112,49 @@ export function SustainabilityServicePage({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      <section data-nx-section style={{ padding: "96px 0", background: "#fafaf7" }}>
+      <ServiceDetailSections
+        outputsTitle={lang === "TR" ? "Hizmet çıktıları" : "Deliverables"}
+        outputs={sc.outputs}
+        audienceTitle={lang === "TR" ? "Kimler için uygun?" : "Who is it for?"}
+        audience={sc.audience}
+      />
+
+      <section data-nx-section className="nx-sustain-bottom-section">
         <div className="nx-container nx-sustain-bottom">
-          <section className="nx-sustain-bottom__col">
+          <section className="nx-sustain-bottom__panel">
             <SectionHeader
+              size="compact"
+              theme="sustain"
               eyebrow={lang === "TR" ? "İlgili sektörler" : "Related sectors"}
               title={lang === "TR" ? "Sektörler" : "Sectors"}
             />
             <ul className="nx-sustain-sector-list">
               {t.sectors.slice(0, 5).map((name) => (
                 <li key={name} className="nx-sustain-sector-row">
-                  <SectorIcon name={name} kind={sectorKind(name)} size={28} />
+                  <SectorIcon name={name} kind={sectorKind(name)} size={24} />
                   <span>{name}</span>
                 </li>
               ))}
             </ul>
-            <Link href={sectorsHref} className="nx-text-link" style={{ marginTop: 16, display: "inline-flex" }}>
+            <Link href={sectorsHref} className="nx-text-link nx-sustain-bottom__link">
               {lang === "TR" ? "Tüm sektörler" : "All sectors"} →
             </Link>
           </section>
-          <section className="nx-sustain-bottom__col">
+          <section className="nx-sustain-bottom__panel nx-sustain-bottom__panel--insights">
             <SectionHeader
+              size="compact"
+              theme="sustain"
               eyebrow={lang === "TR" ? "İlgili içgörüler" : "Related insights"}
-              title={t.home.insights.title}
+              title={lang === "TR" ? "İçgörüler" : "Insights"}
             />
-            <div className="nx-sustain-insights nx-sustain-insights--cards">
+            <div className="nx-sustain-insights">
               {insightIds.map((id) => {
                 const article = insightArticle(id, lang);
                 const href = pathFor(routeKeyForInsight(id), locale);
                 return (
                   <InsightCard
                     key={id}
+                    compact
                     href={href}
                     imageSrc={article.image}
                     imageAlt=""
@@ -150,16 +165,18 @@ export function SustainabilityServicePage({ locale }: { locale: Locale }) {
                 );
               })}
             </div>
-            <Link href={insightsHref} className="nx-text-link" style={{ marginTop: 16, display: "inline-flex" }}>
+            <Link href={insightsHref} className="nx-text-link nx-sustain-bottom__link">
               {lang === "TR" ? "Tüm içgörüler" : "All insights"} →
             </Link>
           </section>
-          <section className="nx-sustain-bottom__col">
+          <section className="nx-sustain-bottom__panel">
             <SectionHeader
+              size="compact"
+              theme="sustain"
               eyebrow="FAQ"
-              title={lang === "TR" ? "Sıkça sorulan sorular" : "Frequently asked questions"}
+              title={lang === "TR" ? "Sık sorulanlar" : "FAQ"}
             />
-            <FaqAccordion items={FLOW_FAQ[lang].slice(0, 4)} theme="sustain" />
+            <FaqAccordion items={SUSTAIN_FAQ[lang]} theme="sustain" layout="stack" />
           </section>
         </div>
       </section>

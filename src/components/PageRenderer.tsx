@@ -70,9 +70,10 @@ export function PageRenderer({
       {route.jsonLd.includes("Breadcrumb") && (
         <JsonLd data={breadcrumbSchema(route, locale)} />
       )}
-      {route.jsonLd.includes("FAQ") && (
-        <JsonLd data={faqSchema(route, locale)} />
-      )}
+      {(() => {
+        const faq = route.jsonLd.includes("FAQ") ? faqSchema(route, locale) : null;
+        return faq ? <JsonLd data={faq} /> : null;
+      })()}
       {route.jsonLd.includes("Service") && (
         <JsonLd data={serviceSchema(route, locale)} />
       )}

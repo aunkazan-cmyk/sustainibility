@@ -12,8 +12,8 @@ import { insightArticle } from "@/i18n/insights-content";
 
 const TITLES: Partial<Record<PageKey, Record<Locale, string>>> = {
   home: {
-    tr: "Nexovia | Su Verimliliği, Sürdürülebilirlik ve ADR/TMGD Danışmanlığı",
-    en: "Nexovia | Water Efficiency, Sustainability & ADR/TMGD Consulting",
+    tr: "Nexovia | Su Verimliliği, Sürdürülebilirlik ve Dijital Uyum Platformları",
+    en: "Nexovia | Water Efficiency, Sustainability & Digital Compliance Platforms",
   },
   platformIndex: {
     tr: "Platform | Nexovia",

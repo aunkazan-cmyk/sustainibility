@@ -11,6 +11,7 @@ import { CTABand } from "@/components/shared/CTABand";
 import { BrandIcon } from "@/components/shared/BrandIcon";
 import { SectorIcon } from "@/components/shared/SectorIcon";
 import { ArrowRight } from "@/components/shared/primitives";
+import { sectorDetail } from "@/i18n/sectors-content";
 
 export function SectorsPage({ locale }: { locale: Locale }) {
   const { t, lang } = getDictionary(locale);
@@ -43,6 +44,8 @@ export function SectorsPage({ locale }: { locale: Locale }) {
     return "flow";
   };
   const challenge = (s: string) => {
+    const detail = sectorDetail(s, lang);
+    if (detail) return detail;
     const x = s.toLowerCase();
     if (x.includes("kimya") || x.includes("chemic"))
       return lang === "TR"

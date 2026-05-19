@@ -145,12 +145,12 @@ export function HomePage({ locale }: { locale: Locale }) {
             />
             <ServicePlatformCard
               icon={<BrandIcon kind="adr" size={40} />}
-              title={t.services.adr.title}
-              description={t.services.adr.short}
+              title={t.adrPage.title}
+              description={t.adrPage.lead}
               imageSrc={IMAGES.adrCard}
               imageAlt=""
               href={adrHref}
-              linkLabel={lang === "TR" ? "Hizmeti İncele" : "View service"}
+              linkLabel={lang === "TR" ? "Platformu Keşfet" : "Explore the platform"}
               accentColor="var(--nx-adr)"
             />
           </div>

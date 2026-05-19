@@ -6,6 +6,8 @@ import { getDictionary } from "@/i18n/getDictionary";
 import { PageHero } from "@/components/shared/PageHero";
 import { SectionHeader } from "@/components/shared/SectionHeader";
 import { CTABand } from "@/components/shared/CTABand";
+import { FaqAccordion } from "@/components/shared/FaqAccordion";
+import { GENERAL_FAQ } from "@/i18n/faq";
 import { BrandIcon } from "@/components/shared/BrandIcon";
 
 export function AboutPage({ locale }: { locale: Locale }) {
@@ -84,11 +86,11 @@ export function AboutPage({ locale }: { locale: Locale }) {
     {
       kind: "adr",
       name: "Nexovia ADR",
-      role: lang === "TR" ? "ADR / TMGD danışmanlığı" : "ADR / TMGD consulting",
+      role: lang === "TR" ? "ADR/TMGD dijital platform" : "ADR/TMGD digital platform",
       body:
         lang === "TR"
-          ? "Tehlikeli madde uyumu, dokümantasyon, denetim hazırlığı."
-          : "Dangerous goods compliance, documentation, inspection prep.",
+          ? "ADR/TMGD kayıt ve belge takibi, denetim hazırlığı — dijital platform."
+          : "ADR/TMGD records, documents and inspection readiness — digital platform.",
     },
   ];
 
@@ -268,6 +270,16 @@ export function AboutPage({ locale }: { locale: Locale }) {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section data-nx-section style={{ padding: "96px 0", background: "#fafaf7" }}>
+        <div className="nx-container">
+          <SectionHeader
+            eyebrow="FAQ"
+            title={lang === "TR" ? "Sıkça sorulan sorular" : "Frequently asked questions"}
+          />
+          <FaqAccordion items={GENERAL_FAQ[lang]} />
         </div>
       </section>
 

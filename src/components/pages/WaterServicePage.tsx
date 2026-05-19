@@ -1,7 +1,7 @@
 import type { Locale } from "@/lib/site";
 import { getDictionary } from "@/i18n/getDictionary";
 import { pathFor } from "@/lib/routes";
-import { FLOW_FAQ } from "@/i18n/faq";
+import { WATER_FAQ } from "@/i18n/faq";
 import { SectionHeader } from "@/components/shared/SectionHeader";
 import { CTABand } from "@/components/shared/CTABand";
 import { ProcessSteps } from "@/components/shared/ProcessSteps";
@@ -9,6 +9,8 @@ import { FeatureIconGrid } from "@/components/shared/FeatureIconGrid";
 import { FaqAccordion } from "@/components/shared/FaqAccordion";
 import { SectorStrip } from "@/components/shared/SectorStrip";
 import { WaterServiceHero } from "@/components/pages/water/WaterServiceHero";
+import { ServiceDetailSections } from "@/components/shared/ServiceDetailSections";
+import { waterServiceContent } from "@/i18n/service-content";
 import { IconExpertise, IconShield, IconTech, IconLeaf } from "@/components/shared/mockup-icons";
 export function WaterServicePage({ locale }: { locale: Locale }) {
   const { t, lang } = getDictionary(locale);
@@ -18,22 +20,11 @@ export function WaterServicePage({ locale }: { locale: Locale }) {
   const contactHref = pathFor("contact", locale);
   const sectorsHref = pathFor("sectors", locale);
 
-  const processSteps =
-    lang === "TR"
-      ? [
-          { title: "Saha etüdü", body: "Tesis turu, sayaç envanteri ve operasyon görüşmeleri." },
-          { title: "Tüketim analizi", body: "Veri normalizasyonu, birim tüketim hesabı ve kıyaslama." },
-          { title: "İyileştirme planı", body: "Önceliklendirme, yatırım çerçevesi ve geri ödeme süresi." },
-          { title: "Sürekli raporlama", body: "Flow entegrasyonu, aylık özet ve mevzuat takibi." },
-          { title: "Devreye alma", body: "İzleme, raporlama ve iyileştirme döngüsünün sürekliliği." },
-        ]
-      : [
-          { title: "Site audit", body: "Facility walk, meter inventory and operations interviews." },
-          { title: "Consumption analysis", body: "Data normalization, specific consumption and benchmarking." },
-          { title: "Improvement plan", body: "Prioritization, investment framing and payback analysis." },
-          { title: "Continuous reporting", body: "Flow integration, monthly summary and regulation tracking." },
-          { title: "Go-live", body: "Continuity of monitoring, reporting and improvement cycles." },
-        ];
+  const sc = waterServiceContent(lang);
+  const processSteps = sc.scopeItems.map((item) => ({
+    title: item.title,
+    body: item.body,
+  }));
 
   const benefitItems =
     lang === "TR"
@@ -81,6 +72,13 @@ export function WaterServicePage({ locale }: { locale: Locale }) {
         </div>
       </section>
 
+      <ServiceDetailSections
+        outputsTitle={lang === "TR" ? "Hizmet çıktıları" : "Deliverables"}
+        outputs={sc.outputs}
+        audienceTitle={lang === "TR" ? "Kimler için uygun?" : "Who is it for?"}
+        audience={sc.audience}
+      />
+
       <section data-nx-section style={{ padding: "96px 0", background: "#fafaf7" }}>
         <div className="nx-container">
           <SectionHeader
@@ -102,7 +100,7 @@ export function WaterServicePage({ locale }: { locale: Locale }) {
             eyebrow="FAQ"
             title={lang === "TR" ? "Sık sorulanlar" : "Frequently asked questions"}
           />
-          <FaqAccordion items={FLOW_FAQ[lang]} />
+          <FaqAccordion items={WATER_FAQ[lang]} />
         </div>
       </section>
 

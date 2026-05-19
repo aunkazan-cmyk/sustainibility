@@ -9,6 +9,8 @@ import { pathFor } from "@/lib/routes";
 import { PageHero } from "@/components/shared/PageHero";
 import { SectionHeader } from "@/components/shared/SectionHeader";
 import { CTABand } from "@/components/shared/CTABand";
+import { FaqAccordion } from "@/components/shared/FaqAccordion";
+import { TRAININGS_FAQ } from "@/i18n/faq";
 import { ArrowRight } from "@/components/shared/primitives";
 
 export function TrainingsPage({ locale }: { locale: Locale }) {
@@ -208,6 +210,16 @@ export function TrainingsPage({ locale }: { locale: Locale }) {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section data-nx-section style={{ padding: "96px 0", background: "#fff" }}>
+        <div className="nx-container">
+          <SectionHeader
+            eyebrow="FAQ"
+            title={lang === "TR" ? "Eğitimler hakkında" : "About our trainings"}
+          />
+          <FaqAccordion items={TRAININGS_FAQ[lang]} />
         </div>
       </section>
 

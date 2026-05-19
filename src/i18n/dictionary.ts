@@ -71,9 +71,9 @@ export const I18N = {
         brand: "sustain",
       },
       adr: {
-        title: "ADR / TMGD Danışmanlığı",
+        title: "Nexovia ADR",
         short:
-          "Tehlikeli madde taşımacılığında uyum, dokümantasyon ve risk yönetimi.",
+          "ADR/TMGD süreçleri için dijital takip ve dokümantasyon platformu.",
         brand: "adr",
       },
     },
@@ -115,7 +115,7 @@ export const I18N = {
     aboutPage: {
       eyebrow: "Hakkımızda",
       title: "Mevzuata uygun, ölçülebilir bir danışmanlık.",
-      lead: "Nexovia; su verimliliği, sürdürülebilirlik ve ADR/TMGD alanlarında, saha tecrübesini dijital altyapıyla birleştiren bir B2B danışmanlık ekosistemidir.",
+      lead: "Nexovia; su verimliliği ve sürdürülebilirlik danışmanlığı ile ADR/TMGD süreçlerine yönelik dijital takip platformları geliştiren bir B2B çözüm markasıdır. Saha tecrübesini dijital altyapıyla birleştirerek kurumlara ölçülebilir ve raporlanabilir çözümler sunar.",
       manifestoTitle:
         "Bizim için ölçülebilir, raporlanabilir olmaktan geçer.",
       manifestoBody:
@@ -263,9 +263,9 @@ export const I18N = {
         brand: "sustain",
       },
       adr: {
-        title: "ADR / TMGD Consulting",
+        title: "Nexovia ADR",
         short:
-          "Dangerous goods transport compliance, documentation and risk management.",
+          "Digital tracking and documentation platform for ADR/TMGD processes.",
         brand: "adr",
       },
     },

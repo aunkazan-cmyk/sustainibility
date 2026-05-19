@@ -8,6 +8,7 @@ import { FeatureIconGrid } from "@/components/shared/FeatureIconGrid";
 import { BenefitIconGrid } from "@/components/shared/BenefitIconGrid";
 import { IconExpertise, IconShield, IconTech, IconLeaf } from "@/components/shared/mockup-icons";
 import { ArrowRight } from "@/components/shared/primitives";
+import { sustainServiceContent } from "@/i18n/service-content";
 
 export function SustainabilityServiceHero({
   lang,
@@ -24,22 +25,13 @@ export function SustainabilityServiceHero({
   servicesHref: string;
   contactHref: string;
 }) {
-  const scopeItems =
-    lang === "TR"
-      ? [
-          { icon: <IconLeaf />, title: "Sürdürülebilirlik stratejisi", body: "Materyalite ve hedef çerçevesi." },
-          { icon: <IconExpertise />, title: "Performans takibi", body: "Çevresel gösterge seti ve veri kalitesi." },
-          { icon: <IconShield />, title: "Raporlama altyapısı", body: "GRI ve CDP eşlemesi." },
-          { icon: <IconTech />, title: "Kaynak verimliliği", body: "Tüketim ve atık optimizasyonu." },
-          { icon: <IconLeaf />, title: "Uyum ve gelişim alanları", body: "Boşluk analizi ve önceliklendirme." },
-        ]
-      : [
-          { icon: <IconLeaf />, title: "Sustainability strategy", body: "Materiality and target framing." },
-          { icon: <IconExpertise />, title: "Performance tracking", body: "Environmental indicators and data quality." },
-          { icon: <IconShield />, title: "Reporting infrastructure", body: "GRI and CDP mapping." },
-          { icon: <IconTech />, title: "Resource efficiency", body: "Consumption and waste optimization." },
-          { icon: <IconLeaf />, title: "Compliance & development", body: "Gap analysis and prioritization." },
-        ];
+  const sc = sustainServiceContent(lang);
+  const icons = [<IconLeaf />, <IconExpertise />, <IconShield />, <IconTech />, <IconLeaf />, <IconExpertise />];
+  const scopeItems = sc.scopeItems.map((item, i) => ({
+    icon: icons[i % icons.length],
+    title: item.title,
+    body: item.body,
+  }));
 
   const benefitItems =
     lang === "TR"
@@ -130,11 +122,7 @@ export function SustainabilityServiceHero({
         <div className="nx-container">
           <SectionHeader
             title={lang === "TR" ? "Hizmet kapsamımız" : "Our service scope"}
-            intro={
-              lang === "TR"
-                ? "ESG ve raporlama hazırlığında uçtan uca danışmanlık."
-                : "End-to-end consulting for ESG and reporting readiness."
-            }
+            intro={sc.scopeIntro}
           />
           <FeatureIconGrid items={scopeItems} theme="sustain" />
         </div>

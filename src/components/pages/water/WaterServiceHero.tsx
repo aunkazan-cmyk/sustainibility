@@ -7,6 +7,7 @@ import { ImageHero } from "@/components/shared/ImageHero";
 import { ChecklistPanel } from "@/components/shared/ChecklistPanel";
 import { ScopeList } from "@/components/shared/ScopeList";
 import { SectionHeader } from "@/components/shared/SectionHeader";
+import { waterServiceContent } from "@/i18n/service-content";
 import { IconExpertise, IconShield, IconTech } from "@/components/shared/mockup-icons";
 import { ArrowRight } from "@/components/shared/primitives";
 
@@ -25,6 +26,7 @@ export function WaterServiceHero({
   flowHref: string;
   contactHref: string;
 }) {
+  const sc = waterServiceContent(lang);
   const flowEmbed = (
     <figure style={{ marginTop: 24, borderRadius: 12, overflow: "hidden", border: "1px solid var(--nx-200)" }}>
       <Image src={IMAGES.flowScreen2} alt="" width={600} height={360} style={{ width: "100%", height: "auto", display: "block" }} />
@@ -73,14 +75,14 @@ export function WaterServiceHero({
           <section>
             <SectionHeader
               title={lang === "TR" ? "Hizmet Kapsamımız" : "Our service scope"}
-              intro={lang === "TR" ? "Tesis seviyesinde uçtan uca su verimliliği danışmanlığı." : "End-to-end water-efficiency consulting at facility level."}
+              intro={sc.scopeIntro}
             />
             <ScopeList
-              items={[
-                { icon: <IconExpertise />, title: lang === "TR" ? "Saha etüdü" : "Site audit", body: lang === "TR" ? "Tesis turu, sayaç envanteri ve operasyon görüşmeleri." : "Facility walk, meter inventory and operations interviews." },
-                { icon: <IconTech />, title: lang === "TR" ? "Tüketim analizi" : "Consumption analysis", body: lang === "TR" ? "Veri normalizasyonu, birim tüketim ve kıyaslama." : "Data normalization, specific consumption and benchmarking." },
-                { icon: <IconShield />, title: lang === "TR" ? "Mevzuat uyumu" : "Regulatory alignment", body: lang === "TR" ? "ISO 46001 ve ilgili raporlama çerçeveleri." : "ISO 46001 and related reporting frameworks." },
-              ]}
+              items={sc.scopeItems.map((item, i) => ({
+                icon: i % 3 === 0 ? <IconExpertise /> : i % 3 === 1 ? <IconTech /> : <IconShield />,
+                title: item.title,
+                body: item.body,
+              }))}
             />
           </section>
           <ChecklistPanel

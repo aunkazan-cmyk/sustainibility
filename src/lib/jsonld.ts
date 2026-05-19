@@ -4,7 +4,7 @@ import { SITE_URL, SITE_NAME, ORG_EMAIL, type Locale } from "./site";
 import { pathFor, type RouteDef } from "./routes";
 import { I18N } from "@/i18n/dictionary";
 import { langOf } from "@/i18n/getDictionary";
-import { FLOW_FAQ, ADR_FAQ } from "@/i18n/faq";
+import { faqForRouteKey } from "@/i18n/faq";
 import { insightArticle } from "@/i18n/insights-content";
 
 const abs = (path: string) => `${SITE_URL}${path === "/" ? "" : path}`;
@@ -106,8 +106,9 @@ function currentCrumbName(route: RouteDef, lang: "TR" | "EN"): string {
 export function faqSchema(
   route: RouteDef,
   locale: Locale,
-): Record<string, unknown> {
-  const items = (route.key === "adr" ? ADR_FAQ : FLOW_FAQ)[langOf(locale)];
+): Record<string, unknown> | null {
+  const items = faqForRouteKey(route.key, langOf(locale));
+  if (!items.length) return null;
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",

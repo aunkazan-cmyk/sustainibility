@@ -16,11 +16,17 @@ export type PageKey =
   | "trainings"
   | "insights"
   | "insightIso46001"
-  | "insightEsgChain"
-  | "insightTmgd"
-  | "insightWaterReporting"
-  | "insightSustainMeasure"
-  | "insightAdrChanges"
+  | "insightEsgEnvData"
+  | "insightDigitalDocTracking"
+  | "insightWaterAudit"
+  | "insightWaterClassification"
+  | "insightMinNightFlow"
+  | "insightSdsMsds"
+  | "insightAuditChecklists"
+  | "insightWaterSoftware"
+  | "insightAdrPlatformRisks"
+  | "insightSustainRoadmap"
+  | "insightWaterSustainLink"
   | "about"
   | "contact"
   | "legalKvkk"
@@ -55,12 +61,18 @@ export type LegalDocId =
   | "formNotice";
 
 export type InsightId =
+  | "waterAudit"
   | "iso46001"
-  | "esgChain"
-  | "tmgd"
-  | "waterReporting"
-  | "sustainMeasure"
-  | "adrChanges";
+  | "esgEnvData"
+  | "waterClassification"
+  | "minNightFlow"
+  | "digitalDocTracking"
+  | "sdsMsds"
+  | "auditChecklists"
+  | "waterSoftware"
+  | "adrPlatformRisks"
+  | "sustainRoadmap"
+  | "waterSustainLink";
 
 export interface RouteDef {
   key: PageKey;
@@ -133,7 +145,7 @@ export const ROUTES: RouteDef[] = [
       en: ["services", "water-efficiency-consulting"],
     },
     renderer: "waterService",
-    jsonLd: ["Breadcrumb", "Service"],
+    jsonLd: ["Breadcrumb", "Service", "FAQ"],
     sitemap: { priority: 0.9, changeFrequency: "monthly" },
   },
   {
@@ -157,7 +169,7 @@ export const ROUTES: RouteDef[] = [
     key: "trainings",
     segments: { tr: ["egitimler"], en: ["trainings"] },
     renderer: "trainings",
-    jsonLd: [],
+    jsonLd: ["FAQ"],
     sitemap: { priority: 0.7, changeFrequency: "weekly" },
   },
   {
@@ -179,65 +191,131 @@ export const ROUTES: RouteDef[] = [
     insightId: "iso46001",
   },
   {
-    key: "insightEsgChain",
+    key: "insightEsgEnvData",
     segments: {
-      tr: ["icgoruler", "esg-olcum-zinciri"],
-      en: ["insights", "esg-measurement-chain"],
+      tr: ["icgoruler", "esg-cevresel-veriler"],
+      en: ["insights", "esg-environmental-data"],
     },
     renderer: "insightArticle",
     jsonLd: ["Breadcrumb", "Article"],
     sitemap: { priority: 0.6, changeFrequency: "monthly" },
-    insightId: "esgChain",
+    insightId: "esgEnvData",
   },
   {
-    key: "insightTmgd",
+    key: "insightDigitalDocTracking",
     segments: {
-      tr: ["icgoruler", "tmgd-denetim-hazirligi"],
-      en: ["insights", "tmgd-inspection-readiness"],
+      tr: ["icgoruler", "dijital-belge-takibi"],
+      en: ["insights", "digital-document-tracking"],
     },
     renderer: "insightArticle",
     jsonLd: ["Breadcrumb", "Article"],
     sitemap: { priority: 0.6, changeFrequency: "monthly" },
-    insightId: "tmgd",
+    insightId: "digitalDocTracking",
   },
   {
-    key: "insightWaterReporting",
+    key: "insightWaterAudit",
     segments: {
-      tr: ["icgoruler", "sanayide-su-tuketim-raporlama"],
-      en: ["insights", "industrial-water-reporting"],
+      tr: ["icgoruler", "su-verimliligi-etudu"],
+      en: ["insights", "water-efficiency-audit"],
     },
     renderer: "insightArticle",
     jsonLd: ["Breadcrumb", "Article"],
     sitemap: { priority: 0.6, changeFrequency: "monthly" },
-    insightId: "waterReporting",
+    insightId: "waterAudit",
   },
   {
-    key: "insightSustainMeasure",
+    key: "insightWaterClassification",
     segments: {
-      tr: ["icgoruler", "measure-first-yaklasimi"],
-      en: ["insights", "measure-first-approach"],
+      tr: ["icgoruler", "su-tuketimi-siniflandirma"],
+      en: ["insights", "water-consumption-classification"],
     },
     renderer: "insightArticle",
     jsonLd: ["Breadcrumb", "Article"],
     sitemap: { priority: 0.6, changeFrequency: "monthly" },
-    insightId: "sustainMeasure",
+    insightId: "waterClassification",
   },
   {
-    key: "insightAdrChanges",
+    key: "insightMinNightFlow",
     segments: {
-      tr: ["icgoruler", "adr-mevzuat-degisiklikleri"],
-      en: ["insights", "adr-regulation-changes"],
+      tr: ["icgoruler", "minimum-gece-akisi"],
+      en: ["insights", "minimum-night-flow"],
     },
     renderer: "insightArticle",
     jsonLd: ["Breadcrumb", "Article"],
     sitemap: { priority: 0.6, changeFrequency: "monthly" },
-    insightId: "adrChanges",
+    insightId: "minNightFlow",
+  },
+  {
+    key: "insightSdsMsds",
+    segments: {
+      tr: ["icgoruler", "sds-msds-takibi"],
+      en: ["insights", "sds-msds-tracking"],
+    },
+    renderer: "insightArticle",
+    jsonLd: ["Breadcrumb", "Article"],
+    sitemap: { priority: 0.6, changeFrequency: "monthly" },
+    insightId: "sdsMsds",
+  },
+  {
+    key: "insightAuditChecklists",
+    segments: {
+      tr: ["icgoruler", "dijital-kontrol-listeleri"],
+      en: ["insights", "digital-audit-checklists"],
+    },
+    renderer: "insightArticle",
+    jsonLd: ["Breadcrumb", "Article"],
+    sitemap: { priority: 0.6, changeFrequency: "monthly" },
+    insightId: "auditChecklists",
+  },
+  {
+    key: "insightWaterSoftware",
+    segments: {
+      tr: ["icgoruler", "su-verimliligi-yazilimi"],
+      en: ["insights", "water-efficiency-software"],
+    },
+    renderer: "insightArticle",
+    jsonLd: ["Breadcrumb", "Article"],
+    sitemap: { priority: 0.6, changeFrequency: "monthly" },
+    insightId: "waterSoftware",
+  },
+  {
+    key: "insightAdrPlatformRisks",
+    segments: {
+      tr: ["icgoruler", "adr-platform-riskleri"],
+      en: ["insights", "adr-platform-risks"],
+    },
+    renderer: "insightArticle",
+    jsonLd: ["Breadcrumb", "Article"],
+    sitemap: { priority: 0.6, changeFrequency: "monthly" },
+    insightId: "adrPlatformRisks",
+  },
+  {
+    key: "insightSustainRoadmap",
+    segments: {
+      tr: ["icgoruler", "surdurulebilirlik-yol-haritasi"],
+      en: ["insights", "sustainability-roadmap"],
+    },
+    renderer: "insightArticle",
+    jsonLd: ["Breadcrumb", "Article"],
+    sitemap: { priority: 0.6, changeFrequency: "monthly" },
+    insightId: "sustainRoadmap",
+  },
+  {
+    key: "insightWaterSustainLink",
+    segments: {
+      tr: ["icgoruler", "su-ve-surdurulebilirlik"],
+      en: ["insights", "water-and-sustainability"],
+    },
+    renderer: "insightArticle",
+    jsonLd: ["Breadcrumb", "Article"],
+    sitemap: { priority: 0.6, changeFrequency: "monthly" },
+    insightId: "waterSustainLink",
   },
   {
     key: "about",
     segments: { tr: ["hakkimizda"], en: ["about"] },
     renderer: "about",
-    jsonLd: [],
+    jsonLd: ["FAQ"],
     sitemap: { priority: 0.6, changeFrequency: "monthly" },
   },
   {
@@ -302,11 +380,17 @@ const BY_INSIGHT = new Map<InsightId, PageKey>(
  *  pages from one source). First entry is the featured article. */
 export const INSIGHT_ORDER: InsightId[] = [
   "iso46001",
-  "esgChain",
-  "tmgd",
-  "waterReporting",
-  "sustainMeasure",
-  "adrChanges",
+  "esgEnvData",
+  "digitalDocTracking",
+  "waterAudit",
+  "waterClassification",
+  "minNightFlow",
+  "sdsMsds",
+  "auditChecklists",
+  "waterSoftware",
+  "adrPlatformRisks",
+  "sustainRoadmap",
+  "waterSustainLink",
 ];
 
 /** InsightId → its page route key (so cards can link to the detail page). */

@@ -112,7 +112,7 @@ const TR: Record<LegalDocId, LegalDoc> = {
           "- Barındırma (hosting) hizmeti sağlayıcımız: [Barındırma Sağlayıcı ve Ülke]",
           "- E-posta ve iletişim altyapısı sağlayıcımız: [E-posta Sağlayıcı ve Ülke]",
           "- Web analitiği hizmeti sağlayıcımız: [Analitik Sağlayıcı ve Ülke]",
-          "- Form gönderimlerinde bot ve kötüye kullanım koruması için Cloudflare, Inc. (Cloudflare Turnstile)",
+          "- İletişim formlarında bot ve kötüye kullanım koruması (basit matematik doğrulama, honeypot ve istek sınırlama; üçüncü taraf çerez kullanılmaz)",
           "- Hukuken yetkili kamu kurum ve kuruluşları ile adli/idari makamlar (talep edilmesi halinde ve mevzuat gereği)",
           "Yurt dışına aktarım söz konusu olduğunda, aktarım KVKK'da öngörülen şartlar (açık rıza veya kanunda belirtilen uygun güvence ve istisnalar) çerçevesinde gerçekleştirilir.",
         ],
@@ -214,7 +214,7 @@ const TR: Record<LegalDocId, LegalDoc> = {
           "- Barındırma sağlayıcısı: [Barındırma Sağlayıcı ve Ülke]",
           "- E-posta/iletişim sağlayıcısı: [E-posta Sağlayıcı ve Ülke]",
           "- Analitik sağlayıcısı: [Analitik Sağlayıcı ve Ülke]",
-          "- Form güvenliği için Cloudflare, Inc. (Cloudflare Turnstile)",
+          "- İletişim formlarında bot ve kötüye kullanım koruması (basit matematik doğrulama, honeypot ve istek sınırlama)",
           "- Hukuken yetkili kamu kurum ve kuruluşları (talep hâlinde)",
         ],
       },
@@ -287,13 +287,13 @@ const TR: Record<LegalDocId, LegalDoc> = {
           "- Performans/analitik çerezleri: Site kullanımını anlamak ve iyileştirmek için ziyaret istatistikleri üretir.",
           "- İşlevsel çerezler: Tercihlerinizi (örn. dil) hatırlayarak deneyimi kişiselleştirir.",
           "- Hedefleme/reklam çerezleri: İlgi alanına dayalı içerik/reklam sunmak için kullanılır.",
-          "Bu Site şu anda yalnızca zorunlu çerezler, performans/analitik çerezleri ve Cloudflare Turnstile kapsamında güvenlik amaçlı çerezler kullanmaktadır; hedefleme/reklam çerezleri kullanılmamaktadır.",
+          "Bu Site şu anda yalnızca zorunlu çerezler ve performans/analitik çerezleri kullanmaktadır; hedefleme/reklam çerezleri kullanılmamaktadır. İletişim formu güvenliği için üçüncü taraf çerez kullanılmaz.",
         ],
       },
       {
         h: "3. Kullanılan Çerezler",
         body: [
-          "- Zorunlu: Oturum ve güvenlik çerezleri ile Cloudflare Turnstile'in bot/kötüye kullanım korumasına ilişkin çerezleri. Süre: oturum boyu veya [Çerez Süresi].",
+          "- Zorunlu: Oturum ve güvenlik çerezleri. Süre: oturum boyu veya [Çerez Süresi].",
           "- Performans/analitik: [Analitik Sağlayıcı ve Ülke] tarafından sağlanan, sayfa görüntüleme ve ziyaret davranışını ölçen çerezler. Süre: [Çerez Süresi].",
           "- İşlevsel: Dil/görüntü tercihinizi hatırlayan çerezler. Süre: [Çerez Süresi].",
           "Çerez adları, sağlayıcıları ve süreleri zaman zaman değişebilir; güncel ayrıntılar çerez yönetim aracında görüntülenebilir.",
@@ -451,7 +451,7 @@ const TR: Record<LegalDocId, LegalDoc> = {
       {
         h: "4. Aktarım",
         body: [
-          "Verileriniz, formun iletilmesi ve saklanması için e-posta ve barındırma altyapısı sağlayıcılarımıza aktarılabilir: [E-posta Sağlayıcı ve Ülke], [Barındırma Sağlayıcı ve Ülke]. Form güvenliği için Cloudflare Turnstile kullanılır.",
+          "Verileriniz, formun iletilmesi ve saklanması için e-posta ve barındırma altyapısı sağlayıcılarımıza aktarılabilir: [E-posta Sağlayıcı ve Ülke], [Barındırma Sağlayıcı ve Ülke]. Form güvenliği için basit matematik doğrulama, honeypot ve istek sınırlama uygulanır.",
         ],
       },
       {
@@ -517,7 +517,7 @@ const EN: Record<LegalDocId, LegalDoc> = {
           "- Our hosting provider: [Hosting Provider & Country]",
           "- Our email and communication infrastructure provider: [Email Provider & Country]",
           "- Our web analytics provider: [Analytics Provider & Country]",
-          "- Cloudflare, Inc. (Cloudflare Turnstile) for bot and abuse protection on form submissions",
+          "- Bot and abuse protection on contact forms (simple math verification, honeypot and rate limiting; no third-party cookies)",
           "- Legally authorised public institutions and judicial/administrative authorities (upon request and as required by law)",
           "Where an international transfer is involved, it is carried out in accordance with the conditions set out in the KVKK (explicit consent or the appropriate safeguards/exceptions specified by law).",
         ],
@@ -619,7 +619,7 @@ const EN: Record<LegalDocId, LegalDoc> = {
           "- Hosting provider: [Hosting Provider & Country]",
           "- Email/communication provider: [Email Provider & Country]",
           "- Analytics provider: [Analytics Provider & Country]",
-          "- Cloudflare, Inc. (Cloudflare Turnstile) for form security",
+          "- Bot and abuse protection on contact forms (simple math verification, honeypot and rate limiting)",
           "- Legally authorised public institutions (upon request)",
         ],
       },
@@ -692,13 +692,13 @@ const EN: Record<LegalDocId, LegalDoc> = {
           "- Performance/analytics cookies: produce visit statistics to help us understand and improve the Site.",
           "- Functional cookies: remember your preferences (e.g. language) to personalise your experience.",
           "- Targeting/advertising cookies: used to deliver interest-based content/ads.",
-          "This Site currently uses only strictly necessary cookies, performance/analytics cookies and security cookies under Cloudflare Turnstile; no targeting/advertising cookies are used.",
+          "This Site currently uses only strictly necessary cookies and performance/analytics cookies; no targeting/advertising cookies are used. Contact form security does not use third-party cookies.",
         ],
       },
       {
         h: "3. Cookies Used",
         body: [
-          "- Strictly necessary: session and security cookies and cookies related to Cloudflare Turnstile bot/abuse protection. Duration: session or [Cookie Duration].",
+          "- Strictly necessary: session and security cookies. Duration: session or [Cookie Duration].",
           "- Performance/analytics: cookies provided by [Analytics Provider & Country] measuring page views and visit behaviour. Duration: [Cookie Duration].",
           "- Functional: cookies remembering your language/display preference. Duration: [Cookie Duration].",
           "Cookie names, providers and durations may change from time to time; current details can be viewed in the cookie management tool.",
@@ -856,7 +856,7 @@ const EN: Record<LegalDocId, LegalDoc> = {
       {
         h: "4. Transfer",
         body: [
-          "Your data may be transferred to our email and hosting infrastructure providers for the submission and storage of the form: [Email Provider & Country], [Hosting Provider & Country]. Cloudflare Turnstile is used for form security.",
+          "Your data may be transferred to our email and hosting infrastructure providers for the submission and storage of the form: [Email Provider & Country], [Hosting Provider & Country]. Form security uses simple math verification, a honeypot and rate limiting.",
         ],
       },
       {

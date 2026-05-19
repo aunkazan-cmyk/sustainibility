@@ -5,10 +5,12 @@ import type { Locale } from "@/lib/site";
 import { getDictionary } from "@/i18n/getDictionary";
 import { PageHero } from "@/components/shared/PageHero";
 import { ContactForm } from "@/components/contact/ContactForm";
+import { createMathChallenge } from "@/lib/contact-captcha";
 
 export function ContactPage({ locale }: { locale: Locale }) {
   const { t, lang } = getDictionary(locale);
   const cp = t.contactPage;
+  const captcha = createMathChallenge();
 
   return (
     <>
@@ -25,7 +27,7 @@ export function ContactPage({ locale }: { locale: Locale }) {
             }}
             data-nx-collapse data-nx-cgap
           >
-            <ContactForm locale={locale} />
+            <ContactForm locale={locale} captcha={captcha} />
 
             {/* Details */}
             <div>

@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "logos": "node scripts/optimize-logos.mjs",
-    "test:contact": "node --experimental-strip-types tests/contact-schema.test.ts"
+    "test:contact": "node --experimental-strip-types tests/contact-schema.test.ts",
+    "test:captcha": "node --experimental-strip-types tests/contact-captcha.test.ts"
   },
   "dependencies": {
     "clsx": "^2.1.1",

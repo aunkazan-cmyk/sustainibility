@@ -9,7 +9,11 @@ import { getDictionary } from "@/i18n/getDictionary";
 import { pathFor } from "@/lib/routes";
 import { ArrowRight } from "@/components/shared/primitives";
 import { submitContact } from "@/actions/contact";
-import { initialContactState, type ContactField } from "@/actions/contact-state";
+import {
+  initialContactState,
+  type CaptchaChallenge,
+  type ContactField,
+} from "@/actions/contact-state";
 
 const inputStyle: CSSProperties = {
   width: "100%",
@@ -37,7 +41,13 @@ const errStyle: CSSProperties = {
   color: "#b91c1c",
 };
 
-export function ContactForm({ locale }: { locale: Locale }) {
+export function ContactForm({
+  locale,
+  captcha: initialCaptcha,
+}: {
+  locale: Locale;
+  captcha: CaptchaChallenge;
+}) {
   const { t, lang } = getDictionary(locale);
   const cp = t.contactPage;
   const [state, formAction, pending] = useActionState(
@@ -46,6 +56,7 @@ export function ContactForm({ locale }: { locale: Locale }) {
   );
   const v = state.values ?? {};
   const [sector, setSector] = useState<string>(v.sector ?? "");
+  const captcha = state.captcha ?? initialCaptcha;
   const err = (f: ContactField) => state.fieldErrors?.[f];
 
   if (state.status === "success") {
@@ -155,6 +166,7 @@ export function ContactForm({ locale }: { locale: Locale }) {
             aria-label={lang === "TR" ? "Ad Soyad" : "Full name"}
             defaultValue={v.name}
             style={inputStyle}
+            maxLength={80}
             required
           />
           {err("name") && <div style={errStyle}>{err("name")}</div>}
@@ -169,6 +181,7 @@ export function ContactForm({ locale }: { locale: Locale }) {
             aria-label={lang === "TR" ? "Şirket" : "Company"}
             defaultValue={v.company}
             style={inputStyle}
+            maxLength={120}
             required
           />
           {err("company") && <div style={errStyle}>{err("company")}</div>}
@@ -183,6 +196,7 @@ export function ContactForm({ locale }: { locale: Locale }) {
             aria-label={lang === "TR" ? "E-posta" : "Email"}
             defaultValue={v.email}
             style={inputStyle}
+            maxLength={254}
             required
           />
           {err("email") && <div style={errStyle}>{err("email")}</div>}
@@ -197,6 +211,9 @@ export function ContactForm({ locale }: { locale: Locale }) {
             aria-label={lang === "TR" ? "Telefon" : "Phone"}
             defaultValue={v.phone}
             style={inputStyle}
+            inputMode="tel"
+            maxLength={18}
+            placeholder="05XX XXX XX XX"
             required
           />
           {err("phone") && <div style={errStyle}>{err("phone")}</div>}
@@ -227,6 +244,7 @@ export function ContactForm({ locale }: { locale: Locale }) {
                 defaultValue={v.sectorOther}
                 placeholder={lang === "TR" ? "Sektörü belirtin" : "Specify sector"}
                 style={inputStyle}
+                maxLength={80}
               />
               {err("sectorOther") && (
                 <div style={errStyle}>{err("sectorOther")}</div>
@@ -272,9 +290,61 @@ export function ContactForm({ locale }: { locale: Locale }) {
             minHeight: 120,
             fontFamily: "inherit",
           }}
+          minLength={10}
+          maxLength={3000}
           required
         />
         {err("message") && <div style={errStyle}>{err("message")}</div>}
+      </div>
+
+      <div
+        style={{
+          marginTop: 18,
+          padding: "16px 14px",
+          borderRadius: 10,
+          background: "var(--nx-50, #fafaf7)",
+          border: "1px solid var(--nx-200)",
+        }}
+      >
+        <label style={labelStyle}>{cp.captchaLabel} *</label>
+        <input type="hidden" name="captchaToken" value={captcha.token} />
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 12,
+            flexWrap: "wrap",
+          }}
+        >
+          <span
+            aria-hidden
+            style={{
+              fontSize: 18,
+              fontWeight: 600,
+              fontFamily: "var(--nx-font-display, inherit)",
+              color: "var(--nx-900)",
+              letterSpacing: "0.04em",
+            }}
+          >
+            {captcha.prompt} =
+          </span>
+          <input
+            type="text"
+            name="captchaAnswer"
+            inputMode="numeric"
+            autoComplete="off"
+            aria-label={cp.captchaHint}
+            defaultValue={v.captchaAnswer}
+            style={{ ...inputStyle, width: 88, flexShrink: 0 }}
+            required
+          />
+        </div>
+        <p style={{ margin: "8px 0 0", fontSize: 12, color: "var(--nx-500)" }}>
+          {cp.captchaHint}
+        </p>
+        {err("captchaAnswer") && (
+          <div style={errStyle}>{err("captchaAnswer")}</div>
+        )}
       </div>
 
       <div

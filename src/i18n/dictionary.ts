@@ -134,6 +134,8 @@ export const I18N = {
       detailsTitle: "Doğrudan ulaşın",
       kvkkNotice:
         "Formu göndererek KVKK Aydınlatma Metni'ni okuduğunuzu kabul edersiniz.",
+      captchaLabel: "Güvenlik doğrulaması",
+      captchaHint: "Yukarıdaki işlemin sonucunu girin.",
     },
     insightsPage: {
       eyebrow: "İçgörüler",
@@ -322,6 +324,8 @@ export const I18N = {
       detailsTitle: "Reach us directly",
       kvkkNotice:
         "By submitting this form you confirm you have read our Privacy Notice.",
+      captchaLabel: "Security check",
+      captchaHint: "Enter the result of the calculation above.",
     },
     insightsPage: {
       eyebrow: "Insights",

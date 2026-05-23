@@ -6,6 +6,7 @@ import { ORG_EMAIL } from "@/lib/site";
 import { getDictionary } from "@/i18n/getDictionary";
 import { pathFor, type PageKey, type LegalDocId } from "@/lib/routes";
 import { legalTitle } from "@/lib/legal-content";
+import { CookiePreferencesLink } from "@/components/analytics/CookiePreferencesLink";
 
 type FooterLink = { label: string; key?: PageKey };
 
@@ -184,6 +185,8 @@ export function Footer({ locale }: { locale: Locale }) {
         >
           <div>
             © 2026 Nexovia — {lang === "TR" ? "Tüm hakları saklıdır" : "All rights reserved"}.
+            {" · "}
+            <CookiePreferencesLink locale={locale} />
           </div>
           <span>nexovia.com.tr</span>
         </div>

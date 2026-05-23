@@ -21,6 +21,7 @@ The 404 page needs no setup: the per-locale optional catch-alls call
    | `MAIL_FROM` | `noreply@nexovia.com.tr` |
    | `SMTP_HOST` `SMTP_PORT` `SMTP_SECURE` `SMTP_USER` `SMTP_PASS` | SMTP transport creds |
    | `CONTACT_CAPTCHA_SECRET` | Random secret for signed contact-form math challenges (required in production) |
+   | `NEXT_PUBLIC_GA_MEASUREMENT_ID` | `G-DY0PRJ3F9W` (Google Analytics 4; omit locally to disable scripts and banner) |
 
    `.env.local.example` is git-ignored, so it is **not** read on Vercel —
    these must be entered in the dashboard. `CONTACT_RECIPIENT` also has a
@@ -50,7 +51,8 @@ npm run build
 
 Create `.env.production` on the instance (never commit it) from
 `.env.local.example`. Required: `NEXT_PUBLIC_SITE_URL`, `CONTACT_RECIPIENT`,
-`MAIL_FROM`, `CONTACT_CAPTCHA_SECRET`, and the `SMTP_*` group.
+`MAIL_FROM`, `CONTACT_CAPTCHA_SECRET`, and the `SMTP_*` group. Optional:
+`NEXT_PUBLIC_GA_MEASUREMENT_ID` (`G-DY0PRJ3F9W` for production analytics).
 
 - **Quick start:** a Gmail account + [App Password](https://support.google.com/accounts/answer/185833)
   (`SMTP_HOST=smtp.gmail.com`, `SMTP_PORT=465`, `SMTP_SECURE=true`).

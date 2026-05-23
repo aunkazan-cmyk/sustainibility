@@ -22,6 +22,15 @@ export const I18N = {
       proposal: "Teklif talep et",
       explore: "Hizmetleri İncele",
     },
+    consent: {
+      title: "Çerez tercihleri",
+      description:
+        "Zorunlu olmayan analitik çerezler, site kullanımını anlamamıza yardımcı olur. Tercihinizi dilediğiniz zaman güncelleyebilirsiniz. Ayrıntılar için",
+      policyLink: "Çerez Politikası",
+      accept: "Kabul et",
+      reject: "Reddet",
+      manage: "Çerez tercihleri",
+    },
     home: {
       eyebrow: "Mevzuat odaklı, ölçülebilir danışmanlık",
       heroTitle:
@@ -212,6 +221,15 @@ export const I18N = {
       consulting: "Request consulting",
       proposal: "Request a proposal",
       explore: "Explore services",
+    },
+    consent: {
+      title: "Cookie preferences",
+      description:
+        "Non-essential analytics cookies help us understand how the site is used. You can update your choice at any time. See our",
+      policyLink: "Cookie Policy",
+      accept: "Accept",
+      reject: "Reject",
+      manage: "Cookie preferences",
     },
     home: {
       eyebrow: "Regulation-aware, measurable consulting",

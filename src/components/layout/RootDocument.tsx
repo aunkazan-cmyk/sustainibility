@@ -8,6 +8,8 @@ import type { Locale } from "@/lib/site";
 import { fontVariables } from "@/lib/fonts";
 import { SiteShell } from "@/components/layout/SiteShell";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
+import { AnalyticsConsentScript } from "@/components/analytics/AnalyticsScripts";
 import { organizationSchema, webSiteSchema } from "@/lib/jsonld";
 import "@/app/globals.css";
 
@@ -21,6 +23,8 @@ export function RootDocument({
   return (
     <html lang={locale === "tr" ? "tr" : "en"} className={fontVariables}>
       <body>
+        <AnalyticsConsentScript />
+        <GoogleAnalytics />
         {/* Site-wide structured data on every page of both trees. */}
         <JsonLd data={organizationSchema()} />
         <JsonLd data={webSiteSchema()} />

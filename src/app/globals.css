@@ -357,6 +357,76 @@ img, svg { display: block; max-width: 100%; }
   body { padding-bottom: 64px; }
 }
 
+/* Cookie consent banner — above mobile sticky CTA (z-index 55). */
+.nx-cookie-banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 70;
+  padding: 16px 0 calc(16px + env(safe-area-inset-bottom));
+  background: rgba(2, 13, 51, 0.96);
+  color: rgba(255, 255, 255, 0.88);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 -12px 40px rgba(2, 13, 51, 0.28);
+}
+.nx-cookie-banner__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.nx-cookie-banner__copy {
+  flex: 1 1 320px;
+  min-width: 0;
+}
+.nx-cookie-banner__title {
+  margin: 0 0 6px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+}
+.nx-cookie-banner__desc {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.72);
+}
+.nx-cookie-banner__link {
+  color: var(--nx-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.nx-cookie-banner__link:hover {
+  color: #fff;
+}
+.nx-cookie-banner__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  flex-shrink: 0;
+}
+@media (max-width: 960px) {
+  .nx-cookie-banner {
+    bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+  }
+}
+.nx-cookie-preferences-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  font-size: inherit;
+  color: rgba(255, 255, 255, 0.78);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.nx-cookie-preferences-link:hover {
+  color: #fff;
+}
+
 /* ---------------------------------------------------------------------
    Mockup-aligned layout (heroes, cards, header on dark)
    --------------------------------------------------------------------- */

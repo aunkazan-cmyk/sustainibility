@@ -69,6 +69,10 @@ export const LEGAL_PLACEHOLDERS: string[] = [
 export const LEGAL_FILL: Record<string, string> = {
   "[KVKK İletişim E-posta]": "kvkk@nexovia.com.tr",
   "[KVKK Contact Email]": "kvkk@nexovia.com.tr",
+  "[Analitik Sağlayıcı ve Ülke]": "Google Analytics (Google LLC, ABD)",
+  "[Analytics Provider & Country]": "Google Analytics (Google LLC, USA)",
+  "[Çerez Süresi]": "_ga: 24 ay; _ga_*: oturum boyunca",
+  "[Cookie Duration]": "_ga: 24 months; _ga_*: session",
 };
 
 const TR: Record<LegalDocId, LegalDoc> = {

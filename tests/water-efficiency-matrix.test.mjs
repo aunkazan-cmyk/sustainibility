@@ -5,7 +5,7 @@ import { dirname, join } from "path";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const nace = JSON.parse(
   readFileSync(join(root, "src/data/nace-ek1.json"), "utf8"),
-) as { code: string; status: string }[];
+);
 
 function assert(cond: boolean, msg: string) {
   if (!cond) throw new Error(msg);

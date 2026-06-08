@@ -19,6 +19,7 @@ import {
   IconShield,
   IconTech,
 } from "@/components/shared/mockup-icons";
+import { WaterEfficiencyMatrix } from "@/components/home/WaterEfficiencyMatrix";
 import { ArrowRight } from "@/components/shared/primitives";
 
 export function HomePage({ locale }: { locale: Locale }) {
@@ -101,6 +102,8 @@ export function HomePage({ locale }: { locale: Locale }) {
           <FeatureIconGrid items={featureItems} />
         </div>
       </section>
+
+      <WaterEfficiencyMatrix locale={locale} />
 
       <section data-nx-section style={{ padding: "0 0 96px", background: "#fff" }}>
         <div className="nx-container">

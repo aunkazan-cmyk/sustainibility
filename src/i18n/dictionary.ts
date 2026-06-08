@@ -31,6 +31,38 @@ export const I18N = {
       reject: "Reddet",
       manage: "Çerez tercihleri",
     },
+    matrix: {
+      eyebrow: "Değerlendirme aracı",
+      title: "Su verimliliği yükümlülük değerlendirmesi",
+      lead:
+        "NACE kodunuz ve çalışan sayınıza göre yükümlü veya gönüllü statünüzü ön değerlendirin. Kalite ve uyum ekiplerinin üst yönetime iletebileceği bilgilendirme taslağı raporu indirilebilir.",
+      facilityTypeLabel: "Tesis türü",
+      facilityIndustrial: "Endüstriyel işletme",
+      facilityOsb: "Organize Sanayi Bölgesi (OSB)",
+      facilityFreeZone: "Serbest Bölge",
+      facilityIndustrialZone: "Endüstri Bölgesi",
+      naceLabel: "NACE kodu (Ek-1)",
+      nacePlaceholder: "Kod veya faaliyet adı ile arayın…",
+      employeeLabel: "Çalışan sayısı",
+      employeePlaceholder: "Örn. 75",
+      evaluateHint: "Endüstriyel işletmeler için NACE kodu ve çalışan sayısını girin.",
+      resultTitle: "Değerlendirme sonucu",
+      resultReference:
+        "Su Verimliliği Yönetmeliği ve Endüstriyel Su Verimliliği Başvuru Kılavuzu Ek-1 / s.15.",
+      downloadCta: "Yönetime iletilebilir raporu indir",
+      modalTitle: "Rapor bilgileri",
+      modalIntro:
+        "Taslak raporu indirmeden önce aşağıdaki bilgileri doldurun. Rapor, üst yönetime iletilmek üzere hazırlanmış bilgilendirme formatındadır.",
+      companyLabel: "Şirket adı",
+      recipientLabel: "Raporu alan kişi (ad soyad)",
+      emailLabel: "E-posta",
+      phoneLabel: "Telefon",
+      kvkkLabel: "Form Aydınlatma Metni'ni okudum; kişisel verilerimin bu talep kapsamında işlenmesini kabul ediyorum.",
+      submitDownload: "Raporu oluştur ve indir",
+      cancel: "Vazgeç",
+      disclaimer:
+        "Bu sonuç bilgilendirme amaçlıdır; resmi başvuru veya hukuki görüş yerine geçmez.",
+    },
     home: {
       eyebrow: "Mevzuat odaklı, ölçülebilir danışmanlık",
       heroTitle:
@@ -230,6 +262,39 @@ export const I18N = {
       accept: "Accept",
       reject: "Reject",
       manage: "Cookie preferences",
+    },
+    matrix: {
+      eyebrow: "Assessment tool",
+      title: "Water efficiency obligation assessment",
+      lead:
+        "Pre-assess whether you are obligatory or voluntary based on your NACE code and employee count. Download a draft report suitable for quality teams to forward to senior management.",
+      facilityTypeLabel: "Facility type",
+      facilityIndustrial: "Industrial facility",
+      facilityOsb: "Organized Industrial Zone (OIZ)",
+      facilityFreeZone: "Free Zone",
+      facilityIndustrialZone: "Industrial Zone",
+      naceLabel: "NACE code (Annex-1)",
+      nacePlaceholder: "Search by code or activity…",
+      employeeLabel: "Employee count",
+      employeePlaceholder: "e.g. 75",
+      evaluateHint: "For industrial facilities, enter NACE code and employee count.",
+      resultTitle: "Assessment result",
+      resultReference:
+        "Water Efficiency Regulation and Industrial Water Efficiency Application Guide Annex-1 / p.15.",
+      downloadCta: "Download management-ready report",
+      modalTitle: "Report details",
+      modalIntro:
+        "Complete the fields below before downloading the draft report. The document is formatted as an informational brief for senior management.",
+      companyLabel: "Company name",
+      recipientLabel: "Report recipient (full name)",
+      emailLabel: "Email",
+      phoneLabel: "Phone",
+      kvkkLabel:
+        "I have read the Form Privacy Notice and accept processing of my personal data for this request.",
+      submitDownload: "Generate and download report",
+      cancel: "Cancel",
+      disclaimer:
+        "This result is for information only; it does not replace an official application or legal advice.",
     },
     home: {
       eyebrow: "Regulation-aware, measurable consulting",

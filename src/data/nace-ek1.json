@@ -1,0 +1,800 @@
+[
+  {
+    "no": 1,
+    "code": "01.41",
+    "activityTr": "Sütü sağılan büyük baş hayvan yetiştiriciliği",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 2,
+    "code": "01.42",
+    "activityTr": "Diğer sığır ve manda yetiştiriciliği",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 3,
+    "code": "01.43",
+    "activityTr": "At ve at benzeri diğer hayvan yetiştiriciliği",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 4,
+    "code": "01.45",
+    "activityTr": "Koyun ve keçi yetiştiriciliği",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 5,
+    "code": "01.47",
+    "activityTr": "Kümes hayvanları yetiştiriciliği",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 6,
+    "code": "03.12",
+    "activityTr": "Tatlı su balık yetiştiriciliği (İç su ürünleri dâhil)",
+    "status": "GONULLU"
+  },
+  {
+    "no": 7,
+    "code": "05.10",
+    "activityTr": "Taş kömürü madenciliği",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 8,
+    "code": "05.20",
+    "activityTr": "Linyit madenciliği",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 9,
+    "code": "07.10",
+    "activityTr": "Demir cevherleri madenciliği",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 10,
+    "code": "07.29",
+    "activityTr": "Diğer demir dışı metal cevherleri madenciliği",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 11,
+    "code": "08.91",
+    "activityTr": "Kimyasal ve gübreleme amaçlı mineral madenciliği",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 12,
+    "code": "08.93",
+    "activityTr": "Tuz çıkarımı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 13,
+    "code": "09.10",
+    "activityTr": "Petrol ve doğal gaz çıkarımını destekleyici faaliyetler",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 14,
+    "code": "10.11",
+    "activityTr": "Etin işlenmesi ve saklanması",
+    "status": "GONULLU"
+  },
+  {
+    "no": 15,
+    "code": "10.12",
+    "activityTr": "Kümes hayvanları etlerinin işlenmesi ve saklanması",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 16,
+    "code": "10.13",
+    "activityTr": "Et ve kümes hayvanları etlerinden üretilen ürünlerin imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 17,
+    "code": "10.20",
+    "activityTr": "Balık, kabuklu deniz hayvanları ve yumuşakçaların işlenmesi ve saklanması",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 18,
+    "code": "10.31",
+    "activityTr": "Patatesin işlenmesi ve saklanması",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 19,
+    "code": "10.32",
+    "activityTr": "Sebze ve meyve suyu imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 20,
+    "code": "10.39",
+    "activityTr": "Başka yerde sınıflandırılmamış meyve ve sebzelerin işlenmesi ve saklanması",
+    "status": "GONULLU"
+  },
+  {
+    "no": 21,
+    "code": "10.41",
+    "activityTr": "Sıvı ve katı yağ imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 22,
+    "code": "10.42",
+    "activityTr": "Margarin ve benzeri yenilebilir katı yağların imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 23,
+    "code": "10.51",
+    "activityTr": "Süthane işletmeciliği ve peynir imalatı",
+    "status": "GONULLU"
+  },
+  {
+    "no": 24,
+    "code": "10.52",
+    "activityTr": "Dondurma imalatı",
+    "status": "GONULLU"
+  },
+  {
+    "no": 25,
+    "code": "10.61",
+    "activityTr": "Öğütülmüş hububat ve sebze ürünleri imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 26,
+    "code": "10.62",
+    "activityTr": "Nişasta ve nişastalı ürünlerin imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 27,
+    "code": "10.71",
+    "activityTr": "Ekmek, taze pastane ürünleri ve taze kek imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 28,
+    "code": "10.72",
+    "activityTr": "Peksimet ve bisküvi imalatı; dayanıklı pastane ürünleri ve dayanıklı kek imalatı",
+    "status": "GONULLU"
+  },
+  {
+    "no": 29,
+    "code": "10.73",
+    "activityTr": "Makarna, şehriye, kuskus ve benzeri unlu mamullerin imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 30,
+    "code": "10.81",
+    "activityTr": "Şeker imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 31,
+    "code": "10.82",
+    "activityTr": "Kakao, çikolata ve şekerleme imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 32,
+    "code": "10.83",
+    "activityTr": "Kahve ve çayın işlenmesi",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 33,
+    "code": "10.84",
+    "activityTr": "Baharat, sos, sirke ve diğer çeşni maddelerinin imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 34,
+    "code": "10.85",
+    "activityTr": "Hazır yemeklerin imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 35,
+    "code": "10.89",
+    "activityTr": "Başka yerde sınıflandırılmamış diğer gıda maddelerinin imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 36,
+    "code": "11.01",
+    "activityTr": "Alkollü içeceklerin damıtılması, arıtılması ve harmanlanması",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 37,
+    "code": "11.02",
+    "activityTr": "Üzümden şarap imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 38,
+    "code": "11.05",
+    "activityTr": "Bira imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 39,
+    "code": "11.07",
+    "activityTr": "Alkolsüz içeceklerin imalatı; maden sularının ve diğer şişelenmiş suların üretimi",
+    "status": "GONULLU"
+  },
+  {
+    "no": 40,
+    "code": "12.00",
+    "activityTr": "Tütün ürünleri imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 41,
+    "code": "13.10",
+    "activityTr": "Tekstil elyafının hazırlanması ve bükülmesi",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 42,
+    "code": "13.20",
+    "activityTr": "Dokuma",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 43,
+    "code": "13.30",
+    "activityTr": "Tekstil ürünlerinin bitirilmesi",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 44,
+    "code": "13.91",
+    "activityTr": "Örgü (triko) veya tığ işi (kroşe) kumaşların imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 45,
+    "code": "13.92",
+    "activityTr": "Giyim eşyası dışındaki tamamlanmış tekstil ürünlerinin imalatı",
+    "status": "GONULLU"
+  },
+  {
+    "no": 46,
+    "code": "13.93",
+    "activityTr": "Halı ve kilim imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 47,
+    "code": "13.95",
+    "activityTr": "Dokusuz kumaşların ve dokusuz kumaştan yapılan ürünlerin imalatı, giyim eşyası hariç",
+    "status": "GONULLU"
+  },
+  {
+    "no": 48,
+    "code": "13.96",
+    "activityTr": "Diğer teknik ve endüstriyel tekstillerin imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 49,
+    "code": "13.99",
+    "activityTr": "Başka yerde sınıflandırılmamış diğer tekstillerin imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 50,
+    "code": "15.11",
+    "activityTr": "Derinin tabaklanması ve işlenmesi; kürkün işlenmesi ve boyanması",
+    "status": "GONULLU"
+  },
+  {
+    "no": 51,
+    "code": "15.12",
+    "activityTr": "Bavul, el çantası ve benzerleri ile saraçlık ve koşum takımı imalatı (deri giyim eşyası hariç)",
+    "status": "GONULLU"
+  },
+  {
+    "no": 52,
+    "code": "15.20",
+    "activityTr": "Ayakkabı, bot, terlik vb. imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 53,
+    "code": "16.21",
+    "activityTr": "Ahşap kaplama paneli ve ağaç esaslı panel imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 54,
+    "code": "16.22",
+    "activityTr": "Birleştirilmiş parke yer döşemelerinin imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 55,
+    "code": "16.23",
+    "activityTr": "Diğer bina doğramacılığı ve marangozluk ürünlerinin imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 56,
+    "code": "17.11",
+    "activityTr": "Kağıt hamuru imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 57,
+    "code": "17.12",
+    "activityTr": "Kağıt ve mukavva imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 58,
+    "code": "17.22",
+    "activityTr": "Kağıttan yapılan ev eşyası, sıhhi malzemeler ve tuvalet malzemeleri imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 59,
+    "code": "19.20",
+    "activityTr": "Rafine edilmiş petrol ürünleri imalatı",
+    "status": "GONULLU"
+  },
+  {
+    "no": 60,
+    "code": "20.11",
+    "activityTr": "Sanayi gazları imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 61,
+    "code": "20.12",
+    "activityTr": "Boya maddeleri ve pigment imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 62,
+    "code": "20.13",
+    "activityTr": "Diğer inorganik temel kimyasal maddelerin imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 63,
+    "code": "20.14",
+    "activityTr": "Diğer organik temel kimyasalların imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 64,
+    "code": "20.15",
+    "activityTr": "Kimyasal gübre ve azot bileşiklerinin imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 65,
+    "code": "20.16",
+    "activityTr": "Birincil formda plastik hammaddelerin imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 66,
+    "code": "20.17",
+    "activityTr": "Birincil formda sentetik kauçuk imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 67,
+    "code": "20.20",
+    "activityTr": "Haşere ilaçları ve diğer zirai - kimyasal ürünlerin imalatı",
+    "status": "GONULLU"
+  },
+  {
+    "no": 68,
+    "code": "20.30",
+    "activityTr": "Boya, vernik ve benzeri kaplayıcı maddeler ile matbaa mürekkebi ve macun imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 69,
+    "code": "20.41",
+    "activityTr": "Sabun ve deterjan ile temizlik ve parlatıcı maddeler imalatı",
+    "status": "GONULLU"
+  },
+  {
+    "no": 70,
+    "code": "20.42",
+    "activityTr": "Parfümlerin, kozmetiklerin ve kişisel bakım ürünlerinin imalatı",
+    "status": "GONULLU"
+  },
+  {
+    "no": 71,
+    "code": "20.59",
+    "activityTr": "Başka yerde sınıflandırılmamış diğer kimyasal ürünlerin imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 72,
+    "code": "20.60",
+    "activityTr": "Suni veya sentetik elyaf imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 73,
+    "code": "21.20",
+    "activityTr": "Eczacılığa ilişkin ilaçların imalatı",
+    "status": "GONULLU"
+  },
+  {
+    "no": 74,
+    "code": "22.11",
+    "activityTr": "İç ve dış lastik imalatı; lastiğe sırt geçirilmesi ve yeniden işlenmesi",
+    "status": "GONULLU"
+  },
+  {
+    "no": 75,
+    "code": "22.21",
+    "activityTr": "Plastik tabaka, levha, tüp ve profil imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 76,
+    "code": "22.22",
+    "activityTr": "Plastik torba, çanta, poşet, çuval, kutu, damacana, şişe, makara vb. paketleme malzemelerinin imalatı",
+    "status": "GONULLU"
+  },
+  {
+    "no": 77,
+    "code": "23.11",
+    "activityTr": "Düz cam imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 78,
+    "code": "23.13",
+    "activityTr": "Çukur cam imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 79,
+    "code": "23.14",
+    "activityTr": "Cam elyafı imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 80,
+    "code": "23.20",
+    "activityTr": "Ateşe dayanıklı (refrakter) ürünlerin imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 81,
+    "code": "23.31",
+    "activityTr": "Seramik karo ve kaldırım taşları imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 82,
+    "code": "23.41",
+    "activityTr": "Seramik ev ve süs eşyaları imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 83,
+    "code": "23.42",
+    "activityTr": "Seramik sıhhi ürünlerin imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 84,
+    "code": "23.52",
+    "activityTr": "Kireç ve alçı imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 85,
+    "code": "23.61",
+    "activityTr": "İnşaat amaçlı beton ürünlerin imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 86,
+    "code": "23.62",
+    "activityTr": "İnşaat amaçlı alçı ürünlerin imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 87,
+    "code": "23.64",
+    "activityTr": "Toz harç imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 88,
+    "code": "23.99",
+    "activityTr": "Başka yerde sınıflandırılmamış metalik olmayan diğer mineral ürünlerin imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 89,
+    "code": "24.10",
+    "activityTr": "Ana demir ve çelik ürünleri ile ferro alaşımların imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 90,
+    "code": "24.20",
+    "activityTr": "Çelikten tüpler, borular, içi boş profiller ve benzeri bağlantı parçalarının imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 91,
+    "code": "24.31",
+    "activityTr": "Barların soğuk çekilmesi",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 92,
+    "code": "24.32",
+    "activityTr": "Dar şeritlerin soğuk haddelenmesi",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 93,
+    "code": "24.34",
+    "activityTr": "Tellerin soğuk çekilmesi",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 94,
+    "code": "24.41",
+    "activityTr": "Değerli metal üretimi",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 95,
+    "code": "24.42",
+    "activityTr": "Alüminyum üretimi",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 96,
+    "code": "24.51",
+    "activityTr": "Demir döküm",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 97,
+    "code": "24.52",
+    "activityTr": "Çelik dökümü",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 98,
+    "code": "24.53",
+    "activityTr": "Hafif metallerin dökümü",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 99,
+    "code": "24.54",
+    "activityTr": "Diğer demir dışı metallerin dökümü",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 100,
+    "code": "25.12",
+    "activityTr": "Metalden kapı ve pencere imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 101,
+    "code": "25.21",
+    "activityTr": "Merkezi ısıtma radyatörleri (elektrikli radyatörler hariç) ve sıcak su kazanları (boylerleri) imalatı",
+    "status": "GONULLU"
+  },
+  {
+    "no": 102,
+    "code": "25.92",
+    "activityTr": "Metalden hafif paketleme malzemeleri imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 103,
+    "code": "25.93",
+    "activityTr": "Tel ürünleri, zincir ve yayların imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 104,
+    "code": "25.94",
+    "activityTr": "Bağlantı malzemelerinin ve vida makinesi ürünlerinin imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 105,
+    "code": "25.99",
+    "activityTr": "Başka yerde sınıflandırılmamış diğer fabrikasyon metal ürünlerin imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 106,
+    "code": "26.40",
+    "activityTr": "Tüketici elektroniği ürünlerinin imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 107,
+    "code": "26.51",
+    "activityTr": "Ölçme, test ve seyrüsefer amaçlı alet ve cihazların imalatı",
+    "status": "GONULLU"
+  },
+  {
+    "no": 108,
+    "code": "27.11",
+    "activityTr": "Elektrik motorlarının, jeneratörlerin ve transformatörlerin imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 109,
+    "code": "27.12",
+    "activityTr": "Elektrik dağıtım ve kontrol cihazları imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 110,
+    "code": "27.20",
+    "activityTr": "Akümülatör ve pil imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 111,
+    "code": "27.31",
+    "activityTr": "Fiber optik kabloların imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 112,
+    "code": "27.32",
+    "activityTr": "Diğer elektronik ve elektrik telleri ve kablolarının imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 113,
+    "code": "27.40",
+    "activityTr": "Elektrikli aydınlatma ekipmanlarının imalatı",
+    "status": "GONULLU"
+  },
+  {
+    "no": 114,
+    "code": "27.51",
+    "activityTr": "Elektrikli ev aletlerinin imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 115,
+    "code": "28.12",
+    "activityTr": "Akışkan gücü ile çalışan ekipmanların imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 116,
+    "code": "28.14",
+    "activityTr": "Diğer musluk ve valf/vana imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 117,
+    "code": "28.15",
+    "activityTr": "Rulman, dişli/dişli takımı, şanzıman ve tahrik elemanlarının imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 118,
+    "code": "28.22",
+    "activityTr": "Kaldırma ve taşıma ekipmanları imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 119,
+    "code": "28.25",
+    "activityTr": "Soğutma ve havalandırma donanımlarının imalatı, evde kullanılanlar hariç",
+    "status": "GONULLU"
+  },
+  {
+    "no": 120,
+    "code": "28.92",
+    "activityTr": "Maden, taş ocağı ve inşaat makineleri imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 121,
+    "code": "28.94",
+    "activityTr": "Tekstil, giyim eşyası ve deri üretiminde kullanılan makinelerin imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 122,
+    "code": "28.99",
+    "activityTr": "Başka yerde sınıflandırılmamış diğer özel amaçlı makinelerin imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 123,
+    "code": "29.10",
+    "activityTr": "Motorlu kara taşıtlarının imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 124,
+    "code": "29.20",
+    "activityTr": "Motorlu kara taşıtları karoseri (kaporta) imalatı; treyler (römork) ve yarı treyler (yarı römork) imalatı",
+    "status": "GONULLU"
+  },
+  {
+    "no": 125,
+    "code": "29.32",
+    "activityTr": "Motorlu kara taşıtları için diğer parça ve aksesuarların imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 126,
+    "code": "30.11",
+    "activityTr": "Gemilerin ve yüzen yapıların inşası",
+    "status": "GONULLU"
+  },
+  {
+    "no": 127,
+    "code": "30.20",
+    "activityTr": "Demir yolu lokomotifleri ve vagonlarının imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 128,
+    "code": "32.12",
+    "activityTr": "Mücevher ve benzeri eşyaların imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 129,
+    "code": "32.40",
+    "activityTr": "Oyun ve oyuncak imalatı",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 130,
+    "code": "33.16",
+    "activityTr": "Hava taşıtlarının ve uzay araçlarının bakım ve onarımı",
+    "status": "GONULLU"
+  },
+  {
+    "no": 131,
+    "code": "33.20",
+    "activityTr": "Sanayi makine ve ekipmanlarının kurulumu",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 132,
+    "code": "35.30",
+    "activityTr": "Buhar ve iklimlendirme temini",
+    "status": "YUKUMLU"
+  },
+  {
+    "no": 133,
+    "code": "42.12",
+    "activityTr": "Demir yolları ve metroların inşaatı",
+    "status": "YUKUMLU"
+  }
+]

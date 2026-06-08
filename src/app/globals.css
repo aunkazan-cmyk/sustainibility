@@ -427,6 +427,97 @@ img, svg { display: block; max-width: 100%; }
   color: #fff;
 }
 
+/* Water efficiency obligation matrix (homepage). */
+.nx-matrix-facility-types {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+@media (min-width: 720px) {
+  .nx-matrix-facility-types {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+.nx-matrix-facility-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 12px 14px;
+  border: 1px solid var(--nx-200);
+  border-radius: 12px;
+  font-size: 13px;
+  line-height: 1.45;
+  cursor: pointer;
+  background: var(--nx-50);
+}
+.nx-matrix-facility-option:has(input:checked) {
+  border-color: var(--nx-flow);
+  background: rgba(0, 168, 150, 0.08);
+}
+.nx-matrix-facility-option input {
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+.nx-matrix-nace-list {
+  position: absolute;
+  z-index: 20;
+  left: 0;
+  right: 0;
+  top: calc(100% + 4px);
+  list-style: none;
+  margin: 0;
+  padding: 6px;
+  background: #fff;
+  border: 1px solid var(--nx-200);
+  border-radius: 12px;
+  box-shadow: 0 16px 40px rgba(2, 13, 51, 0.12);
+  max-height: 280px;
+  overflow: auto;
+}
+.nx-matrix-nace-list button {
+  width: 100%;
+  text-align: left;
+  border: 0;
+  background: transparent;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: grid;
+  gap: 4px;
+}
+.nx-matrix-nace-list button:hover {
+  background: var(--nx-50);
+}
+.nx-matrix-nace-list strong {
+  font-size: 13px;
+  color: var(--nx-navy);
+}
+.nx-matrix-nace-list span {
+  font-size: 12.5px;
+  color: var(--nx-600);
+  line-height: 1.4;
+}
+.nx-matrix-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  background: rgba(2, 13, 51, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+}
+.nx-matrix-modal {
+  width: min(520px, 100%);
+  max-height: min(90vh, 720px);
+  overflow: auto;
+  background: #fff;
+  border-radius: 18px;
+  padding: 28px;
+  border: 1px solid var(--nx-200);
+  box-shadow: 0 32px 64px rgba(2, 13, 51, 0.2);
+}
+
 /* ---------------------------------------------------------------------
    Mockup-aligned layout (heroes, cards, header on dark)
    --------------------------------------------------------------------- */

@@ -22,6 +22,7 @@ The 404 page needs no setup: the per-locale optional catch-alls call
    | `SMTP_HOST` `SMTP_PORT` `SMTP_SECURE` `SMTP_USER` `SMTP_PASS` | SMTP transport creds |
    | `CONTACT_CAPTCHA_SECRET` | Random secret for signed contact-form math challenges (required in production) |
    | `NEXT_PUBLIC_GA_MEASUREMENT_ID` | `G-DY0PRJ3F9W` (Google Analytics 4; omit locally to disable scripts and banner) |
+   | `MATRIS_LEAD_WEBHOOK_URL` | Optional HTTPS endpoint for matrix report lead JSON (CRM integration) |
 
    `.env.local.example` is git-ignored, so it is **not** read on Vercel —
    these must be entered in the dashboard. `CONTACT_RECIPIENT` also has a

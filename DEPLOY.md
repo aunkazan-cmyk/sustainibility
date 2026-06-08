@@ -38,11 +38,14 @@ The 404 page needs no setup: the per-locale optional catch-alls call
 
 ### Matrix report PDF assets
 
-- Run `npm run logos` before deploy/build so `public/logos/optimized/nexovia-logo.png`
-  exists for the matrix PDF header (falls back to text-only if missing).
-- Optional letterhead: add `public/documents/matrix-letterhead.png` (A4, ~2480×3508).
-  When present, it is used as a full-page background; adjust `CONTENT_BOX` in
-  `src/lib/matrix-pdf-letterhead.ts` to match the design.
+- **Letterhead (primary):** `public/documents/matrix-letterhead.png` is committed to the repo.
+  When present, every PDF page uses the full Nexovia Flow letterhead background; content
+  is rendered inside `CONTENT_BOX` in [`src/lib/matrix-pdf-letterhead.ts`](src/lib/matrix-pdf-letterhead.ts).
+- **Recalibrate margins:** `npm run calibrate:matrix-letterhead` analyses the PNG rows and
+  prints suggested `CONTENT_BOX` values. Set `MATRIX_PDF_CALIBRATE=1` when running
+  `npm run sample:matrix-pdf` to draw a red safe-area guide on sample PDFs.
+- **Fallback (no letterhead):** run `npm run logos` so `public/logos/optimized/nexovia-logo.png`
+  exists for the programmatic header layout.
 
 ## AWS EC2 (alternative)
 

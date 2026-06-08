@@ -1,4 +1,3 @@
-import "server-only";
 import fs from "fs";
 import path from "path";
 import {
@@ -24,6 +23,7 @@ import {
   FOOTER_SAFE_Y,
   LETTERHEAD_RELATIVE_PATH,
   LOGO_RELATIVE_PATH,
+  SHOW_CALIBRATION_OVERLAY,
 } from "@/lib/matrix-pdf-letterhead";
 
 export interface MatrixPdfInput {
@@ -41,6 +41,7 @@ const DISCLAIMER_EN =
 const navy = rgb(0.02, 0.05, 0.2);
 const muted = rgb(0.35, 0.4, 0.48);
 const lineColor = rgb(0.85, 0.87, 0.9);
+const calibrateColor = rgb(0.85, 0.15, 0.15);
 
 function assetPath(relative: string) {
   return path.join(process.cwd(), relative);
@@ -66,18 +67,29 @@ function wrapText(text: string, maxChars: number): string[] {
 class PdfWriter {
   private y: number;
   private page: PDFPage;
+  private pdf: PDFDocument;
   private letterhead: PDFImage | null;
+  private font: PDFFont;
+  private fontBold: PDFFont;
+  private useLetterhead: boolean;
+  private showCalibration: boolean;
 
   constructor(
-    private pdf: PDFDocument,
+    pdf: PDFDocument,
     page: PDFPage,
     letterhead: PDFImage | null,
-    private font: PDFFont,
-    private fontBold: PDFFont,
-    private useLetterhead: boolean,
+    font: PDFFont,
+    fontBold: PDFFont,
+    useLetterhead: boolean,
+    showCalibration: boolean,
   ) {
+    this.pdf = pdf;
     this.page = page;
     this.letterhead = letterhead;
+    this.font = font;
+    this.fontBold = fontBold;
+    this.useLetterhead = useLetterhead;
+    this.showCalibration = showCalibration;
     this.y = useLetterhead ? CONTENT_BOX.top : 780;
     this.paintBackground();
   }
@@ -92,14 +104,46 @@ class PdfWriter {
         height,
       });
     }
+    if (this.showCalibration && this.useLetterhead) {
+      this.drawCalibrationOverlay();
+    }
   }
 
-  private ensureSpace(needed: number) {
-    const minY = this.useLetterhead ? CONTENT_BOX.bottom : FOOTER_SAFE_Y;
-    if (this.y - needed >= minY) return;
+  private drawCalibrationOverlay() {
+    const { left, right, top, bottom } = CONTENT_BOX;
+    const w = right - left;
+    const h = top - bottom;
+    this.page.drawRectangle({
+      x: left,
+      y: bottom,
+      width: w,
+      height: h,
+      borderWidth: 0.75,
+      borderColor: calibrateColor,
+      color: rgb(1, 1, 1),
+      opacity: 0,
+    });
+    const label = `top=${top} bottom=${bottom} left=${left} right=${right}`;
+    this.page.drawText(label, {
+      x: left,
+      y: bottom - 12,
+      size: 7,
+      font: this.font,
+      color: calibrateColor,
+    });
+  }
+
+  private minY(): number {
+    return this.useLetterhead ? CONTENT_BOX.bottom : FOOTER_SAFE_Y;
+  }
+
+  /** Returns true when a new page was added. */
+  private ensureSpace(needed: number): boolean {
+    if (this.y - needed >= this.minY()) return false;
     this.page = this.pdf.addPage([595.28, 841.89]);
     this.y = this.useLetterhead ? CONTENT_BOX.top : 780;
     this.paintBackground();
+    return true;
   }
 
   drawLine(size: number, text: string, bold = false, color = navy) {
@@ -206,13 +250,8 @@ class PdfWriter {
     this.y -= 4;
   }
 
-  drawActivityTable(
-    lang: "TR" | "EN",
-    evaluation: MatrixEvaluation,
-  ) {
+  private drawActivityTableHeader(lang: "TR" | "EN") {
     const l = (tr: string, en: string) => (lang === "TR" ? tr : en);
-    this.drawLine(12, l("Faaliyet değerlendirme tablosu", "Activity assessment table"), true);
-
     const colNace = CONTENT_BOX.left;
     const colActivity = CONTENT_BOX.left + 52;
     const colStatus = CONTENT_BOX.right - 90;
@@ -241,6 +280,25 @@ class PdfWriter {
       color: muted,
     });
     this.y -= rowH;
+  }
+
+  drawActivityTable(
+    lang: "TR" | "EN",
+    evaluation: MatrixEvaluation,
+  ) {
+    const l = (tr: string, en: string) => (lang === "TR" ? tr : en);
+    this.drawLine(
+      12,
+      l("Faaliyet değerlendirme tablosu", "Activity assessment table"),
+      true,
+    );
+
+    const colNace = CONTENT_BOX.left;
+    const colActivity = CONTENT_BOX.left + 52;
+    const colStatus = CONTENT_BOX.right - 90;
+    const rowH = 14;
+
+    this.drawActivityTableHeader(lang);
 
     for (const row of evaluation.rows) {
       const activity =
@@ -251,7 +309,12 @@ class PdfWriter {
 
       const activityLines = wrapText(activity, 52);
       const blockH = Math.max(rowH, activityLines.length * 11 + 4);
-      this.ensureSpace(blockH);
+
+      if (this.ensureSpace(blockH + rowH)) {
+        this.drawActivityTableHeader(lang);
+      } else {
+        this.ensureSpace(blockH);
+      }
 
       this.page.drawText(code, {
         x: colNace,
@@ -322,7 +385,15 @@ export async function buildMatrixPdf(input: MatrixPdfInput): Promise<Uint8Array>
   }
 
   const page = pdf.addPage([595.28, 841.89]);
-  const writer = new PdfWriter(pdf, page, letterhead, font, fontBold, useLetterhead);
+  const writer = new PdfWriter(
+    pdf,
+    page,
+    letterhead,
+    font,
+    fontBold,
+    useLetterhead,
+    SHOW_CALIBRATION_OVERLAY,
+  );
 
   const title =
     lang === "TR"
@@ -367,11 +438,14 @@ export async function buildMatrixPdf(input: MatrixPdfInput): Promise<Uint8Array>
 
   writer.drawLine(11, lang === "TR" ? "Uyarı" : "Disclaimer", true);
   writer.drawParagraph(lang === "TR" ? DISCLAIMER_TR : DISCLAIMER_EN);
-  writer.drawParagraph(
-    lang === "TR"
-      ? `Danışmanlık ve uygulama desteği: ${ORG_EMAIL} · nexovia.com.tr`
-      : `Consulting support: ${ORG_EMAIL} · nexovia.com.tr`,
-  );
+
+  if (!useLetterhead) {
+    writer.drawParagraph(
+      lang === "TR"
+        ? `Danışmanlık ve uygulama desteği: ${ORG_EMAIL} · nexovia.com.tr`
+        : `Consulting support: ${ORG_EMAIL} · nexovia.com.tr`,
+    );
+  }
 
   return pdf.save();
 }

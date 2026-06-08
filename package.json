@@ -12,6 +12,8 @@
     "test:contact": "node --experimental-strip-types tests/contact-schema.test.ts",
     "test:captcha": "node --experimental-strip-types tests/contact-captcha.test.ts",
     "test:matrix": "node tests/water-efficiency-matrix.test.mjs",
+    "calibrate:matrix-letterhead": "node scripts/calibrate-matrix-letterhead.mjs",
+    "sample:matrix-pdf": "npx --yes tsx scripts/generate-matrix-pdf-samples.ts",
     "nace:build": "node scripts/build-nace-ek1-from-pdf.mjs"
   },
   "dependencies": {

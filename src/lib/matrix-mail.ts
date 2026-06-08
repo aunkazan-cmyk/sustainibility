@@ -1,9 +1,10 @@
 import "server-only";
 import nodemailer from "nodemailer";
-import type { MatrixResult } from "@/lib/water-efficiency-matrix";
+import type { MatrixEvaluation } from "@/lib/water-efficiency-matrix";
 import {
-  buildResultSummary,
+  buildMultiResultSummary,
   facilityTypeLabel,
+  formatSummaryLine,
   statusLabel,
 } from "@/lib/water-efficiency-matrix";
 
@@ -14,7 +15,7 @@ export interface MatrixLeadPayload {
   phone: string;
   kvkkAccepted: boolean;
   locale: "tr" | "en";
-  result: MatrixResult;
+  evaluation: MatrixEvaluation;
 }
 
 function required(name: string): string {
@@ -40,7 +41,19 @@ export async function sendMatrixLeadEmail(p: MatrixLeadPayload): Promise<void> {
   const to = process.env.CONTACT_RECIPIENT ?? "info@nexovia.com.tr";
   const from = process.env.MAIL_FROM ?? to;
   const lang = p.locale === "tr" ? "TR" : "EN";
-  const summary = buildResultSummary(p.result, lang);
+  const { evaluation } = p;
+
+  const activityLines =
+    evaluation.facilityType === "industrial"
+      ? evaluation.rows
+          .map(
+            (row, i) =>
+              `${i + 1}. ${row.inputNaceCode} — ${statusLabel(row.status, lang)}${
+                row.naceEntry ? ` (${row.naceEntry.activityTr})` : ""
+              }`,
+          )
+          .join("\n")
+      : "—";
 
   const rows: [string, string][] = [
     [lang === "TR" ? "Şirket" : "Company", p.company],
@@ -49,23 +62,22 @@ export async function sendMatrixLeadEmail(p: MatrixLeadPayload): Promise<void> {
     [lang === "TR" ? "Telefon" : "Phone", p.phone],
     [
       lang === "TR" ? "Tesis türü" : "Facility type",
-      facilityTypeLabel(p.result.facilityType, lang),
-    ],
-    [
-      lang === "TR" ? "NACE" : "NACE",
-      p.result.naceEntry
-        ? `${p.result.naceEntry.code} — ${p.result.naceEntry.activityTr}`
-        : "—",
+      facilityTypeLabel(evaluation.facilityType, lang),
     ],
     [
       lang === "TR" ? "Çalışan sayısı" : "Employees",
-      p.result.employeeCount != null ? String(p.result.employeeCount) : "—",
+      evaluation.employeeCount != null ? String(evaluation.employeeCount) : "—",
     ],
     [
-      lang === "TR" ? "Sonuç" : "Result",
-      statusLabel(p.result.status, lang),
+      lang === "TR" ? "Genel sonuç" : "Headline result",
+      statusLabel(evaluation.headlineStatus, lang),
     ],
-    [lang === "TR" ? "Özet" : "Summary", summary],
+    [
+      lang === "TR" ? "Faaliyet dağılımı" : "Activity breakdown",
+      formatSummaryLine(evaluation.summary, lang),
+    ],
+    [lang === "TR" ? "Faaliyetler" : "Activities", activityLines],
+    [lang === "TR" ? "Özet" : "Summary", buildMultiResultSummary(evaluation, lang)],
     [lang === "TR" ? "KVKK onayı" : "KVKK", p.kvkkAccepted ? "✓" : "✗"],
   ];
 

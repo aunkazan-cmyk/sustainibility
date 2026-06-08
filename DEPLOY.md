@@ -36,6 +36,14 @@ The 404 page needs no setup: the per-locale optional catch-alls call
 4. Point the `nexovia.com.tr` DNS at Vercel and ensure the SMTP/from domain
    has SPF + DKIM so lead mail isn't spam-filtered.
 
+### Matrix report PDF assets
+
+- Run `npm run logos` before deploy/build so `public/logos/optimized/nexovia-logo.png`
+  exists for the matrix PDF header (falls back to text-only if missing).
+- Optional letterhead: add `public/documents/matrix-letterhead.png` (A4, ~2480×3508).
+  When present, it is used as a full-page background; adjust `CONTENT_BOX` in
+  `src/lib/matrix-pdf-letterhead.ts` to match the design.
+
 ## AWS EC2 (alternative)
 
 Standalone Node server.

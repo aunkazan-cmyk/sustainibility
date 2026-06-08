@@ -428,6 +428,173 @@ img, svg { display: block; max-width: 100%; }
 }
 
 /* Water efficiency obligation matrix (homepage). */
+.nx-matrix-panel {
+  margin-top: 40px;
+  padding: 32px;
+  background: #fff;
+  border: 1px solid var(--nx-200);
+  border-radius: 20px;
+  display: grid;
+  gap: 28px;
+}
+.nx-matrix-legend {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--nx-navy);
+  margin-bottom: 12px;
+}
+.nx-matrix-row-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--nx-navy);
+  margin-bottom: 8px;
+}
+.nx-matrix-activities {
+  display: grid;
+  gap: 16px;
+}
+.nx-matrix-activity-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+}
+.nx-matrix-activity-row > div:first-child {
+  flex: 1;
+  min-width: 0;
+}
+.nx-matrix-employee {
+  max-width: 280px;
+}
+.nx-matrix-hint {
+  margin: 8px 0 0;
+  font-size: 12.5px;
+  color: var(--nx-600);
+  line-height: 1.45;
+}
+.nx-matrix-result {
+  padding: 24px;
+  border-radius: 16px;
+  background: var(--nx-50);
+  border: 1px solid var(--nx-200);
+  display: grid;
+  gap: 12px;
+}
+.nx-matrix-result__eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--nx-600);
+}
+.nx-matrix-result__status {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.15;
+}
+.nx-matrix-result__summary-line {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--nx-navy);
+}
+.nx-matrix-result__lead {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--nx-700);
+}
+.nx-matrix-results-table-wrap {
+  overflow-x: auto;
+  margin-top: 4px;
+}
+.nx-matrix-results-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+.nx-matrix-results-table th,
+.nx-matrix-results-table td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--nx-200);
+  vertical-align: top;
+}
+.nx-matrix-results-table th {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--nx-600);
+  background: rgba(255, 255, 255, 0.6);
+}
+.nx-matrix-row-detail {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--nx-600);
+  padding-left: 12px;
+  border-left: 3px solid var(--nx-200);
+}
+.nx-matrix-reference,
+.nx-matrix-disclaimer {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--nx-600);
+}
+.nx-matrix-modal__title {
+  margin: 0 0 8px;
+  font-size: 20px;
+  color: var(--nx-navy);
+}
+.nx-matrix-modal__intro {
+  margin: 0 0 20px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--nx-600);
+}
+.nx-matrix-modal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 520px) {
+  .nx-matrix-modal-grid {
+    grid-template-columns: 1fr;
+  }
+  .nx-matrix-activity-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+.nx-matrix-kvkk {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--nx-700);
+  cursor: pointer;
+}
+.nx-matrix-kvkk input {
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+.nx-matrix-form-error {
+  padding: 12px 14px;
+  margin-bottom: 16px;
+  border-radius: 10px;
+  background: #fef2f2;
+  color: #b91c1c;
+  font-size: 13.5px;
+}
+.nx-matrix-modal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
 .nx-matrix-facility-types {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

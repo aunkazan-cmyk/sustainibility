@@ -45,6 +45,16 @@ export const I18N = {
       nacePlaceholder: "Kod veya faaliyet adı ile arayın…",
       employeeLabel: "Çalışan sayısı",
       employeePlaceholder: "Örn. 75",
+      sharedEmployeeHint:
+        "Tüm faaliyetler için geçerli toplam çalışan sayısı.",
+      addActivity: "Faaliyet ekle",
+      removeActivity: "Kaldır",
+      activityRowLabel: "Faaliyet",
+      maxActivitiesReached: "En fazla 10 faaliyet eklenebilir.",
+      activitiesEvaluated: "{count} faaliyet değerlendirildi",
+      resultsTableNace: "NACE",
+      resultsTableActivity: "Faaliyet",
+      resultsTableStatus: "Sonuç",
       evaluateHint: "Endüstriyel işletmeler için NACE kodu ve çalışan sayısını girin.",
       resultTitle: "Değerlendirme sonucu",
       resultReference:
@@ -277,6 +287,16 @@ export const I18N = {
       nacePlaceholder: "Search by code or activity…",
       employeeLabel: "Employee count",
       employeePlaceholder: "e.g. 75",
+      sharedEmployeeHint:
+        "Total employee count applicable to all activities.",
+      addActivity: "Add activity",
+      removeActivity: "Remove",
+      activityRowLabel: "Activity",
+      maxActivitiesReached: "You can add up to 10 activities.",
+      activitiesEvaluated: "{count} activities assessed",
+      resultsTableNace: "NACE",
+      resultsTableActivity: "Activity",
+      resultsTableStatus: "Result",
       evaluateHint: "For industrial facilities, enter NACE code and employee count.",
       resultTitle: "Assessment result",
       resultReference:

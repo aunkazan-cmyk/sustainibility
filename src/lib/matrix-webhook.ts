@@ -1,4 +1,11 @@
 import "server-only";
+import type { MatrixStatus } from "@/lib/water-efficiency-matrix";
+
+export interface MatrixWebhookActivity {
+  naceCode: string;
+  activityTr: string | null;
+  status: MatrixStatus;
+}
 
 export interface MatrixWebhookPayload {
   company: string;
@@ -7,11 +14,10 @@ export interface MatrixWebhookPayload {
   phone: string;
   locale: "tr" | "en";
   facilityType: string;
-  naceCode: string | null;
-  naceActivity: string | null;
   employeeCount: number | null;
-  matrixStatus: string;
+  headlineStatus: string;
   summary: string;
+  activities: MatrixWebhookActivity[];
   submittedAt: string;
 }
 

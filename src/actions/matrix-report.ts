@@ -5,13 +5,14 @@ import { sendMatrixLeadEmail } from "@/lib/matrix-mail";
 import { buildMatrixPdf } from "@/lib/matrix-pdf";
 import { postMatrixLeadWebhook } from "@/lib/matrix-webhook";
 import {
+  parseActivitiesJson,
   parseEmployeeCount,
   validateMatrixReport,
   type MatrixReportField,
 } from "@/lib/matrix-report-schema";
 import {
-  evaluateMatrix,
-  buildResultSummary,
+  evaluateMatrixMulti,
+  buildMultiResultSummary,
   type FacilityType,
   type MatrixStatus,
 } from "@/lib/water-efficiency-matrix";
@@ -40,6 +41,7 @@ const tr = {
   naceRequired: "NACE kodu seçin.",
   employeeRequired: "Çalışan sayısını girin.",
   employeeInvalid: "Geçerli bir çalışan sayısı girin.",
+  activitiesInvalid: "Geçerli en az bir faaliyet (NACE) girin.",
   fix: "Lütfen işaretli alanları kontrol edin.",
   fail: "Gönderim sırasında bir sorun oluştu. Lütfen tekrar deneyin.",
   invalidMatrix: "Matris sonucu geçersiz. Lütfen değerlendirmeyi yenileyin.",
@@ -54,6 +56,7 @@ const en = {
   naceRequired: "Select a NACE code.",
   employeeRequired: "Enter employee count.",
   employeeInvalid: "Enter a valid employee count.",
+  activitiesInvalid: "Enter at least one valid activity (NACE).",
   fix: "Please review the highlighted fields.",
   fail: "Something went wrong. Please try again.",
   invalidMatrix: "Invalid assessment result. Please refresh the evaluation.",
@@ -83,7 +86,7 @@ function parseFacilityType(raw: string): FacilityType | null {
   return null;
 }
 
-function parseMatrixStatus(raw: string): MatrixStatus | null {
+function parseHeadlineStatus(raw: string): MatrixStatus | null {
   if (raw === "YUKUMLU" || raw === "GONULLU" || raw === "OUT_OF_EK1") {
     return raw;
   }
@@ -108,16 +111,16 @@ export async function submitMatrixReport(
     email: get("email"),
     phone: get("phone"),
     facilityType: get("facilityType"),
-    naceCode: get("naceCode"),
     employeeCount: get("employeeCount"),
-    matrixStatus: get("matrixStatus"),
+    activitiesJson: get("activitiesJson"),
+    headlineStatus: get("headlineStatus"),
   };
 
   const kvkkAccepted = formData.get("kvkkAccepted") != null;
   const facilityType = parseFacilityType(values.facilityType);
-  const matrixStatus = parseMatrixStatus(values.matrixStatus);
+  const headlineStatus = parseHeadlineStatus(values.headlineStatus);
 
-  if (!facilityType || !matrixStatus) {
+  if (!facilityType || !headlineStatus) {
     return {
       status: "error",
       message: m.invalidMatrix,
@@ -133,9 +136,9 @@ export async function submitMatrixReport(
       phone: values.phone,
       kvkkAccepted,
       facilityType,
-      naceCode: values.naceCode,
       employeeCount: values.employeeCount,
-      matrixStatus,
+      activitiesJson: values.activitiesJson,
+      headlineStatus,
     },
     m,
   );
@@ -156,15 +159,20 @@ export async function submitMatrixReport(
   const employeeCount =
     facilityType === "industrial"
       ? parseEmployeeCount(values.employeeCount)
-      : null;
+      : undefined;
 
-  const result = evaluateMatrix({
+  const activityCodes =
+    facilityType === "industrial"
+      ? parseActivitiesJson(values.activitiesJson)
+      : [];
+
+  const evaluation = evaluateMatrixMulti(
     facilityType,
-    naceCode: facilityType === "industrial" ? values.naceCode : undefined,
-    employeeCount: employeeCount ?? undefined,
-  });
+    employeeCount ?? undefined,
+    (activityCodes ?? []).map((naceCode) => ({ naceCode })),
+  );
 
-  if (result.status !== matrixStatus) {
+  if (!evaluation || evaluation.headlineStatus !== headlineStatus) {
     return {
       status: "error",
       message: m.invalidMatrix,
@@ -182,7 +190,7 @@ export async function submitMatrixReport(
       phone: values.phone,
       kvkkAccepted,
       locale,
-      result,
+      evaluation,
     });
 
     await postMatrixLeadWebhook({
@@ -192,11 +200,14 @@ export async function submitMatrixReport(
       phone: values.phone,
       locale,
       facilityType,
-      naceCode: result.naceEntry?.code ?? null,
-      naceActivity: result.naceEntry?.activityTr ?? null,
-      employeeCount: result.employeeCount,
-      matrixStatus: result.status,
-      summary: buildResultSummary(result, lang),
+      employeeCount: evaluation.employeeCount,
+      headlineStatus: evaluation.headlineStatus,
+      summary: buildMultiResultSummary(evaluation, lang),
+      activities: evaluation.rows.map((row) => ({
+        naceCode: row.inputNaceCode || row.naceEntry?.code || "",
+        activityTr: row.naceEntry?.activityTr ?? null,
+        status: row.status,
+      })),
       submittedAt: new Date().toISOString(),
     });
 
@@ -204,7 +215,7 @@ export async function submitMatrixReport(
       locale,
       company: values.company,
       recipientName: values.recipientName,
-      result,
+      evaluation,
     });
 
     const fileName =

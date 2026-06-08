@@ -17,17 +17,19 @@ import {
   type MatrixReportState,
 } from "@/actions/matrix-report";
 import {
-  buildResultSummary,
-  evaluateMatrix,
-  findNaceEntry,
-  normalizeNaceCode,
-  searchNace,
+  buildMultiResultSummary,
+  buildRowSummary,
+  evaluateMatrixMulti,
+  formatSummaryLine,
+  MAX_MATRIX_ACTIVITIES,
   statusLabel,
   type FacilityType,
-  type MatrixResult,
-  type NaceEntry,
 } from "@/lib/water-efficiency-matrix";
 import { SectionHeader } from "@/components/shared/SectionHeader";
+import {
+  MatrixActivityRow,
+  type ActivityRowState,
+} from "@/components/home/MatrixActivityRow";
 
 const initialReportState: MatrixReportState = { status: "idle" };
 
@@ -42,6 +44,12 @@ const fieldStyle: CSSProperties = {
 
 const errStyle: CSSProperties = { marginTop: 6, fontSize: 12, color: "#b91c1c" };
 
+let rowIdCounter = 0;
+function newRow(): ActivityRowState {
+  rowIdCounter += 1;
+  return { id: `row-${rowIdCounter}`, query: "", naceCode: "" };
+}
+
 function downloadPdf(base64: string, fileName: string) {
   const bytes = Uint8Array.from(atob(base64), (c) => c.charCodeAt(0));
   const blob = new Blob([bytes], { type: "application/pdf" });
@@ -53,29 +61,15 @@ function downloadPdf(base64: string, fileName: string) {
   URL.revokeObjectURL(url);
 }
 
-function isReady(
-  facilityType: FacilityType,
-  naceCode: string,
-  employeeCount: string,
-): boolean {
-  if (facilityType !== "industrial") return true;
-  const code = normalizeNaceCode(naceCode);
-  if (!/^\d{2}\.\d{2}$/.test(code)) return false;
-  const entry = findNaceEntry(code);
-  if (!entry) return true;
-  const n = Number(employeeCount);
-  return Number.isInteger(n) && n >= 1;
-}
-
 export function WaterEfficiencyMatrix({ locale }: { locale: Locale }) {
   const { t, lang } = getDictionary(locale);
   const mx = t.matrix;
 
   const [facilityType, setFacilityType] = useState<FacilityType>("industrial");
-  const [naceQuery, setNaceQuery] = useState("");
-  const [naceCode, setNaceCode] = useState("");
+  const [activityRows, setActivityRows] = useState<ActivityRowState[]>(() => [
+    newRow(),
+  ]);
   const [employeeCount, setEmployeeCount] = useState("");
-  const [showNaceList, setShowNaceList] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
 
   const [reportState, formAction, pending] = useActionState(
@@ -84,20 +78,20 @@ export function WaterEfficiencyMatrix({ locale }: { locale: Locale }) {
   );
   const lastPdfRef = useRef<string | null>(null);
 
-  const naceSuggestions = useMemo(
-    () => searchNace(naceQuery || naceCode, 12),
-    [naceQuery, naceCode],
-  );
+  const emp = employeeCount.trim() ? Number(employeeCount) : null;
+  const validEmp =
+    emp != null && Number.isInteger(emp) && emp >= 1 ? emp : null;
 
-  const result: MatrixResult | null = useMemo(() => {
-    if (!isReady(facilityType, naceCode, employeeCount)) return null;
-    const emp = employeeCount.trim() ? Number(employeeCount) : undefined;
-    return evaluateMatrix({
+  const evaluation = useMemo(() => {
+    if (facilityType !== "industrial") {
+      return evaluateMatrixMulti(facilityType, undefined, []);
+    }
+    return evaluateMatrixMulti(
       facilityType,
-      naceCode: facilityType === "industrial" ? naceCode : undefined,
-      employeeCount: emp,
-    });
-  }, [facilityType, naceCode, employeeCount]);
+      validEmp ?? undefined,
+      activityRows.map((r) => ({ naceCode: r.naceCode })),
+    );
+  }, [facilityType, activityRows, validEmp]);
 
   useEffect(() => {
     if (
@@ -117,13 +111,22 @@ export function WaterEfficiencyMatrix({ locale }: { locale: Locale }) {
     { value: "industrialZone", label: mx.facilityIndustrialZone },
   ];
 
-  const pickNace = (entry: NaceEntry) => {
-    setNaceCode(entry.code);
-    setNaceQuery(`${entry.code} — ${entry.activityTr}`);
-    setShowNaceList(false);
+  const updateRow = (id: string, query: string, naceCode: string) => {
+    setActivityRows((rows) =>
+      rows.map((r) => (r.id === id ? { ...r, query, naceCode } : r)),
+    );
   };
 
-  const statusColor = (status: MatrixResult["status"]) => {
+  const removeRow = (id: string) => {
+    setActivityRows((rows) => rows.filter((r) => r.id !== id));
+  };
+
+  const addRow = () => {
+    if (activityRows.length >= MAX_MATRIX_ACTIVITIES) return;
+    setActivityRows((rows) => [...rows, newRow()]);
+  };
+
+  const statusColor = (status: string) => {
     if (status === "YUKUMLU") return "var(--nx-navy)";
     if (status === "GONULLU") return "var(--nx-flow)";
     return "var(--nx-600)";
@@ -131,7 +134,13 @@ export function WaterEfficiencyMatrix({ locale }: { locale: Locale }) {
 
   const v = reportState.status === "error" ? (reportState.values ?? {}) : {};
   const err = (f: string) =>
-    reportState.status === "error" ? reportState.fieldErrors?.[f as keyof typeof reportState.fieldErrors] : undefined;
+    reportState.status === "error"
+      ? reportState.fieldErrors?.[f as keyof typeof reportState.fieldErrors]
+      : undefined;
+
+  const activitiesJson = JSON.stringify(
+    activityRows.map((r) => ({ naceCode: r.naceCode })),
+  );
 
   return (
     <>
@@ -143,28 +152,9 @@ export function WaterEfficiencyMatrix({ locale }: { locale: Locale }) {
         <div className="nx-container">
           <SectionHeader eyebrow={mx.eyebrow} title={mx.title} intro={mx.lead} />
 
-          <div
-            className="nx-matrix-panel"
-            style={{
-              marginTop: 36,
-              background: "#fff",
-              borderRadius: 18,
-              border: "1px solid var(--nx-200)",
-              padding: 32,
-              boxShadow: "0 24px 48px -32px rgba(2,13,51,0.12)",
-            }}
-          >
+          <div className="nx-matrix-panel">
             <fieldset style={{ border: 0, margin: 0, padding: 0 }}>
-              <legend
-                style={{
-                  fontSize: 13,
-                  fontWeight: 600,
-                  color: "var(--nx-600)",
-                  marginBottom: 12,
-                }}
-              >
-                {mx.facilityTypeLabel}
-              </legend>
+              <legend className="nx-matrix-legend">{mx.facilityTypeLabel}</legend>
               <div className="nx-matrix-facility-types">
                 {facilityOptions.map((opt) => (
                   <label key={opt.value} className="nx-matrix-facility-option">
@@ -182,53 +172,36 @@ export function WaterEfficiencyMatrix({ locale }: { locale: Locale }) {
             </fieldset>
 
             {facilityType === "industrial" && (
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "1.4fr 0.6fr",
-                  gap: 20,
-                  marginTop: 28,
-                }}
-                data-nx-collapse
-              >
-                <div style={{ position: "relative" }}>
-                  <label style={{ display: "block", fontSize: 13, fontWeight: 600, marginBottom: 8 }}>
-                    {mx.naceLabel}
-                  </label>
-                  <input
-                    type="text"
-                    value={naceQuery}
-                    onChange={(e) => {
-                      setNaceQuery(e.target.value);
-                      const normalized = normalizeNaceCode(e.target.value);
-                      if (/^\d{2}\.\d{2}$/.test(normalized)) setNaceCode(normalized);
-                      setShowNaceList(true);
-                    }}
-                    onFocus={() => setShowNaceList(true)}
-                    placeholder={mx.nacePlaceholder}
-                    style={fieldStyle}
-                    autoComplete="off"
-                  />
-                  {showNaceList && naceSuggestions.length > 0 && (
-                    <ul className="nx-matrix-nace-list">
-                      {naceSuggestions.map((entry) => (
-                        <li key={entry.code}>
-                          <button type="button" onClick={() => pickNace(entry)}>
-                            <strong>{entry.code}</strong>
-                            <span>{entry.activityTr}</span>
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
+              <>
+                <div className="nx-matrix-activities">
+                  {activityRows.map((row, index) => (
+                    <MatrixActivityRow
+                      key={row.id}
+                      row={row}
+                      rowLabel={`${mx.activityRowLabel} ${index + 1}`}
+                      naceLabel={mx.naceLabel}
+                      nacePlaceholder={mx.nacePlaceholder}
+                      removeLabel={mx.removeActivity}
+                      canRemove={activityRows.length > 1}
+                      onChange={updateRow}
+                      onRemove={removeRow}
+                    />
+                  ))}
+                  <button
+                    type="button"
+                    className="nx-btn nx-btn--ghost"
+                    onClick={addRow}
+                    disabled={activityRows.length >= MAX_MATRIX_ACTIVITIES}
+                  >
+                    {mx.addActivity}
+                  </button>
+                  {activityRows.length >= MAX_MATRIX_ACTIVITIES && (
+                    <p className="nx-matrix-hint">{mx.maxActivitiesReached}</p>
                   )}
-                  <p style={{ margin: "8px 0 0", fontSize: 12, color: "var(--nx-500)" }}>
-                    {mx.evaluateHint}
-                  </p>
                 </div>
-                <div>
-                  <label style={{ display: "block", fontSize: 13, fontWeight: 600, marginBottom: 8 }}>
-                    {mx.employeeLabel}
-                  </label>
+
+                <div className="nx-matrix-employee">
+                  <label className="nx-matrix-row-label">{mx.employeeLabel}</label>
                   <input
                     type="number"
                     min={1}
@@ -237,47 +210,78 @@ export function WaterEfficiencyMatrix({ locale }: { locale: Locale }) {
                     placeholder={mx.employeePlaceholder}
                     style={fieldStyle}
                   />
+                  <p className="nx-matrix-hint">{mx.sharedEmployeeHint}</p>
                 </div>
-              </div>
+              </>
             )}
 
-            {result && (
-              <div
-                className="nx-matrix-result"
-                style={{
-                  marginTop: 28,
-                  padding: "24px 28px",
-                  borderRadius: 14,
-                  background: "var(--nx-50)",
-                  border: "1px solid var(--nx-150)",
-                }}
-              >
-                <div style={{ fontSize: 12, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--nx-500)", marginBottom: 8 }}>
-                  {mx.resultTitle}
-                </div>
+            {evaluation && (
+              <div className="nx-matrix-result">
+                <div className="nx-matrix-result__eyebrow">{mx.resultTitle}</div>
                 <div
-                  style={{
-                    fontSize: 28,
-                    fontWeight: 700,
-                    color: statusColor(result.status),
-                    marginBottom: 12,
-                  }}
+                  className="nx-matrix-result__status"
+                  style={{ color: statusColor(evaluation.headlineStatus) }}
                 >
-                  {statusLabel(result.status, lang)}
+                  {statusLabel(evaluation.headlineStatus, lang)}
                 </div>
-                <p style={{ margin: "0 0 12px", lineHeight: 1.65, color: "var(--nx-700)", fontSize: 15 }}>
-                  {buildResultSummary(result, lang)}
+                {evaluation.facilityType === "industrial" && (
+                  <p className="nx-matrix-result__summary-line">
+                    {mx.activitiesEvaluated.replace(
+                      "{count}",
+                      String(evaluation.rows.length),
+                    )}{" "}
+                    — {formatSummaryLine(evaluation.summary, lang)}
+                  </p>
+                )}
+                <p className="nx-matrix-result__lead">
+                  {buildMultiResultSummary(evaluation, lang)}
                 </p>
-                <p style={{ margin: 0, fontSize: 12.5, color: "var(--nx-500)" }}>
-                  {mx.resultReference}
-                </p>
-                <p style={{ margin: "12px 0 0", fontSize: 12, color: "var(--nx-500)" }}>
-                  {mx.disclaimer}
-                </p>
+
+                {evaluation.facilityType === "industrial" && (
+                  <div className="nx-matrix-results-table-wrap">
+                    <table className="nx-matrix-results-table">
+                      <thead>
+                        <tr>
+                          <th>{mx.resultsTableNace}</th>
+                          <th>{mx.resultsTableActivity}</th>
+                          <th>{mx.resultsTableStatus}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {evaluation.rows.map((row) => (
+                          <tr key={`${row.rowIndex}-${row.inputNaceCode}`}>
+                            <td>{row.inputNaceCode || "—"}</td>
+                            <td>
+                              {row.naceEntry?.activityTr ??
+                                (lang === "TR"
+                                  ? "Ek-1 dışı / tanımsız"
+                                  : "Outside Annex-1")}
+                            </td>
+                            <td>
+                              <strong>{statusLabel(row.status, lang)}</strong>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+
+                {evaluation.facilityType === "industrial" &&
+                  evaluation.rows.map((row) => (
+                    <p
+                      key={`detail-${row.rowIndex}-${row.inputNaceCode}`}
+                      className="nx-matrix-row-detail"
+                    >
+                      {buildRowSummary(row, lang)}
+                    </p>
+                  ))}
+
+                <p className="nx-matrix-reference">{mx.resultReference}</p>
+                <p className="nx-matrix-disclaimer">{mx.disclaimer}</p>
                 <button
                   type="button"
                   className="nx-btn nx-btn--primary"
-                  style={{ marginTop: 20 }}
                   onClick={() => setModalOpen(true)}
                 >
                   {mx.downloadCta}
@@ -288,8 +292,12 @@ export function WaterEfficiencyMatrix({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      {modalOpen && result && (
-        <div className="nx-matrix-modal-backdrop" role="presentation" onClick={() => !pending && setModalOpen(false)}>
+      {modalOpen && evaluation && (
+        <div
+          className="nx-matrix-modal-backdrop"
+          role="presentation"
+          onClick={() => !pending && setModalOpen(false)}
+        >
           <div
             className="nx-matrix-modal"
             role="dialog"
@@ -297,58 +305,90 @@ export function WaterEfficiencyMatrix({ locale }: { locale: Locale }) {
             aria-labelledby="matrix-modal-title"
             onClick={(e) => e.stopPropagation()}
           >
-            <h3 id="matrix-modal-title" className="nx-display" style={{ fontSize: 24, margin: "0 0 8px", fontWeight: 500 }}>
+            <h3 id="matrix-modal-title" className="nx-matrix-modal__title">
               {mx.modalTitle}
             </h3>
-            <p style={{ margin: "0 0 24px", color: "var(--nx-600)", fontSize: 14, lineHeight: 1.6 }}>
-              {mx.modalIntro}
-            </p>
+            <p className="nx-matrix-modal__intro">{mx.modalIntro}</p>
 
             <form action={formAction}>
               <input type="hidden" name="locale" value={locale} />
               <input type="hidden" name="facilityType" value={facilityType} />
-              <input type="hidden" name="naceCode" value={naceCode} />
               <input type="hidden" name="employeeCount" value={employeeCount} />
-              <input type="hidden" name="matrixStatus" value={result.status} />
+              <input
+                type="hidden"
+                name="activitiesJson"
+                value={activitiesJson}
+              />
+              <input
+                type="hidden"
+                name="headlineStatus"
+                value={evaluation.headlineStatus}
+              />
 
-              <div aria-hidden style={{ position: "absolute", left: -9999, width: 1, height: 1, overflow: "hidden" }}>
+              <div
+                aria-hidden
+                style={{
+                  position: "absolute",
+                  left: -9999,
+                  width: 1,
+                  height: 1,
+                  overflow: "hidden",
+                }}
+              >
                 <input type="text" name="company_url" tabIndex={-1} autoComplete="off" />
               </div>
 
               {reportState.status === "error" && reportState.message && (
-                <div style={{ marginBottom: 16, padding: 12, borderRadius: 10, background: "#fef2f2", border: "1px solid #fecaca", color: "#b91c1c", fontSize: 13 }}>
-                  {reportState.message}
-                </div>
+                <div className="nx-matrix-form-error">{reportState.message}</div>
               )}
 
               <div style={{ display: "grid", gap: 16 }}>
                 <div>
-                  <label style={{ display: "block", fontSize: 13, fontWeight: 600, marginBottom: 6 }}>{mx.companyLabel}</label>
+                  <label className="nx-matrix-row-label">{mx.companyLabel}</label>
                   <input name="company" defaultValue={v.company} required style={fieldStyle} />
                   {err("company") && <p style={errStyle}>{err("company")}</p>}
                 </div>
                 <div>
-                  <label style={{ display: "block", fontSize: 13, fontWeight: 600, marginBottom: 6 }}>{mx.recipientLabel}</label>
-                  <input name="recipientName" defaultValue={v.recipientName} required style={fieldStyle} />
-                  {err("recipientName") && <p style={errStyle}>{err("recipientName")}</p>}
+                  <label className="nx-matrix-row-label">{mx.recipientLabel}</label>
+                  <input
+                    name="recipientName"
+                    defaultValue={v.recipientName}
+                    required
+                    style={fieldStyle}
+                  />
+                  {err("recipientName") && (
+                    <p style={errStyle}>{err("recipientName")}</p>
+                  )}
                 </div>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }} data-nx-collapse>
+                <div className="nx-matrix-modal-grid" data-nx-collapse>
                   <div>
-                    <label style={{ display: "block", fontSize: 13, fontWeight: 600, marginBottom: 6 }}>{mx.emailLabel}</label>
-                    <input name="email" type="email" defaultValue={v.email} required style={fieldStyle} />
+                    <label className="nx-matrix-row-label">{mx.emailLabel}</label>
+                    <input
+                      name="email"
+                      type="email"
+                      defaultValue={v.email}
+                      required
+                      style={fieldStyle}
+                    />
                     {err("email") && <p style={errStyle}>{err("email")}</p>}
                   </div>
                   <div>
-                    <label style={{ display: "block", fontSize: 13, fontWeight: 600, marginBottom: 6 }}>{mx.phoneLabel}</label>
-                    <input name="phone" type="tel" defaultValue={v.phone} required style={fieldStyle} />
+                    <label className="nx-matrix-row-label">{mx.phoneLabel}</label>
+                    <input
+                      name="phone"
+                      type="tel"
+                      defaultValue={v.phone}
+                      required
+                      style={fieldStyle}
+                    />
                     {err("phone") && <p style={errStyle}>{err("phone")}</p>}
                   </div>
                 </div>
-                <label style={{ display: "flex", gap: 10, alignItems: "flex-start", fontSize: 13, lineHeight: 1.5, color: "var(--nx-700)" }}>
-                  <input type="checkbox" name="kvkkAccepted" style={{ marginTop: 3 }} />
+                <label className="nx-matrix-kvkk">
+                  <input type="checkbox" name="kvkkAccepted" />
                   <span>
                     {mx.kvkkLabel}{" "}
-                    <Link href={pathFor("legalFormNotice", locale)} style={{ color: "var(--nx-flow)", textDecoration: "underline" }}>
+                    <Link href={pathFor("legalFormNotice", locale)}>
                       {lang === "TR" ? "Form Aydınlatma Metni" : "Form Privacy Notice"}
                     </Link>
                   </span>
@@ -356,11 +396,16 @@ export function WaterEfficiencyMatrix({ locale }: { locale: Locale }) {
                 {err("kvkkAccepted") && <p style={errStyle}>{err("kvkkAccepted")}</p>}
               </div>
 
-              <div style={{ display: "flex", gap: 12, marginTop: 24, flexWrap: "wrap" }}>
+              <div className="nx-matrix-modal-actions">
                 <button type="submit" className="nx-btn nx-btn--accent" disabled={pending}>
                   {pending ? "…" : mx.submitDownload}
                 </button>
-                <button type="button" className="nx-btn nx-btn--ghost" disabled={pending} onClick={() => setModalOpen(false)}>
+                <button
+                  type="button"
+                  className="nx-btn nx-btn--ghost"
+                  disabled={pending}
+                  onClick={() => setModalOpen(false)}
+                >
                   {mx.cancel}
                 </button>
               </div>

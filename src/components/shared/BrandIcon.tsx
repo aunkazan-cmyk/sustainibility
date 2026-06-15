@@ -1,5 +1,5 @@
 // Sub-brand mark — ported verbatim from components.jsx.
-type BrandKind = "flow" | "sustain" | "adr" | "nexovia";
+type BrandKind = "flow" | "sustain" | "adr" | "energy" | "nexovia";
 
 export function BrandIcon({
   kind,
@@ -11,6 +11,7 @@ export function BrandIcon({
   const config = {
     flow: { color: "var(--nx-flow)", soft: "var(--nx-flow-soft)" },
     sustain: { color: "var(--nx-sustain)", soft: "var(--nx-sustain-soft)" },
+    energy: { color: "var(--nx-energy)", soft: "var(--nx-energy-soft)" },
     adr: { color: "var(--nx-adr)", soft: "var(--nx-adr-soft)" },
     nexovia: { color: "var(--nx-navy)", soft: "#EEF2FF" },
   }[kind as BrandKind];
@@ -31,6 +32,11 @@ export function BrandIcon({
           fillOpacity="0.12"
         />
         <path d="M12 10 L12 18" />
+      </g>
+    ),
+    energy: (
+      <g fill="none" stroke={config.color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M13 3 L6 14 H12 L11 21 L18 10 H12 Z" fill={config.color} fillOpacity="0.15" />
       </g>
     ),
     adr: (

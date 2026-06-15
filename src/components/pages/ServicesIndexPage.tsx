@@ -1,5 +1,4 @@
-// Services index — landing for the two consulting practices (water,
-// sustainability). Server component; cards are registry-driven <Link>s.
+// Services index — water, energy and sustainability consulting practices.
 import Link from "next/link";
 import type { Locale } from "@/lib/site";
 import { getDictionary } from "@/i18n/getDictionary";
@@ -18,12 +17,21 @@ export function ServicesIndexPage({ locale }: { locale: Locale }) {
       title: t.services.water.title,
       desc: t.services.water.short,
       href: pathFor("waterService", locale),
+      linkLabel: lang === "TR" ? "Detayları gör" : "View details",
+    },
+    {
+      kind: "energy" as const,
+      title: t.services.energy.title,
+      desc: t.services.energy.short,
+      href: pathFor("energyService", locale),
+      linkLabel: t.energyPage.cardLinkLabel,
     },
     {
       kind: "sustain" as const,
       title: t.sustainabilityPage.title,
-      desc: t.sustainabilityPage.lead,
+      desc: t.services.sustain.short,
       href: pathFor("sustainabilityService", locale),
+      linkLabel: lang === "TR" ? "Detayları gör" : "View details",
     },
   ];
 
@@ -47,14 +55,7 @@ export function ServicesIndexPage({ locale }: { locale: Locale }) {
 
       <section data-nx-section style={{ padding: "120px 0", background: "#fff" }}>
         <div className="nx-container">
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(2, 1fr)",
-              gap: 24,
-            }}
-            data-nx-collapse
-          >
+          <div className="nx-services-index-grid" data-nx-collapse>
             {servicesList.map((s) => (
               <Link
                 key={s.title}
@@ -102,7 +103,7 @@ export function ServicesIndexPage({ locale }: { locale: Locale }) {
                     color: "var(--nx-accent)",
                   }}
                 >
-                  {lang === "TR" ? "Detayları gör" : "View details"}
+                  {s.linkLabel}
                   <ArrowRight />
                 </div>
               </Link>

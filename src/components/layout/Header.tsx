@@ -34,6 +34,7 @@ export function Header({ locale }: { locale: Locale }) {
       label: t.nav.services,
       children: [
         { key: "waterService", label: t.services.water.title },
+        { key: "energyService", label: t.services.energy.title },
         { key: "sustainabilityService", label: t.sustainabilityPage.title },
       ],
     },

@@ -3,6 +3,7 @@
 import type { LangCode } from "./getDictionary";
 
 export type ScopeItem = { title: string; body: string };
+export type AudienceSegment = { title: string; body: string };
 
 export const WATER_SERVICE = {
   TR: {
@@ -195,4 +196,163 @@ export function waterServiceContent(lang: LangCode) {
 
 export function sustainServiceContent(lang: LangCode) {
   return SUSTAIN_SERVICE[lang];
+}
+
+export const ENERGY_SERVICE = {
+  TR: {
+    scopeItems: [
+      {
+        title: "Ön değerlendirme",
+        body: "Tesisin faaliyet alanı, enerji kaynakları, üretim yapısı, mevcut ölçüm altyapısı, geçmiş tüketim verileri ve raporlama ihtiyacı değerlendirilir.",
+      },
+      {
+        title: "Veri envanteri",
+        body: "Elektrik, doğalgaz, buhar, yakıt, basınçlı hava, soğutma, iklimlendirme ve proses ekipmanlarına ait mevcut veri kaynakları çıkarılır.",
+      },
+      {
+        title: "Saha incelemesi",
+        body: "Enerji kullanım noktaları, ana ekipmanlar, yardımcı tesisler, sayaçlar, pano yapısı, işletme alışkanlıkları ve bakım kayıtları saha gerçekliği içinde incelenir.",
+      },
+      {
+        title: "Tüketim analizi",
+        body: "Enerji tüketimi dönemsel olarak analiz edilir; üretim, kapasite, çalışma saati, mevsimsellik ve operasyon yoğunluğu gibi değişkenlerle ilişkilendirilir.",
+      },
+      {
+        title: "Verimlilik fırsatları",
+        body: "Kısa, orta ve uzun vadeli iyileştirme alanları belirlenir. Aksiyonlar tahmini etki, yatırım ihtiyacı, uygulanabilirlik ve operasyonel risk düzeyine göre önceliklendirilir.",
+      },
+      {
+        title: "Raporlama ve izleme yapısı",
+        body: "Çalışma çıktıları yönetim raporu haline getirilir. Uygun projelerde enerji performans göstergeleri, hedefler ve aksiyon takibi için izleme yapısı kurgulanır.",
+      },
+    ] as ScopeItem[],
+    evaluatedTopics: [
+      "Elektrik tüketimi ve yük profili",
+      "Doğalgaz ve yakıt tüketimi",
+      "Basınçlı hava sistemleri",
+      "Buhar ve sıcak su hatları",
+      "Soğutma ve iklimlendirme sistemleri",
+      "Pompa, fan ve motor sistemleri",
+      "Aydınlatma",
+      "Proses ekipmanları",
+      "Sayaç ve alt ölçüm altyapısı",
+      "Bakım, kaçak, kayıp ve işletme alışkanlıkları",
+      "Enerji performans göstergeleri",
+      "ISO 50001 hazırlık yapısı",
+    ],
+    outputs: [
+      "Enerji veri envanteri",
+      "Tüketim ve maliyet analiz raporu",
+      "Ana tüketim noktaları haritası",
+      "Enerji performans göstergesi önerileri",
+      "Kayıp ve verimsizlik alanları listesi",
+      "Önceliklendirilmiş iyileştirme planı",
+      "Yatırım / etki / uygulanabilirlik sınıflandırması",
+      "Yönetim sunumu",
+      "ISO 50001 hazırlığına yönelik yol haritası",
+      "İzleme ve raporlama yapısı önerisi",
+    ],
+    audience: [
+      {
+        title: "Üretim tesisleri",
+        body: "Proses, yardımcı tesisler ve üretim yoğunluğuna bağlı enerji tüketimini analiz etmek isteyen işletmeler için.",
+      },
+      {
+        title: "Gıda ve içecek tesisleri",
+        body: "Soğutma, buhar, sıcak su, temizlik, proses ve paketleme hatlarında enerji performansını izlemek isteyen tesisler için.",
+      },
+      {
+        title: "Kimya ve sanayi işletmeleri",
+        body: "Yüksek enerji yoğunluğu olan proseslerde tüketim, kayıp ve iyileştirme fırsatlarını sistematik değerlendirmek için.",
+      },
+      {
+        title: "Oteller ve büyük yerleşkeler",
+        body: "İklimlendirme, sıcak su, aydınlatma, mutfak, çamaşırhane ve ortak alan tüketimlerini yönetmek için.",
+      },
+      {
+        title: "OSB ve çok tesisli yapılar",
+        body: "Birden fazla tesisin enerji verisini karşılaştırmak, raporlamak ve ortak iyileştirme alanlarını belirlemek için.",
+      },
+    ] as AudienceSegment[],
+  },
+  EN: {
+    scopeItems: [
+      {
+        title: "Initial assessment",
+        body: "Activity type, energy sources, production structure, metering infrastructure, historical consumption and reporting needs are reviewed.",
+      },
+      {
+        title: "Data inventory",
+        body: "Existing data sources for electricity, gas, steam, fuel, compressed air, cooling, HVAC and process equipment are mapped.",
+      },
+      {
+        title: "Site review",
+        body: "Use points, main equipment, utilities, meters, panel layout, operating habits and maintenance records are assessed on site.",
+      },
+      {
+        title: "Consumption analysis",
+        body: "Energy use is analysed over time and linked to production, capacity, operating hours, seasonality and operational intensity.",
+      },
+      {
+        title: "Efficiency opportunities",
+        body: "Short-, medium- and long-term improvements are identified and prioritised by estimated impact, investment, feasibility and operational risk.",
+      },
+      {
+        title: "Reporting and monitoring",
+        body: "Outputs are packaged for management. Where appropriate, KPIs, targets and action tracking structures are designed.",
+      },
+    ] as ScopeItem[],
+    evaluatedTopics: [
+      "Electricity consumption and load profile",
+      "Natural gas and fuel use",
+      "Compressed air systems",
+      "Steam and hot-water lines",
+      "Cooling and HVAC systems",
+      "Pump, fan and motor systems",
+      "Lighting",
+      "Process equipment",
+      "Metering and sub-metering infrastructure",
+      "Maintenance, leakage, losses and operating habits",
+      "Energy performance indicators",
+      "ISO 50001 readiness structure",
+    ],
+    outputs: [
+      "Energy data inventory",
+      "Consumption and cost analysis report",
+      "Main consumption points map",
+      "Energy performance indicator recommendations",
+      "Loss and inefficiency list",
+      "Prioritised improvement plan",
+      "Investment / impact / feasibility classification",
+      "Management presentation",
+      "ISO 50001 readiness roadmap",
+      "Monitoring and reporting structure proposal",
+    ],
+    audience: [
+      {
+        title: "Manufacturing sites",
+        body: "For organisations analysing process, utilities and production-linked energy use.",
+      },
+      {
+        title: "Food and beverage plants",
+        body: "For sites tracking energy across cooling, steam, hot water, cleaning, process and packaging lines.",
+      },
+      {
+        title: "Chemical and industrial operators",
+        body: "For high-intensity processes requiring systematic review of consumption, losses and improvements.",
+      },
+      {
+        title: "Hotels and large campuses",
+        body: "For managing HVAC, hot water, lighting, kitchens, laundry and common-area consumption.",
+      },
+      {
+        title: "Industrial zones and multi-site groups",
+        body: "For comparing, reporting and identifying shared improvement areas across multiple facilities.",
+      },
+    ] as AudienceSegment[],
+  },
+};
+
+export function energyServiceContent(lang: LangCode) {
+  return ENERGY_SERVICE[lang];
 }

@@ -8,6 +8,7 @@ export const IMAGES = {
   waterCta: "/images/textures/water-cta.jpg",
   waterCard: "/images/cards/water-theme.jpg",
   sustainCard: "/images/cards/sustain-theme.jpg",
+  energyCard: "/images/cards/energy-theme.svg",
   adrCard: "/images/cards/adr-theme.jpg",
   flowScreen1: "/images/screens/flow-dashboard-1.jpg",
   flowScreen2: "/images/screens/flow-dashboard-2.jpg",

@@ -26,6 +26,7 @@ export function HomePage({ locale }: { locale: Locale }) {
   const { t, lang } = getDictionary(locale);
   const flowHref = pathFor("flow", locale);
   const waterHref = pathFor("waterService", locale);
+  const energyHref = pathFor("energyService", locale);
   const sustainHref = pathFor("sustainabilityService", locale);
   const adrHref = pathFor("adr", locale);
   const contactHref = pathFor("contact", locale);
@@ -135,6 +136,16 @@ export function HomePage({ locale }: { locale: Locale }) {
               imageAlt=""
               href={waterHref}
               linkLabel={lang === "TR" ? "Hizmeti İncele" : "View service"}
+            />
+            <ServicePlatformCard
+              icon={<BrandIcon kind="energy" size={40} />}
+              title={t.services.energy.title}
+              description={t.services.energy.short}
+              imageSrc={IMAGES.energyCard}
+              imageAlt=""
+              href={energyHref}
+              linkLabel={t.energyPage.cardLinkLabel}
+              accentColor="var(--nx-energy)"
             />
             <ServicePlatformCard
               icon={<BrandIcon kind="sustain" size={40} />}

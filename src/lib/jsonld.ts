@@ -86,6 +86,8 @@ function currentCrumbName(route: RouteDef, lang: "TR" | "EN"): string {
       return d.nav.services;
     case "waterService":
       return d.services.water.title;
+    case "energyService":
+      return d.energyPage.title;
     case "sustainabilityService":
       return d.sustainabilityPage.title;
     case "sectors":
@@ -143,11 +145,21 @@ export function serviceSchema(
   locale: Locale,
 ): Record<string, unknown> {
   const d = I18N[langOf(locale)];
-  const isSustain = route.key === "sustainabilityService";
-  const name = isSustain
-    ? d.sustainabilityPage.title
-    : d.services.water.title;
-  const description = isSustain ? d.sustainabilityPage.lead : d.waterPage.lead;
+  let name: string;
+  let description: string;
+  switch (route.key) {
+    case "sustainabilityService":
+      name = d.sustainabilityPage.title;
+      description = d.sustainabilityPage.lead;
+      break;
+    case "energyService":
+      name = d.energyPage.title;
+      description = d.energyPage.seoDescription;
+      break;
+    default:
+      name = d.services.water.title;
+      description = d.waterPage.lead;
+  }
   return {
     "@context": "https://schema.org",
     "@type": "Service",

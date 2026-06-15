@@ -35,6 +35,10 @@ const TITLES: Partial<Record<PageKey, Record<Locale, string>>> = {
     tr: "Su Verimliliği Danışmanlığı | Nexovia",
     en: "Water Efficiency Consulting | Nexovia",
   },
+  energyService: {
+    tr: "Enerji Verimliliği Danışmanlığı | Etüt, Veri Analizi ve ISO 50001 Hazırlığı | Nexovia",
+    en: "Energy Efficiency Consulting | Audit, Data Analysis & ISO 50001 Readiness | Nexovia",
+  },
   sustainabilityService: {
     tr: "Sürdürülebilirlik Danışmanlığı | Nexovia",
     en: "Sustainability Consulting | Nexovia",
@@ -79,6 +83,8 @@ function descriptionFor(key: PageKey, locale: Locale): string {
       return clamp(d.servicesIndex.lead);
     case "waterService":
       return clamp(d.waterPage.lead);
+    case "energyService":
+      return clamp(d.energyPage.seoDescription);
     case "sustainabilityService":
       return clamp(d.sustainabilityPage.lead);
     case "sectors":

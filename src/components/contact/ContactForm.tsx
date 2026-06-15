@@ -2,7 +2,8 @@
 // Contact form island — markup ported from pages-secondary.jsx ContactPage,
 // wired to the submitContact Server Action via useActionState. Per-field
 // errors, value preservation on error, on-brand success panel.
-import { useActionState, useState, type CSSProperties } from "react";
+import { useActionState, useEffect, useState, type CSSProperties } from "react";
+import { TEP_LEAD_STORAGE_KEY, type TepLeadPayload } from "@/lib/tep-calculator";
 import Link from "next/link";
 import type { Locale } from "@/lib/site";
 import { getDictionary } from "@/i18n/getDictionary";
@@ -56,8 +57,29 @@ export function ContactForm({
   );
   const v = state.values ?? {};
   const [sector, setSector] = useState<string>(v.sector ?? "");
+  const [serviceInterest, setServiceInterest] = useState<string>(
+    v.serviceInterest ?? "",
+  );
+  const [message, setMessage] = useState<string>(v.message ?? "");
   const captcha = state.captcha ?? initialCaptcha;
   const err = (f: ContactField) => state.fieldErrors?.[f];
+
+  useEffect(() => {
+    try {
+      const raw = sessionStorage.getItem(TEP_LEAD_STORAGE_KEY);
+      if (!raw) return;
+      const payload = JSON.parse(raw) as TepLeadPayload;
+      sessionStorage.removeItem(TEP_LEAD_STORAGE_KEY);
+      setServiceInterest(payload.serviceInterest);
+      setMessage((prev) =>
+        prev.trim()
+          ? `${payload.messageBlock}\n\n---\n\n${prev}`
+          : payload.messageBlock,
+      );
+    } catch {
+      /* ignore malformed payload */
+    }
+  }, []);
 
   if (state.status === "success") {
     return (
@@ -261,11 +283,13 @@ export function ContactForm({
             aria-label={
               lang === "TR" ? "İlgilendiğiniz hizmet" : "Service interest"
             }
-            defaultValue={v.serviceInterest}
+            value={serviceInterest}
+            onChange={(e) => setServiceInterest(e.target.value)}
             style={inputStyle}
           >
             <option value="">{lang === "TR" ? "Seçin" : "Select"}</option>
             <option>{t.services.water.title}</option>
+            <option>{t.services.energy.title}</option>
             <option>{t.services.sustain.title}</option>
             <option>{t.services.adr.title}</option>
             <option>
@@ -283,7 +307,8 @@ export function ContactForm({
           name="message"
           aria-label={lang === "TR" ? "Mesajınız" : "Message"}
           rows={5}
-          defaultValue={v.message}
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
           style={{
             ...inputStyle,
             resize: "vertical",

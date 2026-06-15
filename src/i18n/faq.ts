@@ -594,6 +594,61 @@ export const GENERAL_FAQ: Record<LangCode, FaqItem[]> = {
   ],
 };
 
+export const ENERGY_FAQ: Record<LangCode, FaqItem[]> = {
+  TR: [
+    {
+      q: "Enerji verimliliği çalışması neyle başlar?",
+      a: "Önce mevcut tüketim verileri, faturalar, sayaç yapısı, ana ekipmanlar ve operasyon düzeni incelenir. Ardından saha değerlendirmesiyle tüketimin nerede oluştuğu netleştirilir.",
+    },
+    {
+      q: "Resmi enerji etüdü yapıyor musunuz?",
+      a: "Resmi mevzuat kapsamında yetki gerektiren etüt, VAP veya belgelendirme süreçleri proje özelinde değerlendirilir. Gerekli durumlarda yetkili çözüm ortaklarıyla ilerlenebilir.",
+    },
+    {
+      q: "ISO 50001 belgelendirmesi sağlıyor musunuz?",
+      a: "Nexovia, ISO 50001 hazırlığı, veri yapısı, performans göstergeleri ve yönetim sistemi kurgusu için danışmanlık sağlayabilir. Belgelendirme kuruluşu hizmeti ayrı bir süreçtir.",
+    },
+    {
+      q: "Çalışma ne kadar sürer?",
+      a: "Süre; tesis büyüklüğü, veri kalitesi, saha erişimi, ekipman çeşitliliği ve rapor kapsamına göre değişir. Ön değerlendirme sonrası net takvim çıkarılır.",
+    },
+    {
+      q: "Sadece sanayi tesisleri için mi uygundur?",
+      a: "Hayır. Oteller, hastaneler, kampüsler, lojistik merkezleri, OSB'ler ve büyük ticari yapılar için de enerji verimliliği çalışması yapılabilir.",
+    },
+    {
+      q: "Enerji verimliliği ile sürdürülebilirlik birlikte yürütülebilir mi?",
+      a: "Evet. Enerji tüketimi, sürdürülebilirlik ve karbon raporlamasının temel veri alanlarından biridir. Bu nedenle enerji verimliliği çalışmaları sürdürülebilirlik danışmanlığıyla birlikte kurgulanabilir.",
+    },
+  ],
+  EN: [
+    {
+      q: "Where does an energy efficiency engagement start?",
+      a: "We begin with consumption data, bills, metering layout, main equipment and operating patterns, then clarify where use occurs through field assessment.",
+    },
+    {
+      q: "Do you deliver official energy audits?",
+      a: "Audit, VAP or certification processes that require authorisation under regulation are scoped per project. Where needed we work with authorised partners.",
+    },
+    {
+      q: "Do you provide ISO 50001 certification?",
+      a: "Nexovia can support ISO 50001 readiness, data structures, performance indicators and management-system design. Certification body services are a separate process.",
+    },
+    {
+      q: "How long does the work take?",
+      a: "Duration depends on site size, data quality, field access, equipment diversity and report scope. A clear timeline is agreed after the initial assessment.",
+    },
+    {
+      q: "Is it only for industrial plants?",
+      a: "No. Hotels, hospitals, campuses, logistics centres, industrial zones and large commercial buildings can all benefit.",
+    },
+    {
+      q: "Can energy efficiency run alongside sustainability consulting?",
+      a: "Yes. Energy use is a core data domain for sustainability and carbon reporting, so both tracks can be designed together.",
+    },
+  ],
+};
+
 export function faqForRouteKey(key: PageKey, lang: LangCode): FaqItem[] {
   switch (key) {
     case "flow":
@@ -602,6 +657,8 @@ export function faqForRouteKey(key: PageKey, lang: LangCode): FaqItem[] {
       return ADR_FAQ[lang];
     case "waterService":
       return WATER_FAQ[lang];
+    case "energyService":
+      return ENERGY_FAQ[lang];
     case "sustainabilityService":
       return SUSTAIN_FAQ[lang];
     case "trainings":

@@ -11,6 +11,7 @@ export type PageKey =
   | "adr"
   | "servicesIndex"
   | "waterService"
+  | "energyService"
   | "sustainabilityService"
   | "sectors"
   | "trainings"
@@ -42,6 +43,7 @@ export type RendererKey =
   | "adr"
   | "servicesIndex"
   | "waterService"
+  | "energyService"
   | "sustainabilityService"
   | "sectors"
   | "trainings"
@@ -145,6 +147,16 @@ export const ROUTES: RouteDef[] = [
       en: ["services", "water-efficiency-consulting"],
     },
     renderer: "waterService",
+    jsonLd: ["Breadcrumb", "Service", "FAQ"],
+    sitemap: { priority: 0.9, changeFrequency: "monthly" },
+  },
+  {
+    key: "energyService",
+    segments: {
+      tr: ["hizmetler", "enerji-verimliligi-danismanligi"],
+      en: ["services", "energy-efficiency-consulting"],
+    },
+    renderer: "energyService",
     jsonLd: ["Breadcrumb", "Service", "FAQ"],
     sitemap: { priority: 0.9, changeFrequency: "monthly" },
   },

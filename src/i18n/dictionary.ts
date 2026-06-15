@@ -95,7 +95,7 @@ export const I18N = {
         eyebrow: "Hizmetler",
         title: "Üç odak alanı, bütünleşik bir metodoloji.",
         intro:
-          "Su verimliliği, sürdürülebilirlik stratejisi ve tehlikeli madde uyumu — her biri ayrı bir disiplin, hepsi ortak bir kalite çerçevesinde.",
+          "Su verimliliği, enerji verimliliği, sürdürülebilirlik stratejisi ve tehlikeli madde uyumu — her biri ayrı bir disiplin, hepsi ortak bir kalite çerçevesinde.",
       },
       sectors: {
         eyebrow: "Sektörler",
@@ -120,6 +120,12 @@ export const I18N = {
         title: "Sürdürülebilirlik Danışmanlığı",
         short: "ESG odaklı strateji, çevresel performans, raporlama hazırlığı.",
         brand: "sustain",
+      },
+      energy: {
+        title: "Enerji Verimliliği Danışmanlığı",
+        short:
+          "Tesis enerji tüketimini analiz eder, verimlilik fırsatlarını belirler ve enerji performansının izlenebilir hale gelmesi için veri, raporlama ve aksiyon planı yapısı kurarız.",
+        brand: "energy",
       },
       adr: {
         title: "Nexovia ADR",
@@ -162,6 +168,78 @@ export const I18N = {
       relatedFlow: "Nexovia Flow — destekleyici platform",
       relatedFlowLead:
         "Su Verimliliği Danışmanlığı'nın doğal uzantısı; ölçüm, izleme ve raporlamayı tek akışta sürdürür.",
+    },
+    energyPage: {
+      eyebrow: "Hizmet — Enerji Verimliliği",
+      title: "Enerji Verimliliği Danışmanlığı",
+      lead: "Nexovia, kurumların enerji tüketimini ölçülebilir hale getirmesine, verimsizlik alanlarını belirlemesine, iyileştirme fırsatlarını önceliklendirmesine ve enerji performansını düzenli izlenebilir bir yapıya taşımasına yardımcı olur.",
+      seoDescription:
+        "Nexovia enerji verimliliği danışmanlığı; tesis enerji tüketim analizi, saha değerlendirmesi, verimlilik fırsatları, ISO 50001 hazırlığı, raporlama ve izleme süreçlerini kapsar.",
+      ctaPrimary: "Danışmanlık Talep Et",
+      ctaSecondary: "Sürdürülebilirlik Yaklaşımını İncele",
+      scopeNoteTitle: "Enerji verimliliği çalışması yalnızca tasarruf listesi değildir.",
+      scopeNoteLead:
+        "Enerji verimliliği danışmanlığında amaç; elektrik, doğalgaz, buhar, basınçlı hava, soğutma, iklimlendirme, aydınlatma ve proses kaynaklı tüketimleri bütüncül şekilde değerlendirmektir. Resmi mevzuat kapsamında yetkilendirme gerektiren etüt, VAP veya belgelendirme süreçlerinde çalışma kapsamı proje özelinde değerlendirilir; gerekli durumlarda yetkili çözüm ortaklarıyla ilerlenir.",
+      processTitle: "Süreç",
+      processIntro:
+        "Altı aşamalı, çıktı odaklı bir metodoloji. Her adımda raporlanabilir bir teslimat.",
+      evaluatedTopicsTitle: "Değerlendirilen başlıklar",
+      outcomesTitle: "Enerji performansı, düzenli ölçüm ve doğru yorumla yönetilir.",
+      outcomesLead:
+        "Enerji verimliliği çalışmasının değeri yalnızca bir defalık tasarruf önerilerinden gelmez. Asıl değer; tüketimin hangi faaliyetlerden kaynaklandığını anlamak, sapmaları erken görmek, yatırım kararlarını veriye dayandırmak ve enerji performansını düzenli raporlanabilir hale getirmektir.",
+      isoTitle: "ISO 50001 hazırlığı için güçlü başlangıç: veri, sınır ve gösterge disiplini.",
+      isoLead:
+        "Enerji yönetim sistemi kurmak isteyen kurumlar için ilk ihtiyaç, enerji kullanım sınırlarını, önemli enerji kullanım alanlarını, veri kaynaklarını ve performans göstergelerini netleştirmektir. Nexovia, ISO 50001 hazırlık sürecinde enerji verisinin düzenlenmesi, sorumlulukların tanımlanması ve izleme yapısının kurulması için danışmanlık sağlar.",
+      sustainTitle:
+        "Enerji verimliliği, sürdürülebilirlik raporlamasının en güçlü veri alanlarından biridir.",
+      sustainLead:
+        "Enerji tüketimi, karbon emisyonu, operasyonel maliyet ve kaynak verimliliği doğrudan ilişkilidir. Enerji verimliliği çalışmaları; ESG, sürdürülebilirlik raporlaması ve kurumsal çevresel performans göstergeleri için güvenilir bir veri zemini oluşturur.",
+      audienceTitle: "Kimler için uygun?",
+      outputsTitle: "Teslimatlar",
+      ctaTitle: "Tesisinizde enerji verimliliği potansiyelini birlikte ortaya çıkaralım.",
+      ctaLead:
+        "Enerji tüketiminizi, ana kullanım noktalarınızı ve iyileştirme fırsatlarınızı birlikte değerlendirelim; kurumunuza uygun ölçülebilir bir yol haritası oluşturalım.",
+      ctaButton: "Danışmanlık Talep Et",
+      cardLinkLabel: "Detayları İncele",
+      tep: {
+        eyebrow: "TEP Hesaplama Motoru",
+        title: "Tesisinizin yıllık enerji tüketimini TEP cinsinden hesaplayın.",
+        intro:
+          "Elektrik, doğalgaz ve diğer enerji kaynaklarına ait yıllık tüketimlerinizi girerek yaklaşık toplam TEP değerinizi hesaplayabilirsiniz. Sonuçlar ön değerlendirme amaçlıdır; resmi beyan, etüt veya mevzuat yorumu yerine geçmez.",
+        inputHint:
+          "Boş bırakılan alanlar 0 kabul edilir. Yıllık tüketim miktarlarını girin.",
+        calculateButton: "TEP Hesapla",
+        validationError: "Negatif veya geçersiz değerleri düzeltin.",
+        totalLabel: "Yaklaşık toplam yıllık TEP",
+        colSource: "Enerji kaynağı",
+        colConsumption: "Tüketim",
+        colFactor: "Katsayı",
+        colTep: "TEP",
+        colShare: "Pay",
+        noInputNote: "Tüm alanlar boş — en az bir tüketim değeri girin.",
+        versionLabel: "Katsayı sürümü",
+        customBadge: "özel katsayı",
+        addCustom: "+ Özel enerji kaynağı ekle",
+        removeCustom: "Kaldır",
+        customNamePlaceholder: "Kaynak adı",
+        customUnitPlaceholder: "Birim",
+        customFactorPlaceholder: "TEP katsayısı (TEP/birim)",
+        customFactorWarning: "Bu satırda özel katsayı kullanıldı.",
+        commentary0_250:
+          "Yaklaşık enerji tüketiminiz temel izleme ve verimlilik değerlendirmesi için uygun görünebilir; proje özelinde ayrıca değerlendirilmelidir.",
+        commentary250_500:
+          "Yaklaşık enerji tüketiminiz düzenli raporlama ve performans takibi açısından ön değerlendirmede değerlendirilmeye değer görünüyor; kesin hüküm için uzman incelemesi önerilir.",
+        commentary500_1000:
+          "Yaklaşık TEP değeriniz enerji yönetimi, detaylı analiz ve potansiyel yükümlülükler açısından uzman değerlendirmesi gerektirebilir.",
+        commentary1000_plus:
+          "Yaklaşık TEP değeriniz sanayi tesisleri için enerji yönetimi ve mevzuat eşikleri açısından detaylı uzman değerlendirmesi gerektirebilir; nihai sonuç tesis özelinde belirlenmelidir.",
+        ctaStandardTitle: "Enerji tüketiminizi izlenebilir hale getirin",
+        ctaStandardButton: "Ön Değerlendirme Talep Et",
+        ctaExpertTitle: "TEP değeriniz detaylı değerlendirme gerektirebilir",
+        ctaExpertButton: "Uzman Değerlendirmesi Talep Et",
+        legalDisclaimer:
+          "Bu araç ön değerlendirme amacıyla hazırlanmıştır. Hesaplama sonuçları; resmi enerji etüdü, mevzuat yükümlülüğü tespiti, VAP başvurusu, ISO 50001 belgelendirme kararı veya resmi beyan yerine geçmez. Nihai değerlendirme tesisin faaliyet alanı, kullanım alanı, üretim yapısı, ölçüm altyapısı ve güncel mevzuat çerçevesinde ayrıca yapılmalıdır.",
+      },
     },
     aboutPage: {
       eyebrow: "Hakkımızda",
@@ -222,7 +300,7 @@ export const I18N = {
     servicesIndex: {
       eyebrow: "Hizmetler",
       title: "Danışmanlık hizmetleri",
-      lead: "Mevzuat odaklı, ölçülebilir danışmanlık. Su verimliliği ve sürdürülebilirlik alanlarında saha tecrübesi ile dijital altyapı bir arada.",
+      lead: "Mevzuat odaklı, ölçülebilir danışmanlık. Su verimliliği, enerji verimliliği ve sürdürülebilirlik alanlarında saha tecrübesi ile dijital altyapı bir arada.",
     },
     adrPage: {
       eyebrow: "Platform — Nexovia ADR",
@@ -338,7 +416,7 @@ export const I18N = {
         eyebrow: "Services",
         title: "Three focus areas, one integrated methodology.",
         intro:
-          "Water efficiency, sustainability strategy, and dangerous-goods compliance — each its own discipline, all under one quality framework.",
+          "Water efficiency, energy efficiency, sustainability strategy, and dangerous-goods compliance — each its own discipline, all under one quality framework.",
       },
       sectors: {
         eyebrow: "Sectors",
@@ -364,6 +442,12 @@ export const I18N = {
         short:
           "ESG-oriented strategy, environmental performance, reporting readiness.",
         brand: "sustain",
+      },
+      energy: {
+        title: "Energy Efficiency Consulting",
+        short:
+          "We analyse site energy consumption, identify efficiency opportunities, and build data, reporting and action-plan structures so performance becomes trackable.",
+        brand: "energy",
       },
       adr: {
         title: "Nexovia ADR",
@@ -406,6 +490,78 @@ export const I18N = {
       relatedFlow: "Nexovia Flow — supporting platform",
       relatedFlowLead:
         "The natural extension of Water Efficiency Consulting; keeps measurement, monitoring and reporting in one flow.",
+    },
+    energyPage: {
+      eyebrow: "Service — Energy Efficiency",
+      title: "Energy Efficiency Consulting",
+      lead: "Nexovia helps organisations make energy consumption measurable, identify inefficiencies, prioritise improvement opportunities, and move energy performance into a structure that can be monitored regularly.",
+      seoDescription:
+        "Nexovia energy efficiency consulting covers site consumption analysis, field assessment, efficiency opportunities, ISO 50001 readiness, reporting and monitoring.",
+      ctaPrimary: "Request consulting",
+      ctaSecondary: "Explore our sustainability approach",
+      scopeNoteTitle: "Energy efficiency work is more than a savings list.",
+      scopeNoteLead:
+        "The aim is to assess electricity, natural gas, steam, compressed air, cooling, HVAC, lighting and process-related use holistically. Official audit, VAP or certification processes that require authorisation under regulation are scoped per project; where needed we work with authorised partners.",
+      processTitle: "Process",
+      processIntro:
+        "A six-step, deliverable-oriented methodology. Each step produces a reportable output.",
+      evaluatedTopicsTitle: "Areas assessed",
+      outcomesTitle: "Energy performance is managed through regular measurement and sound interpretation.",
+      outcomesLead:
+        "The value of energy efficiency work is not only one-off savings suggestions. The real value is understanding which activities drive consumption, spotting deviations early, grounding investment decisions in data, and making energy performance regularly reportable.",
+      isoTitle: "A strong start for ISO 50001 readiness: data, boundaries and indicator discipline.",
+      isoLead:
+        "Organisations building an energy management system first need clear energy boundaries, significant energy uses, data sources and performance indicators. Nexovia supports ISO 50001 readiness through structured energy data, defined responsibilities and monitoring design.",
+      sustainTitle:
+        "Energy efficiency is one of the strongest data domains in sustainability reporting.",
+      sustainLead:
+        "Energy use is directly linked to carbon emissions, operating cost and resource efficiency. Energy efficiency work creates a reliable data base for ESG, sustainability reporting and corporate environmental performance indicators.",
+      audienceTitle: "Who is it for?",
+      outputsTitle: "Deliverables",
+      ctaTitle: "Let's uncover your site's energy efficiency potential together.",
+      ctaLead:
+        "Let's review your consumption, main use points and improvement opportunities — and build a measurable roadmap suited to your organisation.",
+      ctaButton: "Request consulting",
+      cardLinkLabel: "View details",
+      tep: {
+        eyebrow: "TEP calculator",
+        title: "Calculate your site's annual energy use in TEP.",
+        intro:
+          "Enter annual consumption for electricity, natural gas and other energy sources to estimate your approximate total TEP. Results are for preliminary assessment only — not official declarations, audits or regulatory interpretation.",
+        inputHint:
+          "Empty fields are treated as zero. Enter annual consumption amounts.",
+        calculateButton: "Calculate TEP",
+        validationError: "Fix negative or invalid values.",
+        totalLabel: "Approx. total annual TEP",
+        colSource: "Energy source",
+        colConsumption: "Consumption",
+        colFactor: "Factor",
+        colTep: "TEP",
+        colShare: "Share",
+        noInputNote: "All fields empty — enter at least one consumption value.",
+        versionLabel: "Factor version",
+        customBadge: "custom factor",
+        addCustom: "+ Add custom energy source",
+        removeCustom: "Remove",
+        customNamePlaceholder: "Source name",
+        customUnitPlaceholder: "Unit",
+        customFactorPlaceholder: "TEP factor (TEP/unit)",
+        customFactorWarning: "A custom factor is used for this row.",
+        commentary0_250:
+          "Your approximate consumption may suit basic monitoring and efficiency review; this should be confirmed for your specific site.",
+        commentary250_500:
+          "Your approximate consumption may warrant regular reporting and performance tracking in preliminary terms; expert review is advised before any firm conclusion.",
+        commentary500_1000:
+          "Your approximate TEP may require expert review for energy management, detailed analysis and potential obligations.",
+        commentary1000_plus:
+          "Your approximate TEP may require detailed expert review for industrial energy management and regulatory thresholds; final outcomes depend on site-specific factors.",
+        ctaStandardTitle: "Make your energy use measurable",
+        ctaStandardButton: "Request preliminary assessment",
+        ctaExpertTitle: "Your TEP may need detailed review",
+        ctaExpertButton: "Request expert assessment",
+        legalDisclaimer:
+          "This tool is for preliminary assessment only. Results do not replace official energy audits, regulatory obligation checks, VAP applications, ISO 50001 certification decisions or official declarations. Final evaluation must consider activity type, use areas, production structure, metering infrastructure and current regulation.",
+      },
     },
     aboutPage: {
       eyebrow: "About",
@@ -464,7 +620,7 @@ export const I18N = {
     servicesIndex: {
       eyebrow: "Services",
       title: "Consulting services",
-      lead: "Regulation-aware, measurable consulting. Field experience and digital infrastructure together, across water efficiency and sustainability.",
+      lead: "Regulation-aware, measurable consulting. Field experience and digital infrastructure together, across water efficiency, energy efficiency and sustainability.",
     },
     adrPage: {
       eyebrow: "Platform — Nexovia ADR",

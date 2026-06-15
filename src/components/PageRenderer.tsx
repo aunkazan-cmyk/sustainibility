@@ -14,6 +14,7 @@ import { FlowPage } from "@/components/pages/FlowPage";
 import { AdrPage } from "@/components/pages/AdrPage";
 import { ServicesIndexPage } from "@/components/pages/ServicesIndexPage";
 import { WaterServicePage } from "@/components/pages/WaterServicePage";
+import { EnergyServicePage } from "@/components/pages/EnergyServicePage";
 import { SustainabilityServicePage } from "@/components/pages/SustainabilityServicePage";
 import { SectorsPage } from "@/components/pages/SectorsPage";
 import { TrainingsPage } from "@/components/pages/TrainingsPage";
@@ -44,6 +45,8 @@ export function PageRenderer({
         return <ServicesIndexPage locale={locale} />;
       case "waterService":
         return <WaterServicePage locale={locale} />;
+      case "energyService":
+        return <EnergyServicePage locale={locale} />;
       case "sustainabilityService":
         return <SustainabilityServicePage locale={locale} />;
       case "sectors":

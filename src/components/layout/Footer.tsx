@@ -33,6 +33,7 @@ export function Footer({ locale }: { locale: Locale }) {
       title: t.nav.services,
       links: [
         { label: t.services.water.title, key: "waterService" },
+        { label: t.services.energy.title, key: "energyService" },
         { label: t.sustainabilityPage.title, key: "sustainabilityService" },
       ],
     },

@@ -1547,37 +1547,135 @@ html[data-nx-header="on-dark"] .nx-breadcrumb--on-dark nav span:last-child {
   font-size: 13.5px;
   color: var(--nx-600);
 }
-.nx-tep-calculator__rows {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 14px 20px;
-}
+
+.nx-tep-calculator__form-head,
 .nx-tep-calculator__row {
   display: grid;
-  grid-template-columns: minmax(120px, 1.2fr) 1fr auto;
-  gap: 10px;
+  grid-template-columns: minmax(168px, 34%) minmax(0, 1fr) 5.75rem;
+  gap: 12px;
   align-items: center;
 }
+
+.nx-tep-calculator__form-head {
+  padding: 0 0 10px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid var(--nx-200);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--nx-600);
+}
+
+.nx-tep-calculator__rows {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .nx-tep-calculator__row-label {
   font-size: 13px;
   font-weight: 600;
   color: var(--nx-700);
   line-height: 1.35;
+  padding-right: 4px;
 }
-.nx-tep-calculator__unit {
+
+.nx-tep-calculator__field {
+  width: 100%;
+  min-width: 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--nx-200);
+  font-size: 14px;
+  background: #fff;
+  box-sizing: border-box;
+  font-family: inherit;
+  color: var(--nx-900);
+}
+
+.nx-tep-calculator__field:focus {
+  outline: 2px solid color-mix(in oklab, var(--nx-energy) 35%, transparent);
+  outline-offset: 1px;
+  border-color: color-mix(in oklab, var(--nx-energy) 50%, var(--nx-200));
+}
+
+.nx-tep-calculator__field--invalid {
+  border-color: #b91c1c;
+}
+
+.nx-tep-calculator__unit-cell {
+  width: 5.75rem;
+  min-width: 5.75rem;
+}
+
+.nx-tep-calculator__unit-select,
+.nx-tep-calculator__unit-static {
+  display: block;
+  width: 100%;
+  min-height: 42px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  border: 1px solid var(--nx-200);
   font-size: 13px;
-  color: var(--nx-600);
-  white-space: nowrap;
-  padding: 0 4px;
+  font-family: inherit;
 }
+
+.nx-tep-calculator__unit-select {
+  padding: 10px 28px 10px 10px;
+  background: #fff
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748B' d='M2.5 4.5 6 8l3.5-3.5'/%3E%3C/svg%3E")
+    no-repeat right 10px center;
+  appearance: none;
+  color: var(--nx-900);
+  cursor: pointer;
+}
+
+.nx-tep-calculator__unit-static {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 8px;
+  background: var(--nx-50);
+  color: var(--nx-600);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.nx-tep-calculator__custom-head,
 .nx-tep-calculator__custom-row {
   display: grid;
-  grid-template-columns: repeat(4, 1fr) auto;
-  gap: 10px;
-  align-items: start;
-  margin-top: 16px;
-  padding-top: 16px;
+  grid-template-columns: minmax(168px, 34%) minmax(0, 1fr) 5.75rem minmax(120px, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+}
+
+.nx-tep-calculator__custom-head {
+  margin-top: 20px;
+  padding: 12px 0 10px;
   border-top: 1px dashed var(--nx-200);
+  border-bottom: 1px solid var(--nx-200);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--nx-600);
+}
+
+.nx-tep-calculator__custom-row {
+  margin-top: 10px;
+}
+
+.nx-tep-calculator__field--unit {
+  text-align: center;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.nx-tep-calculator__custom-remove {
+  white-space: nowrap;
+  padding-left: 12px;
+  padding-right: 12px;
 }
 .nx-tep-calculator__custom-warn {
   grid-column: 1 / -1;
@@ -1708,7 +1806,6 @@ html[data-nx-header="on-dark"] .nx-breadcrumb--on-dark nav span:last-child {
   .nx-services-index-grid { grid-template-columns: 1fr; }
   .nx-energy-link-grid { grid-template-columns: 1fr; }
   .nx-energy-audience-grid { grid-template-columns: 1fr 1fr; }
-  .nx-tep-calculator__rows { grid-template-columns: 1fr; }
 }
 @media (max-width: 720px) {
   .nx-service-cards,
@@ -1721,11 +1818,41 @@ html[data-nx-header="on-dark"] .nx-breadcrumb--on-dark nav span:last-child {
     grid-template-columns: 1fr;
   }
   .nx-energy-audience-grid { grid-template-columns: 1fr; }
+  .nx-tep-calculator__form-head,
+  .nx-tep-calculator__custom-head {
+    display: none;
+  }
   .nx-tep-calculator__row {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 5.75rem;
+    grid-template-areas:
+      "label label"
+      "input unit";
+    gap: 6px 8px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--nx-100);
+  }
+  .nx-tep-calculator__rows .nx-tep-calculator__row:last-child {
+    border-bottom: none;
+  }
+  .nx-tep-calculator__row-label {
+    grid-area: label;
+  }
+  .nx-tep-calculator__row .nx-tep-calculator__field {
+    grid-area: input;
+  }
+  .nx-tep-calculator__row .nx-tep-calculator__unit-cell {
+    grid-area: unit;
+    width: 100%;
+    min-width: 0;
   }
   .nx-tep-calculator__custom-row {
     grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 14px 0;
+    border-bottom: 1px dashed var(--nx-200);
+  }
+  .nx-tep-calculator__custom-remove {
+    justify-self: start;
   }
   .nx-tep-calculator__actions {
     flex-direction: column;

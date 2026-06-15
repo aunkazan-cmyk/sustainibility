@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState, type CSSProperties } from "react";
+import { useMemo, useState } from "react";
 import type { Locale } from "@/lib/site";
 import { getDictionary } from "@/i18n/getDictionary";
 import { pathFor } from "@/lib/routes";
@@ -19,16 +19,6 @@ import {
   type TepRowInput,
 } from "@/lib/tep-calculator";
 import { ArrowRight } from "@/components/shared/primitives";
-
-const fieldStyle: CSSProperties = {
-  width: "100%",
-  padding: "10px 12px",
-  borderRadius: 10,
-  border: "1px solid var(--nx-200)",
-  fontSize: 14,
-  background: "#fff",
-  boxSizing: "border-box",
-};
 
 function unitLabel(unit: string, lang: "TR" | "EN"): string {
   const map: Record<string, [string, string]> = {
@@ -152,19 +142,30 @@ export function TepCalculator({ locale }: { locale: Locale }) {
         <div className="nx-tep-calculator__panel">
           <p className="nx-tep-calculator__hint">{tx.inputHint}</p>
 
+          <div className="nx-tep-calculator__form-head" aria-hidden="true">
+            <span>{tx.colSource}</span>
+            <span>{tx.colConsumption}</span>
+            <span>{tx.colUnit}</span>
+          </div>
+
           <div className="nx-tep-calculator__rows">
             {sources.map((source) => {
               const row = rows[source.energy_source_key];
               const invalid = invalidKeys.has(source.energy_source_key);
               return (
                 <div key={source.energy_source_key} className="nx-tep-calculator__row">
-                  <label className="nx-tep-calculator__row-label">
+                  <label
+                    className="nx-tep-calculator__row-label"
+                    htmlFor={`tep-${source.energy_source_key}`}
+                  >
                     {displayName(source, lang)}
                   </label>
                   <input
+                    id={`tep-${source.energy_source_key}`}
                     type="text"
                     inputMode="decimal"
                     placeholder="0"
+                    className={`nx-tep-calculator__field${invalid ? " nx-tep-calculator__field--invalid" : ""}`}
                     value={row?.amount ?? ""}
                     onChange={(e) =>
                       setRows((prev) => ({
@@ -175,47 +176,57 @@ export function TepCalculator({ locale }: { locale: Locale }) {
                         },
                       }))
                     }
-                    style={{
-                      ...fieldStyle,
-                      borderColor: invalid ? "#b91c1c" : undefined,
-                    }}
                     aria-invalid={invalid}
                   />
-                  {source.allowed_units.length > 1 ? (
-                    <select
-                      value={row?.unit ?? source.default_unit}
-                      onChange={(e) =>
-                        setRows((prev) => ({
-                          ...prev,
-                          [source.energy_source_key]: {
-                            ...prev[source.energy_source_key],
-                            unit: e.target.value,
-                          },
-                        }))
-                      }
-                      style={fieldStyle}
-                    >
-                      {source.allowed_units.map((u) => (
-                        <option key={u} value={u}>
-                          {unitLabel(u, lang)}
-                        </option>
-                      ))}
-                    </select>
-                  ) : (
-                    <span className="nx-tep-calculator__unit">
-                      {unitLabel(source.default_unit, lang)}
-                    </span>
-                  )}
+                  <div className="nx-tep-calculator__unit-cell">
+                    {source.allowed_units.length > 1 ? (
+                      <select
+                        className="nx-tep-calculator__unit-select"
+                        value={row?.unit ?? source.default_unit}
+                        onChange={(e) =>
+                          setRows((prev) => ({
+                            ...prev,
+                            [source.energy_source_key]: {
+                              ...prev[source.energy_source_key],
+                              unit: e.target.value,
+                            },
+                          }))
+                        }
+                        aria-label={`${displayName(source, lang)} — ${tx.colUnit}`}
+                      >
+                        {source.allowed_units.map((u) => (
+                          <option key={u} value={u}>
+                            {unitLabel(u, lang)}
+                          </option>
+                        ))}
+                      </select>
+                    ) : (
+                      <span className="nx-tep-calculator__unit-static">
+                        {unitLabel(source.default_unit, lang)}
+                      </span>
+                    )}
+                  </div>
                 </div>
               );
             })}
           </div>
+
+          {customRows.length > 0 && (
+            <div className="nx-tep-calculator__custom-head" aria-hidden="true">
+              <span>{tx.customNamePlaceholder}</span>
+              <span>{tx.colConsumption}</span>
+              <span>{tx.colUnit}</span>
+              <span>{tx.customFactorPlaceholder}</span>
+              <span />
+            </div>
+          )}
 
           {customRows.map((c) => (
             <div key={c.id} className="nx-tep-calculator__custom-row">
               <input
                 type="text"
                 placeholder={tx.customNamePlaceholder}
+                className="nx-tep-calculator__field"
                 value={c.name}
                 onChange={(e) =>
                   setCustomRows((rows) =>
@@ -224,12 +235,12 @@ export function TepCalculator({ locale }: { locale: Locale }) {
                     ),
                   )
                 }
-                style={fieldStyle}
               />
               <input
                 type="text"
                 inputMode="decimal"
                 placeholder="0"
+                className={`nx-tep-calculator__field${invalidKeys.has(c.id) ? " nx-tep-calculator__field--invalid" : ""}`}
                 value={c.amount}
                 onChange={(e) =>
                   setCustomRows((rows) =>
@@ -238,14 +249,11 @@ export function TepCalculator({ locale }: { locale: Locale }) {
                     ),
                   )
                 }
-                style={{
-                  ...fieldStyle,
-                  borderColor: invalidKeys.has(c.id) ? "#b91c1c" : undefined,
-                }}
               />
               <input
                 type="text"
                 placeholder={tx.customUnitPlaceholder}
+                className="nx-tep-calculator__field nx-tep-calculator__field--unit"
                 value={c.unit}
                 onChange={(e) =>
                   setCustomRows((rows) =>
@@ -254,12 +262,12 @@ export function TepCalculator({ locale }: { locale: Locale }) {
                     ),
                   )
                 }
-                style={fieldStyle}
               />
               <input
                 type="text"
                 inputMode="decimal"
                 placeholder={tx.customFactorPlaceholder}
+                className="nx-tep-calculator__field"
                 value={c.factor}
                 onChange={(e) =>
                   setCustomRows((rows) =>
@@ -268,11 +276,10 @@ export function TepCalculator({ locale }: { locale: Locale }) {
                     ),
                   )
                 }
-                style={fieldStyle}
               />
               <button
                 type="button"
-                className="nx-btn nx-btn--ghost"
+                className="nx-btn nx-btn--ghost nx-tep-calculator__custom-remove"
                 onClick={() =>
                   setCustomRows((rows) => rows.filter((r) => r.id !== c.id))
                 }
